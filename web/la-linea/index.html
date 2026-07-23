@@ -399,7 +399,7 @@ function buildChart() {
 function selectPresident(p) {
   if (selPrez.has(p.id)) selPrez.delete(p.id); else { selPrez.clear(); selPrez.add(p.id); }
   if (selPrez.size===1) {
-    const pr=presidentes.find(function(x){return x.id===[].concat([].slice.call(selPrez))[0];});
+    const pr=presidentes.find(function(x){return x.id===Array.from(selPrez)[0];});
     if(pr){dateFrom=parseInt(pr.inicio.substring(0,4));dateTo=parseInt(pr.fin.substring(0,4));document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo;}
   } else if (selPrez.size===0) { dateFrom=1958;dateTo=2026;document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo; }
   buildAll();
@@ -420,7 +420,7 @@ function filterEvents() {
   f=f.filter(function(h){const y=parseInt(h.fe.substring(0,4));return y>=dateFrom&&y<=dateTo;});
   title.textContent+=' ('+f.length+')';
   f.sort(function(a,b){return a.fe<b.fe?1:-1;});
-  const limit = selPrez.size===1 && presidentes.find(function(p){return p.id===[].concat([].slice.call(selPrez))[0];}) && presidentes.find(function(p){return p.id===[].concat([].slice.call(selPrez))[0];}).nombre==='Dictadura'?20:10;
+  const limit = selPrez.size===1 && presidentes.find(function(p){return p.id===Array.from(selPrez)[0];}) && presidentes.find(function(p){return p.id===Array.from(selPrez)[0];}).nombre==='Dictadura'?20:10;
   if (selPrez.size<=1) f=f.slice(0,limit);
   list.innerHTML=f.map(function(h){return '<div class="ev-item"><div class="ev-date">'+h.fe+'</div><div class="ev-title"><span class="tag '+h.cat+'">'+h.cat+'</span>'+h.ti+'</div><div class="ev-desc">'+h.de+'</div></div>';}).join('');
 }
@@ -460,7 +460,7 @@ const CHILE='#f87171';
 const OTHERS=['#60a5fa','#4ade80','#a78bfa','#fb923c','#22d3ee','#fbbf24','#f472b6','#86efac','#c4b5fd','#5eead4','#fca5a5','#94a3b8'];
 const PALETTE={}; let pi=0;
 function colorFor(name){if(name==='Chile')return CHILE;if(!PALETTE[name])PALETTE[name]=OTHERS[pi++%OTHERS.length];return PALETTE[name];}
-function yearsRange(){const all=new Set();Object.values(world).forEach(function(d){Object.keys(d).forEach(function(y){all.add(parseInt(y));});});return [].concat([].slice.call(all)).sort(function(a,b){return a-b;});}
+function yearsRange(){const all=new Set();Object.values(world).forEach(function(d){Object.keys(d).forEach(function(y){all.add(parseInt(y));});});return Array.from(all).sort(function(a,b){return a-b;});}
 function seriesFor(name){const d=world[name]||{};const yrs=yearsRange();return yrs.map(function(y){return d[String(y)]!=null?d[String(y)]:null;});}
 
 let charts = {};
