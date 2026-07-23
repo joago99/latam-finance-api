@@ -211,6 +211,45 @@ def serve_dashboard():
     return FileResponse(WEB_DIR / "linea-del-poder" / "index.html")
 
 
+# =====================
+# Comparación internacional (Banco Mundial)
+# =====================
+WORLD_DIR = DATA_DIR / "world"
+
+@app.get("/api/v1/world/gdp-pcap")
+def world_gdp_pcap():
+    """PIB per cápita (USD corrientes) por país, serie anual 1960-2023. Fuente: Banco Mundial."""
+    path = WORLD_DIR / "gdp_pcap_wb.json"
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="Datos mundiales no encontrados. Ejecuta el fetch de Banco Mundial.")
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return {
+        "metadata": {
+            "fuente": "Banco Mundial — NY.GDP.PCAP.CD (PIB per cápita, USD corrientes)",
+            "indicador": "PIB per cápita (USD)",
+            "rango": "1960-2023",
+        },
+        "data": data,
+    }
+
+
+@app.get("/comparacion")
+@app.get("/comparacion/")
+@app.get("/mundo")
+def serve_comparacion():
+    """Página de comparación internacional Chile vs Mundo."""
+    return FileResponse(WEB_DIR / "comparacion-mundo" / "index.html")
+
+
+@app.get("/vendor/chart.umd.min.js")
+def serve_chart_js():
+    """Chart.js local (evita dependencia de CDN bloqueado)."""
+    p = WEB_DIR / "vendor" / "chart.umd.min.js"
+    if not p.exists():
+        raise HTTPException(status_code=404, detail="chart.umd.min.js no encontrado")
+    return FileResponse(p, media_type="application/javascript")
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8080)

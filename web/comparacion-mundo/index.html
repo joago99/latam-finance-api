@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Línea — Chile vs Mundo | CápsulaData</title>
+<script src="/vendor/chart.umd.min.js"></script>
+<style>
+:root{--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--accent:#2563eb;--accent2:#1d4ed8;--chile:#dc2626}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{padding:1.2rem 2rem;border-bottom:1px solid var(--border);background:#fff;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+header .brand{font-family:'Playfair Display',serif;font-size:1.3rem;font-style:italic;font-weight:700}
+header .brand span{font-family:'Inter';font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-top:-2px}
+header a{color:var(--muted);text-decoration:none;font-size:0.85rem}
+.wrap{max-width:1100px;margin:0 auto;padding:2rem}
+h1{font-family:'Playfair Display',serif;font-size:2.2rem;margin-bottom:0.3rem}
+.sub{color:var(--muted);margin-bottom:2rem;max-width:700px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.8rem;margin-bottom:2rem;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.card h2{font-size:1.3rem;margin-bottom:0.3rem}
+.card .bigidea{color:var(--accent2);font-weight:600;font-size:0.95rem;margin-bottom:0.8rem}
+.card .note{color:var(--muted);font-size:0.85rem;margin-top:1rem;border-top:1px solid var(--border);padding-top:0.8rem}
+canvas{max-height:380px}
+.controls{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center}
+.controls label{font-size:0.8rem;color:var(--muted)}
+select,input{font-family:inherit;padding:0.4rem 0.6rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem}
+.toolbar{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.chip{background:#fff;border:1px solid var(--border);border-radius:20px;padding:0.3rem 0.8rem;font-size:0.75rem;cursor:pointer;color:var(--muted)}
+.chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.chip:hover{border-color:var(--accent)}
+footer{padding:2rem;text-align:center;color:var(--muted);font-size:0.8rem;border-top:1px solid var(--border)}
+footer .brand{font-family:'Playfair Display',serif;font-style:italic;font-size:1.2rem;color:var(--text)}
+footer .commercial{font-size:0.55rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--accent);margin-bottom:0.5rem}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">La Línea<span>Powered by CápsulaData</span></div>
+<a href="/dashboard">← Dashboard Chile</a>
+</header>
+
+<div class="wrap">
+<h1>Chile vs el Mundo</h1>
+<p class="sub">PIB per cápita (USD corrientes) comparado con 23 economías. Siempre con Chile como referencia. Datos: Banco Mundial (NY.GDP.PCAP.CD), 1960–2023.</p>
+
+<div class="toolbar" id="toolbar"></div>
+
+<!-- Gráfico 1: Evolución histórica -->
+<div class="card" id="g1">
+<h2>1. La brecha que no se cierra</h2>
+<div class="bigidea">Chile creció sostenidamente, pero EE.UU. y Noruega se alejan: en 2023 Chile tiene 1/5 del PIB per cápita de Noruega.</div>
+<div class="controls">
+<label>Países a comparar:</label>
+<select id="g1countries" multiple size="6" style="min-width:200px">
+<option value="Chile" selected>Chile (referencia)</option>
+<option value="Argentina" selected>Argentina</option>
+<option value="Perú" selected>Perú</option>
+<option value="México" selected>México</option>
+<option value="Brasil" selected>Brasil</option>
+<option value="EE.UU." selected>EE.UU.</option>
+<option value="Noruega" selected>Noruega</option>
+<option value="España">España</option>
+<option value="Reino Unido">Reino Unido</option>
+<option value="Alemania">Alemania</option>
+<option value="Japón">Japón</option>
+<option value="China">China</option>
+<option value="India">India</option>
+<option value="Corea del Sur">Corea del Sur</option>
+<option value="Finlandia">Finlandia</option>
+<option value="Rusia">Rusia</option>
+<option value="Sudáfrica">Sudáfrica</option>
+<option value="Nigeria">Nigeria</option>
+<option value="Etiopía">Etiopía</option>
+<option value="Egipto">Egipto</option>
+<option value="Kenia">Kenia</option>
+<option value="Angola">Angola</option>
+<option value="Argelia">Argelia</option>
+</select>
+</div>
+<canvas id="chart1"></canvas>
+<div class="note">Línea roja = Chile. Escala lineal en USD. El gap con países desarrollados es estructural desde los 80.</div>
+</div>
+
+<!-- Gráfico 2: Ranking 2023 -->
+<div class="card" id="g2">
+<h2>2. ¿Dónde cae Chile hoy?</h2>
+<div class="bigidea">Chile es la 4ª economía per cápita de la muestra latinoamericana, pero está a mitad de tabla global.</div>
+<canvas id="chart2"></canvas>
+<div class="note">Ranking 2023, barras horizontales ordenadas. Chile en rojo destacado.</div>
+</div>
+
+<!-- Gráfico 3: Crecimiento relativo 1990→2023 -->
+<div class="card" id="g3">
+<h2>3. ¿Quién corrió más desde 1990?</h2>
+<div class="bigidea">China multiplicó su PIB per cápita por 12x; Chile por 4x. La distancia relativa con Asia se amplió.</div>
+<canvas id="chart3"></canvas>
+<div class="note">Índice base 1990 = 100. Muestra cuánto se multiplicó el ingreso por persona en 33 años.</div>
+</div>
+
+<!-- Gráfico 4: Convergencia OCDE vs Latam -->
+<div class="card" id="g4">
+<h2>4. Convergencia: Chile vs promedio mundial</h2>
+<div class="bigidea">Chile superó el promedio de los países comparados a partir de 2005 y no miró atrás.</div>
+<canvas id="chart4"></canvas>
+<div class="note">Chile (rojo) vs mediana de los 23 países. La mediana incluye potencias y economías emergentes.</div>
+</div>
+
+<!-- Gráfico 5: Por región 2023 -->
+<div class="card" id="g5">
+<h2>5. El vecindario importa</h2>
+<div class="bigidea">Chile lidera a sus pares sudamericanos, pero África subsahariana se queda rezagada.</div>
+<canvas id="chart5"></canvas>
+<div class="note">Promedio 2023 por bloque regional. Sudamérica (sin Chile), Europa, Asia, Norteamérica, África.</div>
+</div>
+
+</div>
+
+<footer>
+<div class="brand">La Línea</div>
+<div class="commercial">Powered by CápsulaData</div>
+<p>Análisis de grandes datos · Entender · Diagnosticar · Predecir</p>
+<p style="margin-top:0.5rem;opacity:0.6">Fuente: Banco Mundial — NY.GDP.PCAP.CD (PIB per cápita, USD corrientes).</p>
+</footer>
+
+<script>
+let world = {};
+const CHILE = '#dc2626';
+const OTHERS = ['#2563eb','#16a34a','#9333ea','#ea580c','#0891b2','#ca8a04','#db2777','#65a30d','#7c3aed','#0d9488','#dc2626','#475569'];
+const PALETTE = {};
+let pi = 0;
+function colorFor(name){ if(name==='Chile') return CHILE; if(!PALETTE[name]) PALETTE[name]=OTHERS[pi++%OTHERS.length]; return PALETTE[name]; }
+
+async function loadWorld(){
+  const r = await fetch('/api/v1/world/gdp-pcap');
+  const j = await r.json();
+  world = j.data;
+}
+
+function yearsRange(){
+  const all = new Set();
+  Object.values(world).forEach(d => Object.keys(d).forEach(y=>all.add(parseInt(y))));
+  return [...all].sort((a,b)=>a-b);
+}
+function seriesFor(name){
+  const d = world[name] || {};
+  const yrs = yearsRange();
+  return yrs.map(y => d[String(y)] ?? null);
+}
+
+// Chart 1: lineas historicas
+let chart1;
+function render1(){
+  const sel = Array.from(document.getElementById('g1countries').selectedOptions).map(o=>o.value);
+  const yrs = yearsRange();
+  const ds = sel.map(n=>({label:n,data:seriesFor(n),borderColor:colorFor(n),backgroundColor:colorFor(n),borderWidth:n==='Chile'?3:1.5,pointRadius:0,tension:0.15,spanGaps:true}));
+  if(chart1) chart1.destroy();
+  chart1 = new Chart(document.getElementById('chart1'),{type:'line',data:{labels:yrs,datasets:ds},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:10}}}},scales:{x:{ticks:{maxTicksLimit:12,font:{size:9}},grid:{display:false}},y:{ticks:{font:{size:9},callback:v=>'$'+(v/1000).toFixed(0)+'k'},grid:{color:'#f1f5f9'}}}}});
+}
+
+// Chart 2: ranking 2023 horizontal bar
+let chart2;
+function render2(){
+  const arr = Object.entries(world).map(([n,d])=>[n, d['2023']]).filter(x=>x[1]!=null).sort((a,b)=>a[1]-b[1]);
+  const labels = arr.map(x=>x[0]); const vals = arr.map(x=>x[1]);
+  const colors = labels.map(n=> n==='Chile'?'#dc2626':'#93c5fd');
+  if(chart2) chart2.destroy();
+  chart2 = new Chart(document.getElementById('chart2'),{type:'bar',data:{labels,datasets:[{label:'PIB per cápita 2023 (USD)',data:vals,backgroundColor:colors}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'k',font:{size:9}},grid:{color:'#f1f5f9'}},y:{ticks:{font:{size:9}},grid:{display:false}}}}});
+}
+
+// Chart 3: indice 1990=100
+let chart3;
+function render3(){
+  const focus = ['Chile','China','India','Corea del Sur','Perú','Argentina','EE.UU.','Noruega'];
+  const yrs = yearsRange();
+  const base = 1990;
+  const ds = focus.map(n=>{
+    const d = world[n]||{};
+    const b = d[String(base)];
+    const data = yrs.map(y=>{
+      const v = d[String(y)];
+      if(b==null||v==null) return null;
+      return (v/b*100);
+    });
+    return {label:n,data,borderColor:colorFor(n),borderWidth:n==='Chile'?3:1.5,pointRadius:0,tension:0.2,spanGaps:true};
+  });
+  if(chart3) chart3.destroy();
+  chart3 = new Chart(document.getElementById('chart3'),{type:'line',data:{labels:yrs,datasets:ds},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:10}}}},scales:{x:{ticks:{maxTicksLimit:12,font:{size:9}},grid:{display:false}},y:{ticks:{font:{size:9},callback:v=>v+'x'},grid:{color:'#f1f5f9'}}}}});
+}
+
+// Chart 4: Chile vs mediana
+let chart4;
+function render4(){
+  const yrs = yearsRange();
+  const median = yrs.map(y=>{
+    const vals = Object.values(world).map(d=>d[String(y)]).filter(v=>v!=null).sort((a,b)=>a-b);
+    if(!vals.length) return null;
+    const m = Math.floor(vals.length/2);
+    return vals.length%2 ? vals[m] : (vals[m-1]+vals[m])/2;
+  });
+  const chile = seriesFor('Chile');
+  if(chart4) chart4.destroy();
+  chart4 = new Chart(document.getElementById('chart4'),{type:'line',data:{labels:yrs,datasets:[
+    {label:'Chile',data:chile,borderColor:CHILE,borderWidth:3,pointRadius:0,tension:0.15,spanGaps:true},
+    {label:'Mediana de los 23 países',data:median,borderColor:'#94a3b8',borderWidth:1.5,borderDash:[5,4],pointRadius:0,tension:0.15,spanGaps:true}
+  ]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:10}}}},scales:{x:{ticks:{maxTicksLimit:12,font:{size:9}},grid:{display:false}},y:{ticks:{font:{size:9},callback:v=>'$'+(v/1000).toFixed(0)+'k'},grid:{color:'#f1f5f9'}}}}});
+}
+
+// Chart 5: por region 2023
+let chart5;
+function render5(){
+  const regions = {
+    'Sudamérica (s/ Chile)': ['Argentina','Perú','Brasil','Colombia'],
+    'Europa': ['España','Reino Unido','Alemania','Francia','Noruega','Finlandia'],
+    'Asia': ['China','India','Japón','Corea del Sur'],
+    'Norteamérica': ['EE.UU.','México'],
+    'África': ['Nigeria','Sudáfrica','Etiopía','Egipto','Kenia','Angola','Argelia'],
+    'Eurasia': ['Rusia']
+  };
+  // normalize names to available
+  const avail = Object.keys(world);
+  const labels=[],vals=[[]];
+  Object.entries(regions).forEach(([reg,list])=>{
+    const found = list.filter(c=>avail.includes(c));
+    if(!found.length) return;
+    const v = found.map(c=>world[c]['2023']).filter(x=>x!=null);
+    if(v.length){ labels.push(reg); vals.push(v.reduce((a,b)=>a+b,0)/v.length); }
+  });
+  if(chart5) chart5.destroy();
+  chart5 = new Chart(document.getElementById('chart5'),{type:'bar',data:{labels,datasets:[{label:'Promedio PIB pc 2023 (USD)',data:vals,backgroundColor:['#16a34a','#2563eb','#ea580c','#0891b2','#ca8a04','#7c3aed']}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:9}},grid:{display:false}},y:{ticks:{font:{size:9},callback:v=>'$'+(v/1000).toFixed(0)+'k'},grid:{color:'#f1f5f9'}}}}});
+}
+
+// toolbar chips (year filter)
+function buildToolbar(){
+  const tb = document.getElementById('toolbar');
+  const years = [1960,1980,1990,2000,2010,2023];
+  tb.innerHTML = '<span style="font-size:0.75rem;color:#64748b">Saltar a:</span>' + years.map(y=>`<span class="chip" onclick="jumpYear(${y})">${y}</span>`).join('');
+}
+function jumpYear(y){
+  document.getElementById('g1').scrollIntoView({behavior:'smooth'});
+}
+
+(async()=>{
+  await loadWorld();
+  buildToolbar();
+  render1(); render2(); render3(); render4(); render5();
+  document.getElementById('g1countries').addEventListener('change', render1);
+})();
+</script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>La Línea — Chile 1958-2026</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js">
+<script src="/vendor/chart.umd.min.js"></script>
 </script>
 <style>
 :root{--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--accent:#2563eb;--border:#e2e8f0;--positive:#16a34a;--negative:#dc2626;--warn:#d97706}
@@ -437,9 +437,9 @@ function filterEvents() {
 // ============================================================
 // KPIs
 // ============================================================
-function fmtNum(v, dec) {
+function fmtNum(v, dec, locale='es-CL') {
   if (v === null || v === undefined || isNaN(v)) return '—';
-  return Number(v).toLocaleString('es-CL', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+  return Number(v).toLocaleString(locale, {minimumFractionDigits: dec, maximumFractionDigits: dec});
 }
 
 function lastValid(data, key) {
@@ -454,7 +454,7 @@ function buildKPIs() {
   const data = filteredMacro();
   if (!data.length) return;
   const items = [
-    {label:'PIB per cápita',key:'PIBPC',u:' USD',d:0},
+    {label:'PIB per cápita',key:'PIBPC',u:' USD',d:0,usd:true},
     {label:'PIB total',key:'PIBTOT',u:'M USD',d:0},
     {label:'Población',key:'POB',u:'',d:0,div:1,comma:true},
     {label:'Pob. Hombres',key:'POBH',u:'',d:0,div:1,comma:true},
@@ -483,7 +483,7 @@ function buildKPIs() {
       ch = (pct>=0?'▲':'▼')+' '+Math.abs(pct).toFixed(1)+'% vs año ant.';
     }
     const up = ch.startsWith('▲');
-    const valStr = k.comma ? fmtNum(val, k.d) : val.toFixed(k.d);
+    const valStr = k.comma ? fmtNum(val, k.d) : (k.usd ? '$'+fmtNum(val, k.d, 'en-US') : val.toFixed(k.d));
     return `<div class="kpi-card"><div class="label">${k.label}</div><div class="value">${valStr}${k.u}</div><div class="change ${up?'up':'down'}">${ch||'—'}</div></div>`;
   }).join('');
 }
