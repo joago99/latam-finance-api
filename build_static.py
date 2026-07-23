@@ -25,8 +25,8 @@ def main():
 
     # --- Mundo (Banco Mundial) ---
     world = json.load(open(os.path.join(ROOT, "data", "world", "gdp_pcap_wb.json"), encoding="utf-8"))
-    # world is dict: country -> {year: value}
-    json.dump(world, open(os.path.join(DIST, "data", "world-gdp.json"), "w", encoding="utf-8"),
+    # world is dict: country -> {year: value}; wrap in {data: ...} to match gateway
+    json.dump({"data": world}, open(os.path.join(DIST, "data", "world-gdp.json"), "w", encoding="utf-8"),
               ensure_ascii=False)
 
     # --- Chart.js vendored ---
