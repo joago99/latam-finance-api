@@ -29,6 +29,11 @@ def main():
     json.dump({"data": world}, open(os.path.join(DIST, "data", "world-gdp.json"), "w", encoding="utf-8"),
               ensure_ascii=False)
 
+    # --- Población mundial ---
+    pop = json.load(open(os.path.join(ROOT, "data", "world", "pop_wb.json"), encoding="utf-8"))
+    json.dump({"data": pop}, open(os.path.join(DIST, "data", "world-pop.json"), "w", encoding="utf-8"),
+              ensure_ascii=False)
+
     # --- Chart.js vendored ---
     shutil.copy(os.path.join(ROOT, "web", "vendor", "chart.umd.min.js"),
                 os.path.join(DIST, "vendor", "chart.umd.min.js"))
@@ -37,6 +42,7 @@ def main():
     src = open(os.path.join(ROOT, "web", "la-linea", "index.html"), encoding="utf-8").read()
     src = src.replace("/api/v1/chile/macro", "./data/chile-macro.json")
     src = src.replace("/api/v1/world/gdp-pcap", "./data/world-gdp.json")
+    src = src.replace("/api/v1/world/pop", "./data/world-pop.json")
     # chart vendor también relativo
     src = src.replace('src="/vendor/chart.umd.min.js"', 'src="./vendor/chart.umd.min.js"')
     open(os.path.join(DIST, "index.html"), "w", encoding="utf-8").write(src)

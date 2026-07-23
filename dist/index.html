@@ -371,7 +371,15 @@ function buildChart() {
 }
 function selectPresident(p) {
   if (selPrez.has(p.id)) selPrez.delete(p.id); else { selPrez.clear(); selPrez.add(p.id); }
-  if (selPrez.size===1) { const sp=[].concat([].slice.call(selPrez))[0]; const pr=presidentes.find(function(x){return x.id===sp;}); if(pr){dateFrom=parseInt(pr.inicio.substring(0,4));dateTo=parseInt(pr.fin.substring(0,4));document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo;} }
+  if (selPrez.size===1) {
+    const sp=[].concat([].slice.call(selPrez))[0];
+    const idx=presidentes.findIndex(function(x){return x.id===sp;});
+    const prev=presidentes[Math.max(0,idx-1)];
+    const next=presidentes[Math.min(presidentes.length-1,idx+1)];
+    dateFrom=parseInt(prev.inicio.substring(0,4));
+    dateTo=parseInt(next.fin.substring(0,4));
+    document.getElementById('dateFrom').value=dateFrom; document.getElementById('dateTo').value=dateTo;
+  }
   else if (selPrez.size===0) { dateFrom=1958;dateTo=2026;document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo; }
   buildAll();
 }
@@ -408,14 +416,14 @@ function buildKPIs() {
   ];
   document.getElementById('kpiGrid').innerHTML = items.map(function(k){
     const latest=lastValid(data,k.key); if(!latest) return '<div class="kpi-card"><div class="label">'+k.label+'</div><div class="value">—</div><div class="change">Sin dato</div></div>';
-    const dt=data[latest.idx].fecha; const lm=dt.split('-').map(Number); const prevKey=lm[0]-1+'-'+String(lm[1]).padStart(2,'0');
+    const dt=data[latest.idx].fecha; const yr=dt.substring(0,4); const lm=dt.split('-').map(Number); const prevKey=lm[0]-1+'-'+String(lm[1]).padStart(2,'0');
     const prevRow=data.find(function(r){return r.fecha===prevKey;}); const prevVal=prevRow?prevRow[k.key]:null;
     const raw = k.mult ? latest.val*k.mult : latest.val;
     const val = k.div ? raw/k.div : raw;
     let ch=''; const prevRaw = prevVal!==null&&prevVal!==undefined&&!isNaN(prevVal) ? (k.mult?prevVal*k.mult:prevVal) : null;
     if(prevRaw!==null&&prevRaw!==0){const pct=((raw-prevRaw)/Math.abs(prevRaw))*100;ch=(pct>=0?'▲':'▼')+' '+Math.abs(pct).toFixed(1)+'% vs año ant.';}
     const up=ch.startsWith('▲'); const valStr=k.comma?fmtNum(val,k.d):(k.usd?'$'+fmtNum(val,k.d,'en-US'):val.toFixed(k.d));
-    return '<div class="kpi-card"><div class="label">'+k.label+'</div><div class="value">'+valStr+k.u+'</div><div class="change '+(up?'up':'down')+'">'+ch+'</div></div>';
+    return '<div class="kpi-card"><div class="label">'+k.label+' <span style="color:var(--muted);font-weight:400">'+yr+'</span></div><div class="value">'+valStr+k.u+'</div><div class="change '+(up?'up':'down')+'">'+ch+'</div></div>';
   }).join('');
 }
 function buildIndChips(){document.getElementById('indChips').innerHTML=Object.entries(indCfg).map(function(e){const k=e[0],v=e[1];return '<span class="chip'+(k===activeInd?' active':'')+'" onclick="switchInd(\''+k+'\')">'+v.label.split('(')[0].trim()+'</span>';}).join('');}
@@ -426,6 +434,7 @@ function buildAll(){buildKPIs();buildChart();buildPrezBar();filterEvents();}
 
 // ==================== DATA: MUNDO ====================
 let world = {};
+let worldPop = {};
 const CHILE='#f87171';
 const OTHERS=['#60a5fa','#4ade80','#a78bfa','#fb923c','#22d3ee','#fbbf24','#f472b6','#86efac','#c4b5fd','#5eead4','#fca5a5','#94a3b8'];
 const PALETTE={}; let pi=0;
@@ -438,97 +447,23 @@ function renderMundo() {
   const yrs = yearsRange();
   const chileColor = '#f87171';
   const sel = ['Chile','Argentina','Perú','México','Brasil','EE.UU.','Noruega','China','India'];
-  charts.c1 = new Chart(
-    document.getElementById('sc1'),
-    {
-      type: 'line',
-      data: { labels: yrs, datasets: sel.map(function(n){ return { label: n, data: seriesFor(n), borderColor: n==='Chile'?chileColor:colorFor(n), backgroundColor: n==='Chile'?chileColor:colorFor(n), borderWidth: n==='Chile'?3:1.5, pointRadius: 0, tension: 0.15, spanGaps: true }; }) },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 12, font: { size: 10 } } },
-          tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': $' + Number(ctx.parsed.y).toLocaleString('en-US', { maximumFractionDigits: 0 }); } } }
-        },
-        scales: {
-          x: { ticks: { maxTicksLimit: 12, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } },
-          y: { ticks: { color: '#64748b', font: { size: 9 }, callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; } }, grid: { color: '#1e293b' } }
-        }
-      }
-    }
-  );
+  // Helper seguro: si el canvas no existe o hay error, no bloquea los demás
+  function safeChart(id, cfg) { try { var el=document.getElementById(id); if(!el) return; return new Chart(el, cfg); } catch(e) { console.warn('Chart '+id+' failed:', e.message); return null; } }
+  charts.c1 = safeChart('sc1', { type: 'line', data: { labels: yrs, datasets: sel.map(function(n){ return { label: n, data: seriesFor(n), borderColor: n==='Chile'?chileColor:colorFor(n), backgroundColor: n==='Chile'?chileColor:colorFor(n), borderWidth: n==='Chile'?3:1.5, pointRadius: 0, tension: 0.15, spanGaps: true }; }) }, options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': $' + Number(ctx.parsed.y).toLocaleString('en-US', { maximumFractionDigits: 0 }); } } } }, scales: { x: { ticks: { maxTicksLimit: 12, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#64748b', font: { size: 9 }, callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; } }, grid: { color: '#1e293b' } } } } });
   const arr = Object.entries(world).map(function(e){ return [e[0], e[1]['2023']]; }).filter(function(x){ return x[1]!=null; }).sort(function(a,b){ return a[1]-b[1]; });
-  charts.c2 = new Chart(
-    document.getElementById('sc2'),
-    {
-      type: 'bar',
-      data: { labels: arr.map(function(x){ return x[0]; }), datasets: [ { label: 'PIB per cápita 2023 (USD)', data: arr.map(function(x){ return x[1]; }), backgroundColor: arr.map(function(x){ return x[0]==='Chile'?chileColor:'#60a5fa'; }), borderColor: arr.map(function(x){ return x[0]==='Chile'?chileColor:'#3b82f6'; }), borderWidth: arr.map(function(x){ return x[0]==='Chile'?2:0; }) } ] },
-      options: {
-        indexAxis: 'y',
-        responsive: true,
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx){ return '$' + Number(ctx.parsed.x).toLocaleString('en-US', { maximumFractionDigits: 0 }); } } } },
-        scales: {
-          x: { ticks: { callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; }, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } },
-          y: { ticks: { color: '#cbd5e1', font: { size: 9 } }, grid: { display: false } }
-        }
-      }
-    }
-  );
+  charts.c2 = safeChart('sc2', { type: 'bar', data: { labels: arr.map(function(x){ return x[0]; }), datasets: [ { label: 'PIB per cápita 2023 (USD)', data: arr.map(function(x){ return x[1]; }), backgroundColor: arr.map(function(x){ return x[0]==='Chile'?chileColor:'#60a5fa'; }), borderColor: arr.map(function(x){ return x[0]==='Chile'?chileColor:'#3b82f6'; }), borderWidth: arr.map(function(x){ return x[0]==='Chile'?2:0; }) } ] }, options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx){ return '$' + Number(ctx.parsed.x).toLocaleString('en-US', { maximumFractionDigits: 0 }); } } } }, scales: { x: { ticks: { callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; }, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#cbd5e1', font: { size: 9 } }, grid: { display: false } } } } });
   const focus = ['Chile','China','India','Corea del Sur','Perú','Argentina','EE.UU.','Noruega'];
-  charts.c3 = new Chart(
-    document.getElementById('sc3'),
-    {
-      type: 'line',
-      data: { labels: yrs, datasets: focus.map(function(n){ const d=world[n]||{}; const b=d['1990']; const data=yrs.map(function(y){ const v=d[String(y)]; if(b==null||v==null) return null; return v/b*100; }); return { label: n, data: data, borderColor: n==='Chile'?chileColor:colorFor(n), backgroundColor: n==='Chile'?chileColor:colorFor(n), borderWidth: n==='Chile'?3:1.5, pointRadius: 0, tension: 0.2, spanGaps: true }; }) },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 12, font: { size: 10 } } },
-          tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': ' + Number(ctx.parsed.y).toLocaleString('en-US', { maximumFractionDigits: 0 }) + 'x'; } } }
-        },
-        scales: {
-          x: { ticks: { maxTicksLimit: 12, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } },
-          y: { ticks: { color: '#64748b', font: { size: 9 }, callback: function(v){ return v + 'x'; } }, grid: { color: '#1e293b' } }
-        }
-      }
-    }
-  );
+  charts.c3 = safeChart('sc3', { type: 'line', data: { labels: yrs, datasets: focus.map(function(n){ const d=world[n]||{}; const b=d['1990']; const data=yrs.map(function(y){ const v=d[String(y)]; if(b==null||v==null) return null; return v/b*100; }); return { label: n, data: data, borderColor: n==='Chile'?chileColor:colorFor(n), backgroundColor: n==='Chile'?chileColor:colorFor(n), borderWidth: n==='Chile'?3:1.5, pointRadius: 0, tension: 0.2, spanGaps: true }; }) }, options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': ' + Number(ctx.parsed.y).toLocaleString('en-US', { maximumFractionDigits: 0 }) + 'x'; } } } }, scales: { x: { ticks: { maxTicksLimit: 12, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#64748b', font: { size: 9 }, callback: function(v){ return v + 'x'; } }, grid: { color: '#1e293b' } } } } });
   const median = yrs.map(function(y){ const vals = Object.values(world).map(function(d){ return d[String(y)]; }).filter(function(v){ return v!=null; }).sort(function(a,b){ return a-b; }); if(!vals.length) return null; const m=Math.floor(vals.length/2); return vals.length%2 ? vals[m] : (vals[m-1]+vals[m])/2; });
-  charts.c4 = new Chart(
-    document.getElementById('sc4'),
-    {
-      type: 'line',
-      data: { labels: yrs, datasets: [ { label: 'Chile', data: seriesFor('Chile'), borderColor: chileColor, backgroundColor: chileColor, borderWidth: 3, pointRadius: 0, tension: 0.15, spanGaps: true }, { label: 'Mediana 23 países', data: median, borderColor: '#94a3b8', backgroundColor: '#94a3b8', borderWidth: 1.5, borderDash: [5,4], pointRadius: 0, tension: 0.15, spanGaps: true } ] },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 12, font: { size: 10 } } },
-          tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': $' + Number(ctx.parsed.y).toLocaleString('en-US', { maximumFractionDigits: 0 }); } } }
-        },
-        scales: {
-          x: { ticks: { maxTicksLimit: 12, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } },
-          y: { ticks: { color: '#64748b', font: { size: 9 }, callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; } }, grid: { color: '#1e293b' } }
-        }
-      }
-    }
-  );
-  const regions = {'Sudamérica (s/ Chile)':['Argentina','Perú','Brasil'],'Europa':['España','Reino Unido','Alemania','Francia','Noruega','Finlandia'],'Asia':['China','India','Japón','Corea del Sur'],'Norteamérica':['EE.UU.','México'],'África':['Nigeria','Sudáfrica','Etiopía','Egipto','Kenia','Angola','Argelia'],'Eurasia':['Rusia']};
-  const avail = Object.keys(world); const rlabels = [], rvals = [];
-  Object.entries(regions).forEach(function(rg){ const reg=rg[0], list=rg[1]; const found=list.filter(function(c){ return avail.includes(c); }); if(!found.length) return; const v=found.map(function(c){ return world[c]['2023']; }).filter(function(x){ return x!=null; }); if(v.length){ rlabels.push(reg); rvals.push(v.reduce(function(a,b){ return a+b; },0)/v.length); } });
-  charts.c5 = new Chart(
-    document.getElementById('sc5'),
-    {
-      type: 'bar',
-      data: { labels: rlabels, datasets: [ { label: 'Promedio PIB pc 2023 (USD)', data: rvals, backgroundColor: ['#4ade80','#60a5fa','#fb923c','#22d3ee','#fbbf24','#a78bfa'] } ] },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx){ return '$' + Number(ctx.parsed.y).toLocaleString('en-US', { maximumFractionDigits: 0 }); } } } },
-        scales: {
-          x: { ticks: { color: '#cbd5e1', font: { size: 9 } }, grid: { display: false } },
-          y: { ticks: { color: '#64748b', font: { size: 9 }, callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; } }, grid: { color: '#1e293b' } }
-        }
-      }
-    }
-  );
+  charts.c4 = safeChart('sc4', { type: 'line', data: { labels: yrs, datasets: [ { label: 'Chile', data: seriesFor('Chile'), borderColor: chileColor, backgroundColor: chileColor, borderWidth: 3, pointRadius: 0, tension: 0.15, spanGaps: true }, { label: 'Mediana 23 países', data: median, borderColor: '#94a3b8', backgroundColor: '#94a3b8', borderWidth: 1.5, borderDash: [5,4], pointRadius: 0, tension: 0.15, spanGaps: true } ] }, options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': $' + Number(ctx.parsed.y).toLocaleString('en-US', { maximumFractionDigits: 0 }); } } } }, scales: { x: { ticks: { maxTicksLimit: 12, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#64748b', font: { size: 9 }, callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; } }, grid: { color: '#1e293b' } } } } });
+  // Chart 5: Población % del mundo
+  var pChile = worldPop.Chile && worldPop.Chile['2023'] ? worldPop.Chile['2023'] : 0;
+  var pWorld = worldPop.WLD && worldPop.WLD['2023'] ? worldPop.WLD['2023'] : 1;
+  var pLatAm = worldPop.LCN && worldPop.LCN['2023'] ? worldPop.LCN['2023'] : 0;
+  var pctChile = (pChile / pWorld * 100);
+  var pctLatAm = (pLatAm / pWorld * 100);
+  var pctRest = Math.max(0, 100 - pctChile - pctLatAm);
+  charts.c5 = safeChart('sc5', { type: 'doughnut', data: { labels: ['Chile', 'Latinoamérica', 'Resto del mundo'], datasets: [ { data: [pctChile, pctLatAm, pctRest], backgroundColor: ['#f87171', '#60a5fa', '#334155'], borderColor: '#1e293b', borderWidth: 2 } ] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 10 } } }, tooltip: { callbacks: { label: function(ctx){ return ctx.label + ': ' + Number(ctx.parsed).toFixed(2) + '%'; } } } } } });
 }
 
 // ==================== INIT ====================
@@ -538,12 +473,13 @@ function renderMundo() {
   buildAll();
   try {
     const r = await fetch('./data/world-gdp.json'); const j = await r.json(); world = j.data;
+    const rp = await fetch('./data/world-pop.json'); const jp = await rp.json(); worldPop = jp.data;
     document.getElementById('scGrid').innerHTML =
       '<div class="sc-card"><h3>1. La brecha que no se cierra</h3><div class="bigidea">Chile creció sostenidamente, pero EE.UU. y Noruega se alejan: en 2023 Chile tiene 1/5 del PIB per cápita de Noruega.</div><canvas id="sc1"></canvas><div class="note">Línea roja = Chile. Escala lineal en USD.</div></div>'+
       '<div class="sc-card"><h3>2. ¿Dónde cae Chile hoy?</h3><div class="bigidea">Chile lidera a sus pares sudamericanos, pero está a mitad de tabla global.</div><canvas id="sc2"></canvas><div class="note">Ranking 2023, barras horizontales. Chile en rojo destacado.</div></div>'+
       '<div class="sc-card"><h3>3. ¿Quién corrió más desde 1990?</h3><div class="bigidea">China multiplicó su PIB per cápita por 12x; Chile por 4x. La distancia relativa con Asia se amplió.</div><canvas id="sc3"></canvas><div class="note">Índice base 1990 = 100.</div></div>'+
       '<div class="sc-card"><h3>4. Convergencia: Chile vs mediana mundial</h3><div class="bigidea">Chile superó la mediana de los países comparados a partir de 2005.</div><canvas id="sc4"></canvas><div class="note">Chile (rojo) vs mediana de los 23 países.</div></div>'+
-      '<div class="sc-card"><h3>5. El vecindario importa</h3><div class="bigidea">Chile lidera a Sudamérica, pero África subsahariana se queda rezagada.</div><canvas id="sc5"></canvas><div class="note">Promedio 2023 por bloque regional.</div></div>';
+      '<div class="sc-card"><h3>5. Población: Chile en el mundo</h3><div class="bigidea">Chile tiene el 0,24% de la población mundial. Latinoamérica el 8,2%.</div><canvas id="sc5"></canvas><div class="note">Datos 2023: Población total mundial 8.062M. Fuente: Banco Mundial.</div></div>';
     renderMundo();
   } catch(e){ document.getElementById('scGrid').innerHTML='<p style="color:#f87171;font-size:0.8rem">Error cargando datos mundiales.</p>'; }
 })();
