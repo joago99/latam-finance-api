@@ -1,0 +1,54 @@
+"""Construye versión estática (GitHub Pages) de La Línea / CápsulaData.
+Extrae datos reales a JSON estáticos y genera dist/index.html que los carga
+con rutas relativas (sin backend FastAPI).
+"""
+import json, shutil, os
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+DIST = os.path.join(ROOT, "dist")
+
+def main():
+    os.makedirs(os.path.join(DIST, "data"), exist_ok=True)
+    os.makedirs(os.path.join(DIST, "vendor"), exist_ok=True)
+
+    # --- Macro Chile ---
+    macro = json.load(open(os.path.join(ROOT, "data", "chile", "bcentral", "chile_macro_monthly.json"), encoding="utf-8"))
+    # Mantener solo campos útiles y recortar a 2026
+    clean = []
+    for r in macro["data"]:
+        if r.get("fecha", "") > "2026-12":
+            continue
+        clean.append(r)
+    json.dump({"metadata": macro.get("metadata", {}), "data": clean},
+               open(os.path.join(DIST, "data", "chile-macro.json"), "w", encoding="utf-8"),
+               ensure_ascii=False)
+
+    # --- Mundo (Banco Mundial) ---
+    world = json.load(open(os.path.join(ROOT, "data", "world", "gdp_pcap_wb.json"), encoding="utf-8"))
+    # world is dict: country -> {year: value}
+    json.dump(world, open(os.path.join(DIST, "data", "world-gdp.json"), "w", encoding="utf-8"),
+              ensure_ascii=False)
+
+    # --- Chart.js vendored ---
+    shutil.copy(os.path.join(ROOT, "web", "vendor", "chart.umd.min.js"),
+                os.path.join(DIST, "vendor", "chart.umd.min.js"))
+
+    # --- index.html: copia de la-linea con fetches relativos ---
+    src = open(os.path.join(ROOT, "web", "la-linea", "index.html"), encoding="utf-8").read()
+    src = src.replace("/api/v1/chile/macro", "./data/chile-macro.json")
+    src = src.replace("/api/v1/world/gdp-pcap", "./data/world-gdp.json")
+    # chart vendor también relativo
+    src = src.replace('src="/vendor/chart.umd.min.js"', 'src="./vendor/chart.umd.min.js"')
+    open(os.path.join(DIST, "index.html"), "w", encoding="utf-8").write(src)
+
+    # --- CNAME opcional (descomenta si tienes dominio) ---
+    # open(os.path.join(DIST, "CNAME"), "w").write("capsuladata.com\n")
+
+    print(f"Build estático listo en {DIST}")
+    print(f"  - index.html ({len(src)} bytes)")
+    print(f"  - data/chile-macro.json ({len(clean)} filas)")
+    print(f"  - data/world-gdp.json ({len(world)} países)")
+    print(f"  - vendor/chart.umd.min.js")
+
+if __name__ == "__main__":
+    main()

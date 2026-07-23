@@ -1,0 +1,598 @@
+{
+  "metadata": {
+    "code": "F019.PIB.VAR.CH.T",
+    "name": "Producto interno bruto, Chile, variación anual, porcentaje, frecuencia trimestral",
+    "name_en": "Gross Domestic Product, Chile, year over year, percentage, quarterly frequency",
+    "unit": "var % anual",
+    "fetched_at": "2026-07-23T01:35:14.313539",
+    "first_obs": "01-01-1997",
+    "last_obs": "01-01-2026"
+  },
+  "data": [
+    {
+      "fecha": "01-01-1997",
+      "valor": "5.61",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-1997",
+      "valor": "6.81",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-1997",
+      "valor": "8.15",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-1997",
+      "valor": "8.94",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1998",
+      "valor": "7.66",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-1998",
+      "valor": "6.94",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-1998",
+      "valor": "3.93",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-1998",
+      "valor": "-1.36",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1999",
+      "valor": "-2.53",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-1999",
+      "valor": "-3.23",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-1999",
+      "valor": "-0.7",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-1999",
+      "valor": "5.38",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2000",
+      "valor": "5.8",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2000",
+      "valor": "5.84",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2000",
+      "valor": "5",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2000",
+      "valor": "3.38",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2001",
+      "valor": "3.39",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2001",
+      "valor": "4.21",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2001",
+      "valor": "2.76",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2001",
+      "valor": "2.29",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2002",
+      "valor": "1.19",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2002",
+      "valor": "2.59",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2002",
+      "valor": "4.23",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2002",
+      "valor": "4.78",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2003",
+      "valor": "5.33",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2003",
+      "valor": "5.15",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2003",
+      "valor": "4.59",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2003",
+      "valor": "3.88",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2004",
+      "valor": "4.72",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2004",
+      "valor": "5.64",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2004",
+      "valor": "7.44",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2004",
+      "valor": "8.8",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2005",
+      "valor": "6.19",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2005",
+      "valor": "5.94",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2005",
+      "valor": "5.72",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2005",
+      "valor": "5.52",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2006",
+      "valor": "5.95",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2006",
+      "valor": "6.33",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2006",
+      "valor": "5.63",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2006",
+      "valor": "6.26",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2007",
+      "valor": "5.53",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2007",
+      "valor": "5.47",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2007",
+      "valor": "4.87",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2007",
+      "valor": "4.83",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2008",
+      "valor": "6.1",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2008",
+      "valor": "5.01",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2008",
+      "valor": "3.55",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2008",
+      "valor": "0.75",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2009",
+      "valor": "-2.26",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2009",
+      "valor": "-2.82",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2009",
+      "valor": "-0.72",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2009",
+      "valor": "1.28",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2010",
+      "valor": "1.93",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2010",
+      "valor": "6.41",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2010",
+      "valor": "7.5",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2010",
+      "valor": "7.45",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2011",
+      "valor": "8.77",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2011",
+      "valor": "6.26",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2011",
+      "valor": "4.5",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2011",
+      "valor": "5.53",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2012",
+      "valor": "6.02",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2012",
+      "valor": "6.5",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2012",
+      "valor": "6.63",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2012",
+      "valor": "5.53",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2013",
+      "valor": "4.14",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2013",
+      "valor": "3.43",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2013",
+      "valor": "2.93",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2013",
+      "valor": "2.78",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2014",
+      "valor": "2.45",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2014",
+      "valor": "1.7",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2014",
+      "valor": "1.31",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2014",
+      "valor": "1.71",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2015",
+      "valor": "2.5",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2015",
+      "valor": "2.04",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2015",
+      "valor": "2.27",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2015",
+      "valor": "1.83",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2016",
+      "valor": "2.98",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2016",
+      "valor": "1.26",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2016",
+      "valor": "1.99",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2016",
+      "valor": "0.85",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2017",
+      "valor": "-0.35",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2017",
+      "valor": "0.71",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2017",
+      "valor": "1.89",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2017",
+      "valor": "3.11",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2018",
+      "valor": "4.59",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2018",
+      "valor": "5.34",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2018",
+      "valor": "2.39",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2018",
+      "valor": "3.63",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2019",
+      "valor": "1.25",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2019",
+      "valor": "1.51",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2019",
+      "valor": "2.92",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2019",
+      "valor": "-2.81",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2020",
+      "valor": "-0.4",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2020",
+      "valor": "-15.02",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2020",
+      "valor": "-9.25",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2020",
+      "valor": "0.1",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2021",
+      "valor": "0.43",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2021",
+      "valor": "18.38",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2021",
+      "valor": "16.24",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2021",
+      "valor": "11.67",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2022",
+      "valor": "5.96",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2022",
+      "valor": "4.76",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2022",
+      "valor": "0.14",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2022",
+      "valor": "-1.99",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2023",
+      "valor": "-0.05",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2023",
+      "valor": "-0.36",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2023",
+      "valor": "1.38",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2023",
+      "valor": "1.7",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2024",
+      "valor": "3.48",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2024",
+      "valor": "1.17",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2024",
+      "valor": "2.39",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2024",
+      "valor": "4.1",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2025",
+      "valor": "2.93",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2025",
+      "valor": "3.73",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2025",
+      "valor": "1.7",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2025",
+      "valor": "1.55",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2026",
+      "valor": "-0.48",
+      "status": "OK"
+    }
+  ]
+}

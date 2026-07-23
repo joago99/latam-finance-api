@@ -1,0 +1,2213 @@
+{
+  "metadata": {
+    "code": "F073.UTR.PRE.Z.M",
+    "name": "Unidad tributaria mensual (UTM)",
+    "name_en": "Monthly tax unit (UTM)",
+    "unit": "CLP",
+    "fetched_at": "2026-07-23T01:35:09.214367",
+    "first_obs": "01-01-1990",
+    "last_obs": "01-08-2026"
+  },
+  "data": [
+    {
+      "fecha": "01-01-1990",
+      "valor": "9576",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-1990",
+      "valor": "9777",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-1990",
+      "valor": "10021",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-1990",
+      "valor": "10051",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-1990",
+      "valor": "10292",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-1990",
+      "valor": "10477",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-1990",
+      "valor": "10634",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-1990",
+      "valor": "10868",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-1990",
+      "valor": "11053",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-1990",
+      "valor": "11274",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-1990",
+      "valor": "11826",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-1990",
+      "valor": "12275",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1991",
+      "valor": "12385",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-1991",
+      "valor": "12447",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-1991",
+      "valor": "12497",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-1991",
+      "valor": "12509",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-1991",
+      "valor": "12659",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-1991",
+      "valor": "12887",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-1991",
+      "valor": "13209",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-1991",
+      "valor": "13447",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-1991",
+      "valor": "13689",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-1991",
+      "valor": "13853",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-1991",
+      "valor": "14033",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-1991",
+      "valor": "14440",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1992",
+      "valor": "14570",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-1992",
+      "valor": "14745",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-1992",
+      "valor": "14907",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-1992",
+      "valor": "14818",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-1992",
+      "valor": "14922",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-1992",
+      "valor": "15116",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-1992",
+      "valor": "15282",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-1992",
+      "valor": "15389",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-1992",
+      "valor": "15558",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-1992",
+      "valor": "15776",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-1992",
+      "valor": "16139",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-1992",
+      "valor": "16365",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1993",
+      "valor": "16594",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-1993",
+      "valor": "16611",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-1993",
+      "valor": "16644",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-1993",
+      "valor": "16711",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-1993",
+      "valor": "16811",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-1993",
+      "valor": "17046",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-1993",
+      "valor": "17302",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-1993",
+      "valor": "17389",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-1993",
+      "valor": "17563",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-1993",
+      "valor": "17932",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-1993",
+      "valor": "18147",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-1993",
+      "valor": "18619",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1994",
+      "valor": "18638",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-1994",
+      "valor": "18675",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-1994",
+      "valor": "18862",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-1994",
+      "valor": "18919",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-1994",
+      "valor": "19127",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-1994",
+      "valor": "19223",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-1994",
+      "valor": "19492",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-1994",
+      "valor": "19589",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-1994",
+      "valor": "19707",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-1994",
+      "valor": "19924",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-1994",
+      "valor": "20024",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-1994",
+      "valor": "20144",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1995",
+      "valor": "20265",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-1995",
+      "valor": "20326",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-1995",
+      "valor": "20448",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-1995",
+      "valor": "20550",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-1995",
+      "valor": "20673",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-1995",
+      "valor": "20797",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-1995",
+      "valor": "20922",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-1995",
+      "valor": "21068",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-1995",
+      "valor": "21237",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-1995",
+      "valor": "21577",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-1995",
+      "valor": "21706",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-1995",
+      "valor": "21880",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1996",
+      "valor": "21902",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-1996",
+      "valor": "21968",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-1996",
+      "valor": "22034",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-1996",
+      "valor": "22144",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-1996",
+      "valor": "22299",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-1996",
+      "valor": "22522",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-1996",
+      "valor": "22702",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-1996",
+      "valor": "22793",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-1996",
+      "valor": "22861",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-1996",
+      "valor": "22952",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-1996",
+      "valor": "23067",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-1996",
+      "valor": "23228",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1997",
+      "valor": "23321",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-1997",
+      "valor": "23414",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-1997",
+      "valor": "23531",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-1997",
+      "valor": "23719",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-1997",
+      "valor": "23790",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-1997",
+      "valor": "23861",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-1997",
+      "valor": "23909",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-1997",
+      "valor": "23957",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-1997",
+      "valor": "24101",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-1997",
+      "valor": "24197",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-1997",
+      "valor": "24415",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-1997",
+      "valor": "24708",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1998",
+      "valor": "24733",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-1998",
+      "valor": "24758",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-1998",
+      "valor": "24931",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-1998",
+      "valor": "24906",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-1998",
+      "valor": "25006",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-1998",
+      "valor": "25106",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-1998",
+      "valor": "25156",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-1998",
+      "valor": "25231",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-1998",
+      "valor": "25332",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-1998",
+      "valor": "25408",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-1998",
+      "valor": "25535",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-1998",
+      "valor": "25739",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1999",
+      "valor": "25765",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-1999",
+      "valor": "25894",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-1999",
+      "valor": "25816",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-1999",
+      "valor": "25842",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-1999",
+      "valor": "25997",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-1999",
+      "valor": "26101",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-1999",
+      "valor": "26127",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-1999",
+      "valor": "26153",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-1999",
+      "valor": "26179",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-1999",
+      "valor": "26231",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-1999",
+      "valor": "26283",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-1999",
+      "valor": "26388",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2000",
+      "valor": "26441",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2000",
+      "valor": "26520",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2000",
+      "valor": "26573",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2000",
+      "valor": "26732",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2000",
+      "valor": "26919",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2000",
+      "valor": "27054",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2000",
+      "valor": "27108",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2000",
+      "valor": "27162",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2000",
+      "valor": "27189",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2000",
+      "valor": "27271",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2000",
+      "valor": "27435",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2000",
+      "valor": "27600",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2001",
+      "valor": "27683",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2001",
+      "valor": "27711",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2001",
+      "valor": "27794",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2001",
+      "valor": "27711",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2001",
+      "valor": "27850",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2001",
+      "valor": "27989",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2001",
+      "valor": "28101",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2001",
+      "valor": "28129",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2001",
+      "valor": "28073",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2001",
+      "valor": "28298",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2001",
+      "valor": "28496",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2001",
+      "valor": "28524",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2002",
+      "valor": "28524",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2002",
+      "valor": "28438",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2002",
+      "valor": "28410",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2002",
+      "valor": "28410",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2002",
+      "valor": "28552",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2002",
+      "valor": "28666",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2002",
+      "valor": "28695",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2002",
+      "valor": "28666",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2002",
+      "valor": "28781",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2002",
+      "valor": "28896",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2002",
+      "valor": "29127",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2002",
+      "valor": "29389",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2003",
+      "valor": "29360",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2003",
+      "valor": "29243",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2003",
+      "valor": "29272",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2003",
+      "valor": "29506",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2003",
+      "valor": "29860",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2003",
+      "valor": "29830",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2003",
+      "valor": "29711",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2003",
+      "valor": "29711",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2003",
+      "valor": "29681",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2003",
+      "valor": "29740",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2003",
+      "valor": "29799",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2003",
+      "valor": "29739",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2004",
+      "valor": "29650",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2004",
+      "valor": "29561",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2004",
+      "valor": "29502",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2004",
+      "valor": "29502",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2004",
+      "valor": "29620",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2004",
+      "valor": "29738",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2004",
+      "valor": "29887",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2004",
+      "valor": "30007",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2004",
+      "valor": "30067",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2004",
+      "valor": "30187",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2004",
+      "valor": "30217",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2004",
+      "valor": "30308",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2005",
+      "valor": "30399",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2005",
+      "valor": "30277",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2005",
+      "valor": "30186",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2005",
+      "valor": "30156",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2005",
+      "valor": "30337",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2005",
+      "valor": "30610",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2005",
+      "valor": "30702",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2005",
+      "valor": "30825",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2005",
+      "valor": "31010",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2005",
+      "valor": "31103",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2005",
+      "valor": "31414",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2005",
+      "valor": "31571",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2006",
+      "valor": "31508",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2006",
+      "valor": "31413",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2006",
+      "valor": "31444",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2006",
+      "valor": "31413",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2006",
+      "valor": "31601",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2006",
+      "valor": "31791",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2006",
+      "valor": "31855",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2006",
+      "valor": "32046",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2006",
+      "valor": "32206",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2006",
+      "valor": "32303",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2006",
+      "valor": "32303",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2006",
+      "valor": "32206",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2007",
+      "valor": "32142",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2007",
+      "valor": "32174",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2007",
+      "valor": "32271",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2007",
+      "valor": "32206",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2007",
+      "valor": "32335",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2007",
+      "valor": "32529",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2007",
+      "valor": "32724",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2007",
+      "valor": "33019",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2007",
+      "valor": "33382",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2007",
+      "valor": "33749",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2007",
+      "valor": "34120",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2007",
+      "valor": "34222",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2008",
+      "valor": "34496",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2008",
+      "valor": "34668",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2008",
+      "valor": "34668",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2008",
+      "valor": "34807",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2008",
+      "valor": "35085",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2008",
+      "valor": "35225",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2008",
+      "valor": "35648",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2008",
+      "valor": "36183",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2008",
+      "valor": "36581",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2008",
+      "valor": "36910",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2008",
+      "valor": "37316",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2008",
+      "valor": "37652",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2009",
+      "valor": "37614",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2009",
+      "valor": "37163",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2009",
+      "valor": "36866",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2009",
+      "valor": "36719",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2009",
+      "valor": "36866",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2009",
+      "valor": "36792",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2009",
+      "valor": "36682",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2009",
+      "valor": "36792",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2009",
+      "valor": "36645",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2009",
+      "valor": "36498",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2009",
+      "valor": "36863",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2009",
+      "valor": "36863",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2010",
+      "valor": "36679",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2010",
+      "valor": "36569",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2010",
+      "valor": "36752",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2010",
+      "valor": "36862",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2010",
+      "valor": "36899",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2010",
+      "valor": "37083",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2010",
+      "valor": "37231",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2010",
+      "valor": "37231",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2010",
+      "valor": "37454",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2010",
+      "valor": "37417",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2010",
+      "valor": "37567",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2010",
+      "valor": "37605",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2011",
+      "valor": "37643",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2011",
+      "valor": "37681",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2011",
+      "valor": "37794",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2011",
+      "valor": "37870",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2011",
+      "valor": "38173",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2011",
+      "valor": "38288",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2011",
+      "valor": "38441",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2011",
+      "valor": "38518",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2011",
+      "valor": "38557",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2011",
+      "valor": "38634",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2011",
+      "valor": "38827",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2011",
+      "valor": "39021",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2012",
+      "valor": "39138",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2012",
+      "valor": "39373",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2012",
+      "valor": "39412",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2012",
+      "valor": "39570",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2012",
+      "valor": "39649",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2012",
+      "valor": "39689",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2012",
+      "valor": "39689",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2012",
+      "valor": "39570",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2012",
+      "valor": "39570",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2012",
+      "valor": "39649",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2012",
+      "valor": "39966",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2012",
+      "valor": "40206",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2013",
+      "valor": "40005",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2013",
+      "valor": "40005",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2013",
+      "valor": "40085",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2013",
+      "valor": "40125",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2013",
+      "valor": "40286",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2013",
+      "valor": "40085",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2013",
+      "valor": "40085",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2013",
+      "valor": "40326",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2013",
+      "valor": "40447",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2013",
+      "valor": "40528",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2013",
+      "valor": "40731",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2013",
+      "valor": "40772",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2014",
+      "valor": "40935",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2014",
+      "valor": "41181",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2014",
+      "valor": "41263",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2014",
+      "valor": "41469",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2014",
+      "valor": "41801",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2014",
+      "valor": "42052",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2014",
+      "valor": "42178",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2014",
+      "valor": "42220",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2014",
+      "valor": "42304",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2014",
+      "valor": "42431",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2014",
+      "valor": "42770",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2014",
+      "valor": "43198",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2015",
+      "valor": "43198",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2015",
+      "valor": "43025",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2015",
+      "valor": "43068",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2015",
+      "valor": "43240",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2015",
+      "valor": "43499",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2015",
+      "valor": "43760",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2015",
+      "valor": "43848",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2015",
+      "valor": "44067",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2015",
+      "valor": "44243",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2015",
+      "valor": "44553",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2015",
+      "valor": "44776",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2015",
+      "valor": "44955",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2016",
+      "valor": "44955",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2016",
+      "valor": "44955",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2016",
+      "valor": "45180",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2016",
+      "valor": "45316",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2016",
+      "valor": "45497",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2016",
+      "valor": "45633",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2016",
+      "valor": "45724",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2016",
+      "valor": "45907",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2016",
+      "valor": "45999",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2016",
+      "valor": "45999",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2016",
+      "valor": "46091",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2016",
+      "valor": "46183",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2017",
+      "valor": "46229",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2017",
+      "valor": "46137",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2017",
+      "valor": "46368",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2017",
+      "valor": "46461",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2017",
+      "valor": "46647",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2017",
+      "valor": "46740",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2017",
+      "valor": "46787",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2017",
+      "valor": "46600",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2017",
+      "valor": "46693",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2017",
+      "valor": "46786",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2017",
+      "valor": "46692",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2017",
+      "valor": "46972",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2018",
+      "valor": "47019",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2018",
+      "valor": "47066",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2018",
+      "valor": "47301",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2018",
+      "valor": "47301",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2018",
+      "valor": "47396",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2018",
+      "valor": "47538",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2018",
+      "valor": "47681",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2018",
+      "valor": "47729",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2018",
+      "valor": "47920",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2018",
+      "valor": "48016",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2018",
+      "valor": "48160",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2018",
+      "valor": "48353",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2019",
+      "valor": "48353",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2019",
+      "valor": "48305",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2019",
+      "valor": "48353",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2019",
+      "valor": "48353",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2019",
+      "valor": "48595",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2019",
+      "valor": "48741",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2019",
+      "valor": "49033",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2019",
+      "valor": "49033",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2019",
+      "valor": "49131",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2019",
+      "valor": "49229",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2019",
+      "valor": "49229",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2019",
+      "valor": "49623",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2020",
+      "valor": "49673",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2020",
+      "valor": "49723",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2020",
+      "valor": "50021",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2020",
+      "valor": "50221",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2020",
+      "valor": "50372",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2020",
+      "valor": "50372",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2020",
+      "valor": "50322",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2020",
+      "valor": "50272",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2020",
+      "valor": "50322",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2020",
+      "valor": "50372",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2020",
+      "valor": "50674",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2020",
+      "valor": "51029",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2021",
+      "valor": "50978",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2021",
+      "valor": "51131",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2021",
+      "valor": "51489",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2021",
+      "valor": "51592",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2021",
+      "valor": "51798",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2021",
+      "valor": "52005",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2021",
+      "valor": "52161",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2021",
+      "valor": "52213",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2021",
+      "valor": "52631",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2021",
+      "valor": "52842",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2021",
+      "valor": "53476",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2021",
+      "valor": "54171",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2022",
+      "valor": "54442",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2022",
+      "valor": "54878",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2022",
+      "valor": "55537",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2022",
+      "valor": "55704",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2022",
+      "valor": "56762",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2022",
+      "valor": "57557",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2022",
+      "valor": "58248",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2022",
+      "valor": "58772",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2022",
+      "valor": "59595",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2022",
+      "valor": "60310",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2022",
+      "valor": "60853",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2022",
+      "valor": "61157",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2023",
+      "valor": "61769",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2023",
+      "valor": "61954",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2023",
+      "valor": "62450",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2023",
+      "valor": "62388",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2023",
+      "valor": "63074",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2023",
+      "valor": "63263",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2023",
+      "valor": "63326",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2023",
+      "valor": "63199",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2023",
+      "valor": "63452",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2023",
+      "valor": "63515",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2023",
+      "valor": "63960",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2023",
+      "valor": "64216",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2024",
+      "valor": "64666",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2024",
+      "valor": "64343",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2024",
+      "valor": "64793",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2024",
+      "valor": "65182",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2024",
+      "valor": "65443",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2024",
+      "valor": "65770",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2024",
+      "valor": "65967",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2024",
+      "valor": "65901",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2024",
+      "valor": "66362",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2024",
+      "valor": "66561",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2024",
+      "valor": "66628",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2024",
+      "valor": "67294",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2025",
+      "valor": "67429",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2025",
+      "valor": "67294",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2025",
+      "valor": "68034",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2025",
+      "valor": "68306",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2025",
+      "valor": "68648",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2025",
+      "valor": "68785",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2025",
+      "valor": "68923",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2025",
+      "valor": "68647",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-09-2025",
+      "valor": "69265",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-10-2025",
+      "valor": "69265",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-11-2025",
+      "valor": "69542",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-12-2025",
+      "valor": "69542",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2026",
+      "valor": "69751",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-02-2026",
+      "valor": "69611",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-03-2026",
+      "valor": "69889",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-04-2026",
+      "valor": "69889",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-05-2026",
+      "valor": "70588",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-06-2026",
+      "valor": "71506",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-07-2026",
+      "valor": "71649",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-08-2026",
+      "valor": "71649",
+      "status": "OK"
+    }
+  ]
+}

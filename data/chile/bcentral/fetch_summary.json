@@ -1,0 +1,129 @@
+{
+  "fetched_at": "2026-07-23T01:35:28.416636",
+  "since": "1958-01-01",
+  "until": "2026-07-23",
+  "total_series": 17,
+  "total_errors": 0,
+  "series": [
+    {
+      "name": "TPM",
+      "code": "F022.TPM.TIN.D001.NO.Z.D",
+      "records": 10759,
+      "json": "data\\chile\\bcentral\\TPM.json",
+      "csv": "data\\chile\\bcentral\\TPM.csv"
+    },
+    {
+      "name": "UF",
+      "code": "F073.UFF.PRE.Z.D",
+      "records": 17906,
+      "json": "data\\chile\\bcentral\\UF.json",
+      "csv": "data\\chile\\bcentral\\UF.csv"
+    },
+    {
+      "name": "Dolar_Observado",
+      "code": "F073.TCO.PRE.Z.D",
+      "records": 16055,
+      "json": "data\\chile\\bcentral\\Dolar_Observado.json",
+      "csv": "data\\chile\\bcentral\\Dolar_Observado.csv"
+    },
+    {
+      "name": "Euro",
+      "code": "F072.CLP.EUR.N.O.D",
+      "records": 10063,
+      "json": "data\\chile\\bcentral\\Euro.json",
+      "csv": "data\\chile\\bcentral\\Euro.csv"
+    },
+    {
+      "name": "UTM",
+      "code": "F073.UTR.PRE.Z.M",
+      "records": 440,
+      "json": "data\\chile\\bcentral\\UTM.json",
+      "csv": "data\\chile\\bcentral\\UTM.csv"
+    },
+    {
+      "name": "IMACEC",
+      "code": "F032.IMC.IND.Z.Z.EP18.Z.Z.0.M",
+      "records": 365,
+      "json": "data\\chile\\bcentral\\IMACEC.json",
+      "csv": "data\\chile\\bcentral\\IMACEC.csv"
+    },
+    {
+      "name": "IPC_var_mensual",
+      "code": "G073.IPC.VAR.2023.M",
+      "records": 330,
+      "json": "data\\chile\\bcentral\\IPC_var_mensual.json",
+      "csv": "data\\chile\\bcentral\\IPC_var_mensual.csv"
+    },
+    {
+      "name": "Desempleo",
+      "code": "F049.DES.TAS.HIST.10.M",
+      "records": 484,
+      "json": "data\\chile\\bcentral\\Desempleo.json",
+      "csv": "data\\chile\\bcentral\\Desempleo.csv"
+    },
+    {
+      "name": "PIB_var_anual",
+      "code": "F019.PIB.VAR.CH.T",
+      "records": 117,
+      "json": "data\\chile\\bcentral\\PIB_var_anual.json",
+      "csv": "data\\chile\\bcentral\\PIB_var_anual.csv"
+    },
+    {
+      "name": "IPSA",
+      "code": "F013.IBC.IND.N.7.LAC.CL.CLP.BLO.D",
+      "records": 13714,
+      "json": "data\\chile\\bcentral\\IPSA.json",
+      "csv": "data\\chile\\bcentral\\IPSA.csv"
+    },
+    {
+      "name": "IGPA",
+      "code": "F013.IBG.IND.N.7.LAC.CL.CLP.BLO.D",
+      "records": 13349,
+      "json": "data\\chile\\bcentral\\IGPA.json",
+      "csv": "data\\chile\\bcentral\\IGPA.csv"
+    },
+    {
+      "name": "Cobre_USD",
+      "code": "F019.PPB.PRE.100.D",
+      "records": 5040,
+      "json": "data\\chile\\bcentral\\Cobre_USD.json",
+      "csv": "data\\chile\\bcentral\\Cobre_USD.csv"
+    },
+    {
+      "name": "Petroleo_WTI",
+      "code": "F019.PPB.PRE.41B.D",
+      "records": 14810,
+      "json": "data\\chile\\bcentral\\Petroleo_WTI.json",
+      "csv": "data\\chile\\bcentral\\Petroleo_WTI.csv"
+    },
+    {
+      "name": "PIB_per_capita",
+      "code": "F019.PIBPC.FLU.CH.A",
+      "records": 36,
+      "json": "data\\chile\\bcentral\\PIB_per_capita.json",
+      "csv": "data\\chile\\bcentral\\PIB_per_capita.csv"
+    },
+    {
+      "name": "Poblacion",
+      "code": "F049.POB.STO.INE1.01.A",
+      "records": 79,
+      "json": "data\\chile\\bcentral\\Poblacion.json",
+      "csv": "data\\chile\\bcentral\\Poblacion.csv"
+    },
+    {
+      "name": "Pob_Hombres",
+      "code": "F049.POB.STO.INE1.02.A",
+      "records": 79,
+      "json": "data\\chile\\bcentral\\Pob_Hombres.json",
+      "csv": "data\\chile\\bcentral\\Pob_Hombres.csv"
+    },
+    {
+      "name": "Pob_Mujeres",
+      "code": "F049.POB.STO.INE1.03.A",
+      "records": 79,
+      "json": "data\\chile\\bcentral\\Pob_Mujeres.json",
+      "csv": "data\\chile\\bcentral\\Pob_Mujeres.csv"
+    }
+  ],
+  "errors": []
+}

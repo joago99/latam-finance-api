@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Línea — CápsulaData</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="./vendor/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f172a;--card:#1e293b;--text:#f8fafc;--muted:#94a3b8;--accent:#60a5fa;--accent2:#38bdf8;--border:#334155;--chile:#f87171}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+.la-linea{font-family:'Playfair Display',serif;font-style:italic;letter-spacing:-0.02em}
+header{position:fixed;top:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(15,23,42,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+header .brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem}
+header .brand .sub{font-family:'Inter';font-size:0.55rem;color:var(--muted);display:block;margin-top:-2px;letter-spacing:0.05em;text-transform:uppercase}
+header nav a{color:var(--muted);text-decoration:none;margin-left:1.5rem;font-size:0.8rem;transition:color .2s}
+header nav a:hover{color:var(--text)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 4rem;background:radial-gradient(circle at 50% 30%,#1e3a5f 0%,#0f172a 60%)}
+.hero .big{font-size:clamp(3rem,10vw,7rem);font-family:'Playfair Display',serif;font-style:italic;font-weight:700;line-height:0.95;background:linear-gradient(120deg,#60a5fa,#38bdf8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .powered{margin-top:1.5rem;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+.hero p.lead{max-width:600px;margin:2rem auto 0;font-size:1.1rem;color:var(--muted)}
+.hero .cta{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn{background:var(--accent);color:#fff;padding:0.7rem 1.5rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.9rem;transition:all .2s}
+.btn:hover{background:var(--accent2);transform:translateY(-2px)}
+.btn.outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+section.block{padding:4rem 2rem;max-width:1100px;margin:0 auto;border-top:1px solid var(--border)}
+.section-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;margin-bottom:0.5rem}
+.section-sub{color:var(--muted);max-width:700px;margin-bottom:2rem;font-size:0.9rem}
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:1rem}
+.service{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.8rem;transition:transform .2s,border-color .2s}
+.service:hover{transform:translateY(-4px);border-color:var(--accent)}
+.service .icon{font-size:1.8rem;margin-bottom:1rem}
+.service h3{font-size:1.2rem;margin-bottom:0.5rem}
+.service p{color:var(--muted);font-size:0.85rem}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.5rem;margin-top:1.5rem}
+.metric{text-align:center;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:10px}
+.metric .num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--accent)}
+.metric .lbl{color:var(--muted);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em;margin-top:0.3rem}
+/* dashboard */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0.7rem;margin-bottom:1rem}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0.8rem}
+.kpi-card .label{color:var(--muted);font-size:0.55rem;text-transform:uppercase;letter-spacing:0.04em}
+.kpi-card .value{font-size:1.2rem;font-weight:700;margin:0.1rem 0}
+.kpi-card .change{font-size:0.6rem;color:var(--muted)}
+.kpi-card .change.up{color:#4ade80}.kpi-card .change.down{color:#f87171}
+.controls{display:flex;gap:0.4rem;margin-bottom:0.8rem;flex-wrap:wrap;align-items:center}
+.chip{background:var(--card);border:1px solid var(--border);color:var(--muted);padding:0.3rem 0.6rem;border-radius:999px;cursor:pointer;font-size:0.65rem;transition:all 0.1s;white-space:nowrap}
+.chip:hover{border-color:var(--accent);color:var(--text)}
+.chip.active{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+.date-input{background:var(--card);border:1px solid var(--border);color:var(--text);padding:0.25rem 0.45rem;border-radius:5px;font-size:0.65rem;width:58px}
+.btn-sm{background:var(--accent);color:#fff;border:none;padding:0.3rem 0.6rem;border-radius:5px;font-size:0.65rem;font-weight:600;cursor:pointer}
+.btn-sm.outline{background:var(--card);color:var(--text);border:1px solid var(--border)}
+.chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1rem 0.4rem;margin-bottom:0.6rem}
+.chart-wrap canvas{width:100%!important;max-height:440px}
+.data-note{font-size:0.6rem;color:var(--muted);text-align:center;margin:0 0 1rem;padding:0.4rem;background:var(--card);border:1px solid var(--border);border-radius:6px}
+.prez-bar{display:flex;border-radius:5px;overflow:hidden;margin-bottom:0.4rem;height:28px;cursor:pointer;font-size:0.5rem}
+.prez-seg{display:flex;align-items:center;justify-content:center;font-weight:600;color:#fff;transition:all 0.1s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 0.12rem;border:2px solid transparent;text-shadow:0 1px 1px rgba(0,0,0,0.35)}
+.prez-seg:hover{filter:brightness(1.15);z-index:2}
+.prez-seg.selected{border-color:#f8fafc!important;z-index:3;transform:scaleY(1.12)}
+.prez-label{font-size:0.6rem;color:var(--muted);text-align:center;margin-bottom:1.5rem;display:flex;justify-content:center;gap:0.3rem;flex-wrap:wrap}
+.prez-label span{background:var(--bg);padding:0.1rem 0.4rem;border-radius:4px;font-size:0.6rem;border:1px solid var(--border)}
+.events{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem;max-height:340px;overflow-y:auto}
+.events h3{font-size:0.9rem;margin-bottom:0.7rem;color:var(--accent)}
+.ev-item{padding:0.45rem 0.55rem;border-left:3px solid var(--border);margin-bottom:0.3rem;font-size:0.7rem}
+.ev-item:hover{border-left-color:var(--accent);background:rgba(96,165,250,0.05)}
+.ev-date{color:var(--muted);font-size:0.6rem}
+.ev-title{font-weight:600;margin-top:2px}
+.ev-desc{color:var(--muted);margin-top:2px;font-size:0.62rem}
+.tag{display:inline-block;font-size:0.5rem;padding:0.05rem 0.3rem;border-radius:3px;margin-right:0.15rem;text-transform:uppercase;font-weight:600}
+.tag.economico{background:#14532d;color:#86efac}.tag.politico{background:#4c1d95;color:#c4b5fd}
+.tag.social{background:#7f1d1d;color:#fca5a5}.tag.reforma{background:#1e3a8a;color:#93c5fd}.tag.externo{background:#78350f;color:#fcd34d}
+/* storytelling charts */
+.sc-grid{display:grid;gap:2rem}
+.sc-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.8rem}
+.sc-card h3{font-size:1.2rem;margin-bottom:0.3rem}
+.sc-card .bigidea{color:var(--accent2);font-weight:600;font-size:0.9rem;margin-bottom:1rem}
+.sc-card .note{color:var(--muted);font-size:0.75rem;margin-top:1rem;border-top:1px solid var(--border);padding-top:0.8rem}
+.sc-controls{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
+.sc-controls select{font-family:inherit;padding:0.4rem 0.6rem;border:1px solid var(--border);border-radius:6px;font-size:0.75rem;background:var(--bg);color:var(--text)}
+footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.8rem}
+footer .brand{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--text);margin-bottom:0.5rem}
+footer .commercial{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--accent);margin-bottom:1rem}
+@media(max-width:768px){header nav{display:none}.services{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">La Línea<span class="sub">Powered by CápsulaData</span></div>
+<nav>
+<a href="#servicios">Servicios</a>
+<a href="#chile">Dashboard Chile</a>
+<a href="#mundo">Chile vs Mundo</a>
+</nav>
+</header>
+
+<!-- 1. HERO + LANDING -->
+<section class="hero">
+<div class="big">La Línea</div>
+<div class="powered">Powered by CápsulaData</div>
+<p class="lead">Análisis de grandes volúmenes de datos para entender, diagnosticar y predecir la economía. Desde 1958 hasta hoy, con fuentes oficiales.</p>
+<div class="cta">
+<a href="#chile" class="btn">Explorar dashboard</a>
+<a href="#servicios" class="btn outline">Ver servicios</a>
+</div>
+</section>
+
+<!-- 2. SERVICIOS -->
+<section class="block" id="servicios">
+<h2 class="section-title">Qué hacemos</h2>
+<p class="section-sub">Convertimos datos complejos en decisiones. Tres pilares:</p>
+<div class="services">
+<div class="service"><div class="icon">🔍</div><h3>Entender</h3><p>Integramos y organizamos millones de registros de fuentes oficiales (BCCh, INE, Banco Mundial) en una sola capa de datos limpia y consultable.</p></div>
+<div class="service"><div class="icon">🩺</div><h3>Diagnosticar</h3><p>Dashboards interactivos que revelan patrones, anomalías y correlaciones entre indicadores macroeconómicos y eventos históricos.</p></div>
+<div class="service"><div class="icon">🔮</div><h3>Predecir</h3><p>Modelos sobre series de tiempo para proyectar inflación, tipo de cambio y crecimiento, con margen de error explícito.</p></div>
+</div>
+</section>
+
+<!-- 3. DASHBOARD CHILE -->
+<section class="block" id="chile">
+<h2 class="section-title">Dashboard Chile 1958–2026</h2>
+<p class="section-sub">Datos reales del Banco Central de Chile e INE. Selecciona un indicador, filtra por presidente o rango de años.</p>
+<div class="kpi-grid" id="kpiGrid"><div style="grid-column:1/-1;text-align:center;padding:1.5rem;color:var(--muted);font-size:0.8rem">Cargando datos BCCh...</div></div>
+<div class="controls">
+<span style="font-size:0.65rem;color:var(--muted)">Indicador:</span><span id="indChips"></span>
+<span style="margin-left:auto;font-size:0.65rem;color:var(--muted)">Fechas:</span>
+<input type="number" class="date-input" id="dateFrom" value="1958" min="1958" max="2026">
+<span style="color:var(--muted)">–</span>
+<input type="number" class="date-input" id="dateTo" value="2026" min="1958" max="2026">
+<button class="btn-sm" onclick="applyDateFilter()">Filtrar</button>
+<button class="btn-sm outline" id="btnAgg" onclick="toggleAggregation()" title="Agregación anual automática para rangos largos">Auto</button>
+</div>
+<div class="chart-wrap"><canvas id="mainChart"></canvas></div>
+<div class="data-note" id="dataNote"></div>
+<div class="prez-bar" id="prezBar"></div>
+<div class="prez-label" id="prezLabel"></div>
+<div class="events"><h3 id="eventsTitle"></h3><div id="eventsList"></div></div>
+</section>
+
+<!-- 4. CHILE VS MUNDO -->
+<section class="block" id="mundo">
+<h2 class="section-title">Chile vs el Mundo</h2>
+<p class="section-sub">PIB per cápita (USD corrientes) comparado con 23 economías. Siempre con Chile como referencia. Datos: Banco Mundial (NY.GDP.PCAP.CD), 1960–2023.</p>
+<div class="sc-grid" id="scGrid"></div>
+</section>
+
+<footer>
+<div class="brand">La Línea</div>
+<div class="commercial">Powered by CápsulaData</div>
+<p>Análisis de grandes datos · Entender · Diagnosticar · Predecir</p>
+<p style="margin-top:1rem;opacity:0.6">Fuentes: Banco Central de Chile (BCCh) · Instituto Nacional de Estadísticas (INE) · Banco Mundial</p>
+</footer>
+
+<script>
+// ============================================================
+// DATA — Chile (BCCh)
+// ============================================================
+const ideologyColors = {farLeft:'#991b1b',left:'#dc2626',centerLeft:'#f87171',center:'#78716c',centerRight:'#60a5fa',right:'#2563eb',farRight:'#1e3a5f'};
+const presidentes = [
+ {id:"alessandri",nombre:"Jorge Alessandri",coalicion:"Indep./Derecha",inicio:"1958-11-03",fin:"1964-11-03",color:ideologyColors.centerRight},
+ {id:"frei-montalva",nombre:"Eduardo Frei M.",coalicion:"PDC",inicio:"1964-11-03",fin:"1970-11-03",color:ideologyColors.centerLeft},
+ {id:"allende",nombre:"Salvador Allende",coalicion:"Unidad Popular",inicio:"1970-11-03",fin:"1973-09-11",color:ideologyColors.farLeft},
+ {id:"pinochet",nombre:"Dictadura",coalicion:"Junta Militar",inicio:"1973-09-11",fin:"1990-03-11",color:ideologyColors.center},
+ {id:"aylwin",nombre:"Patricio Aylwin",coalicion:"Concertación",inicio:"1990-03-11",fin:"1994-03-11",color:ideologyColors.centerLeft},
+ {id:"frei",nombre:"Eduardo Frei R-T",coalicion:"Concertación",inicio:"1994-03-11",fin:"2000-03-11",color:ideologyColors.centerLeft},
+ {id:"lagos",nombre:"Ricardo Lagos",coalicion:"Concertación",inicio:"2000-03-11",fin:"2006-03-11",color:ideologyColors.left},
+ {id:"bachelet1",nombre:"M.Bachelet I",coalicion:"Concertación",inicio:"2006-03-11",fin:"2010-03-11",color:ideologyColors.left},
+ {id:"pinera1",nombre:"S.Piñera I",coalicion:"Coalición Cambio",inicio:"2010-03-11",fin:"2014-03-11",color:ideologyColors.right},
+ {id:"bachelet2",nombre:"M.Bachelet II",coalicion:"Nueva Mayoría",inicio:"2014-03-11",fin:"2018-03-11",color:ideologyColors.farLeft},
+ {id:"pinera2",nombre:"S.Piñera II",coalicion:"Chile Vamos",inicio:"2018-03-11",fin:"2022-03-11",color:ideologyColors.right},
+ {id:"boric",nombre:"Gabriel Boric",coalicion:"Apruebo Dignidad",inicio:"2022-03-11",fin:"2026-07-22",color:ideologyColors.farLeft}
+];
+const hitos = [
+{fe:"1960-05-22",ti:"Terremoto Valdivia 9.5°",cat:"externo",de:"El más fuerte registrado en la historia",im:"alto"},
+{fe:"1970-09-04",ti:"Allende electo presidente",cat:"politico",de:"Primer socialista electo democráticamente",im:"alto"},
+{fe:"1971-07-11",ti:"Nacionalización del cobre",cat:"reforma",de:"Ley unánime. 100% del Estado",im:"alto"},
+{fe:"1973-09-11",ti:"Golpe de Estado",cat:"politico",de:"Bombardeo de La Moneda. Inicio dictadura",im:"alto"},
+{fe:"1975-04-24",ti:"Shock económico",cat:"reforma",de:"Chicago Boys. Terapia neoliberal",im:"alto"},
+{fe:"1975-12-31",ti:"PIB cae -12.9%",cat:"economico",de:"Peor recesión desde Gran Depresión",im:"alto"},
+{fe:"1980-09-11",ti:"Constitución de 1980",cat:"politico",de:"Régimen autoritario institucionalizado",im:"alto"},
+{fe:"1982-06-15",ti:"Crisis de la Deuda",cat:"economico",de:"PIB cae -14.5%. Quiebra bancos",im:"alto"},
+{fe:"1988-10-05",ti:"Plebiscito: Triunfa el NO (56%)",cat:"politico",de:"Fin del régimen. Transición democrática",im:"alto"},
+{fe:"1990-03-11",ti:"Retorno a la democracia",cat:"politico",de:"Aylwin asume tras 17 años",im:"alto"},
+{fe:"1999-09-01",ti:"Libre flotación del peso",cat:"reforma",de:"BC abandona banda cambiaria",im:"alto"},
+{fe:"2003-06-06",ti:"TLC Chile – EEUU",cat:"reforma",de:"Libre comercio con principal socio",im:"alto"},
+{fe:"2008-09-15",ti:"Crisis Subprime",cat:"externo",de:"Quiebra Lehman Brothers",im:"alto"},
+{fe:"2010-02-27",ti:"Terremoto 27-F 8.8°",cat:"externo",de:"525 fallecidos. Daños US$30.000M",im:"alto"},
+{fe:"2019-10-18",ti:"Estallido Social",cat:"social",de:"Estado de Emergencia. 34 muertos",im:"alto"},
+{fe:"2020-03-11",ti:"Pandemia COVID-19",cat:"externo",de:"Chile cierra fronteras",im:"alto"},
+{fe:"2022-12-01",ti:"Inflación 14.1%",cat:"economico",de:"Máximo en 30 años",im:"alto"},
+{fe:"2023-05-17",ti:"Royalty Minero",cat:"reforma",de:"US$1.350M/año",im:"alto"}
+];
+const seriesMeta = {
+  TPM:{desde:'1997-02',unidad:'%',desc:'Tasa de Política Monetaria. BCCh.'},
+  UF:{desde:'1977-08',unidad:'CLP',desc:'Unidad de Fomento. BCCh.'},
+  USD:{desde:'1982-08',unidad:'CLP',desc:'Dólar observado. BCCh.'},
+  EUR:{desde:'1999-01',unidad:'CLP',desc:'Euro. BCCh.'},
+  UTM:{desde:'1990-01',unidad:'CLP',desc:'Unidad Tributaria Mensual. BCCh.'},
+  IMACEC:{desde:'1996-01',unidad:'índice',desc:'IMACEC empalmado, base 2018=100. BCCh.'},
+  IPC:{desde:'1999-01',unidad:'%',desc:'IPC variación mensual. BCCh.'},
+  DESEMPLEO:{desde:'1986-02',unidad:'%',desc:'Tasa de desocupación nacional. INE/BCCh.'},
+  PIB:{desde:'1997-01',unidad:'%',desc:'PIB variación anual. BCCh.'},
+  IPSA:{desde:'1989-01',unidad:'pts',desc:'IPSA. BCCh.'},
+  COBRE:{desde:'2012-10',unidad:'USD/oz',desc:'Cobre. BCCh.'},
+  WTI:{desde:'1986-01',unidad:'USD/bbl',desc:'Petróleo WTI. BCCh.'},
+  PIBPC:{desde:'1990-01',unidad:'USD',desc:'PIB per cápita. BCCh.'},
+  POB:{desde:'1992-01',unidad:'personas',desc:'Población total INE.'},
+  POBH:{desde:'1992-01',unidad:'personas',desc:'Población hombres INE.'},
+  POBM:{desde:'1992-01',unidad:'personas',desc:'Población mujeres INE.'}
+};
+const indCfg = {
+  TPM:{label:'TPM (%)',color:'#60a5fa',dec:2},UF:{label:'UF (CLP)',color:'#a78bfa',dec:0},USD:{label:'Dólar (CLP)',color:'#4ade80',dec:0},
+  EUR:{label:'Euro (CLP)',color:'#fbbf24',dec:0},UTM:{label:'UTM (CLP)',color:'#22d3ee',dec:0},IMACEC:{label:'IMACEC (índice)',color:'#fb923c',dec:1},
+  IPC:{label:'IPC (% mensual)',color:'#f472b6',dec:2},DESEMPLEO:{label:'Desempleo (%)',color:'#fb7185',dec:1},PIB:{label:'PIB (% anual)',color:'#34d399',dec:1},
+  IPSA:{label:'IPSA (pts)',color:'#818cf8',dec:0},COBRE:{label:'Cobre (USD/oz)',color:'#f59e0b',dec:2},WTI:{label:'Petróleo WTI',color:'#94a3b8',dec:2},
+  PIBPC:{label:'PIB per cápita',color:'#2dd4bf',dec:0},PIBTOT:{label:'PIB total',color:'#a5b4fc',dec:0},
+  POB:{label:'Población',color:'#94a3b8',dec:0},POBH:{label:'Pob. Hombres',color:'#60a5fa',dec:0},POBM:{label:'Pob. Mujeres',color:'#f472b6',dec:0}
+};
+let macroAll = [], activeInd = 'USD', selPrez = new Set(), dateFrom = 1958, dateTo = 2026, forceAnnual = false, mainChart;
+
+async function loadMacroData() {
+  try {
+    const resp = await fetch('./data/chile-macro.json');
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const json = await resp.json();
+    macroAll = (json.data || []).map(r => {
+      const entry = {fecha: r.fecha};
+      for (const k of Object.keys(indCfg)) { if (k === 'PIBTOT') continue; const v = r[k]; entry[k] = (v !== null && v !== undefined) ? parseFloat(v) : null; }
+      if (entry.PIBPC !== null && r.POB !== null && r.POB !== undefined) { const pob = parseFloat(r.POB); if (!isNaN(pob) && pob > 0) entry.PIBTOT = (entry.PIBPC * pob) / 1e6; }
+      return entry;
+    }).filter(r => r.fecha >= '1958-01');
+    return true;
+  } catch (e) { document.getElementById('kpiGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:1rem;color:#f87171;font-size:0.8rem">Error cargando datos. ¿Servidor corriendo?</div>'; return false; }
+}
+function filteredMacro() { return macroAll.filter(d => { const y = parseInt(d.fecha.substring(0,4)); return y >= dateFrom && y <= dateTo; }); }
+function shouldUseAnnual() { if (forceAnnual) return true; return (dateTo - dateFrom) > 20; }
+function aggregateAnnual(monthly, ind) {
+  const years = {};
+  monthly.forEach(d => { const y = d.fecha.substring(0,4); if (!years[y]) years[y] = {sum:0,count:0}; if (d[ind] !== null && d[ind] !== undefined && !isNaN(d[ind])) { years[y].sum += d[ind]; years[y].count++; } });
+  return Object.keys(years).sort().map(y => ({label:y, value: years[y].count>0 ? years[y].sum/years[y].count : null}));
+}
+function buildChart() {
+  const monthly = filteredMacro(); const useAnnual = shouldUseAnnual(); const cfg = indCfg[activeInd];
+  let labels, series;
+  if (useAnnual) { const ann = aggregateAnnual(monthly, activeInd); labels = ann.map(a=>a.label); series = ann.map(a=>a.value===null?NaN:a.value); document.getElementById('btnAgg').textContent='Anual'; document.getElementById('btnAgg').className='btn-sm'; }
+  else { labels = monthly.map(d=>d.fecha); series = monthly.map(d=>{const v=d[activeInd]; return (v===null||v===undefined)?NaN:v;}); document.getElementById('btnAgg').textContent='Mensual'; document.getElementById('btnAgg').className='btn-sm outline'; }
+  const rawPairs = []; labels.forEach((l,i)=>rawPairs.push({label:l,value:series[i]}));
+  let first=0, last=rawPairs.length-1;
+  while (first<rawPairs.length && isNaN(rawPairs[first].value)) first++;
+  while (last>=0 && isNaN(rawPairs[last].value)) last--;
+  if (first>last || first>=rawPairs.length) { if(mainChart) mainChart.destroy(); return; }
+  first=Math.max(0,first-1); last=Math.min(rawPairs.length-1,last+1);
+  const trimmed = rawPairs.slice(first,last+1); labels = trimmed.map(p=>p.label); series = trimmed.map(p=>isNaN(p.value)?null:p.value);
+  const meta = seriesMeta[activeInd];
+  document.getElementById('dataNote').textContent = `ℹ ${cfg.label.split('(')[0].trim()}: datos desde ${meta?.desde||'?'}. ${meta?.desc||''} Agregación: ${useAnnual?'anual':'mensual'}.`;
+  const annotations = {};
+  presidentes.forEach((p,i)=>{
+    const si = labels.findIndex(l=>{const key=l.length===4?l+'-01-01':l+'-01'; return key>=(p.inicio.substring(0,7)+'-01');});
+    const ei = labels.findLastIndex(l=>{const key=l.length===4?l+'-12-01':l+'-01'; return key<=(p.fin.substring(0,7)+'-01');});
+    if (si>=0 && ei>=si && ei<labels.length) annotations['box'+i]={type:'box',xMin:si,xMax:ei,backgroundColor:p.color+'1A',borderColor:p.color+'33',borderWidth:0,drawTime:'beforeDatasetsDraw'};
+  });
+  const ds=[{label:cfg.label,data:series,borderColor:cfg.color,backgroundColor:cfg.color+'1A',borderWidth:1.5,pointRadius:0,pointHoverRadius:4,tension:0.1,fill:false,spanGaps:true}];
+  if (mainChart) mainChart.destroy();
+  mainChart = new Chart(document.getElementById('mainChart'),{type:'line',data:{labels,datasets:ds},options:{
+    responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{annotation:{annotations},legend:{display:true,labels:{color:'#cbd5e1',font:{size:9},filter:i=>i.datasetIndex===0,usePointStyle:true}},
+      tooltip:{callbacks:{label:ctx=>{const v=ctx.parsed.y;return isNaN(v)||v===null?'Sin dato':cfg.label+': '+v.toFixed(cfg.dec);},
+        afterBody:ctx=>{const l=labels[ctx[0].dataIndex],prefix=l.length===4?l:l.substring(0,7);const hm=hitos.filter(h=>h.fe.substring(0,7)===prefix||(l.length===4&&h.fe.substring(0,4)===l));return hm.length?['','📰 '+hm.length+' hito(s):',...hm.map(h=>' • '+h.ti)]:[];}}}},
+    scales:{x:{ticks:{color:'#64748b',font:{size:8},maxTicksLimit:40,callback:(v,ix)=>labels[ix]?.length===4?labels[ix]:labels[ix]?.endsWith?.('-01')?labels[ix].substring(0,4):''},grid:{color:'#1e293b'}},
+      y:{ticks:{color:'#64748b',callback:v=>isNaN(v)?'':v.toFixed(cfg.dec)},grid:{color:'#1e293b'}}}
+  }});
+}
+function selectPresident(p) {
+  if (selPrez.has(p.id)) selPrez.delete(p.id); else { selPrez.clear(); selPrez.add(p.id); }
+  if (selPrez.size===1) { const sp=[...selPrez][0]; const pr=presidentes.find(x=>x.id===sp); if(pr){dateFrom=parseInt(pr.inicio.substring(0,4));dateTo=parseInt(pr.fin.substring(0,4));document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo;} }
+  else if (selPrez.size===0) { dateFrom=1958;dateTo=2026;document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo; }
+  buildAll();
+}
+function buildPrezBar() {
+  const bar=document.getElementById('prezBar'),lbl=document.getElementById('prezLabel');
+  const tS=new Date('1958-01-01'),tE=new Date('2026-07-01'),total=(tE-tS)/86400000;
+  bar.innerHTML='';lbl.innerHTML='';
+  const sel=presidentes.filter(p=>selPrez.has(p.id));
+  lbl.innerHTML = sel.length ? sel.map(p=>`<span style="border-left:3px solid ${p.color}">${p.nombre}</span>`).join('') : '<span>← Click para filtrar fechas →</span>';
+  presidentes.forEach(p=>{const s=new Date(p.inicio),e=new Date(p.fin),w=((e-s)/86400000/total*100);const seg=document.createElement('div');seg.className='prez-seg'+(selPrez.has(p.id)?' selected':'');seg.style.width=w+'%';seg.style.background=p.color;seg.textContent=p.nombre;seg.title=`${p.nombre} (${p.inicio.substring(0,4)}–${p.fin.substring(0,4)}) — ${p.coalicion}`;seg.onclick=()=>selectPresident(p);bar.appendChild(seg);});
+}
+function filterEvents() {
+  const list=document.getElementById('eventsList'),title=document.getElementById('eventsTitle');
+  let f=hitos;
+  if (selPrez.size>0){const ranges=[];presidentes.filter(p=>selPrez.has(p.id)).forEach(p=>ranges.push([p.inicio,p.fin]));f=hitos.filter(h=>ranges.some(([s,e])=>h.fe>=s&&h.fe<=e));title.textContent='📰 '+presidentes.filter(p=>selPrez.has(p.id)).map(p=>p.nombre).join(' + ');}
+  else title.textContent='📰 Todos los hitos (1958–2026)';
+  f=f.filter(h=>{const y=parseInt(h.fe.substring(0,4));return y>=dateFrom&&y<=dateTo;});
+  title.textContent+=' ('+f.length+')';
+  f.sort((a,b)=>a.fe<b.fe?1:-1);
+  const limit = selPrez.size===1 && presidentes.find(p=>p.id===[...selPrez][0])?.nombre==='Dictadura'?20:10;
+  if (selPrez.size<=1) f=f.slice(0,limit);
+  list.innerHTML=f.map(h=>`<div class="ev-item"><div class="ev-date">${h.fe}</div><div class="ev-title"><span class="tag ${h.cat}">${h.cat}</span>${h.ti}</div><div class="ev-desc">${h.de}</div></div>`).join('');
+}
+function fmtNum(v,dec,locale='es-CL'){if(v===null||v===undefined||isNaN(v))return '—';return Number(v).toLocaleString(locale,{minimumFractionDigits:dec,maximumFractionDigits:dec});}
+function lastValid(data,key){for(let i=data.length-1;i>=0;i--){const v=data[i][key];if(v!==null&&v!==undefined&&!isNaN(v))return {val:v,idx:i};}return null;}
+function buildKPIs() {
+  const data=filteredMacro(); if(!data.length) return;
+  const items=[
+    {label:'PIB per cápita',key:'PIBPC',u:' USD',d:0,usd:true,mult:1000},{label:'PIB total',key:'PIBTOT',u:'M USD',d:0,mult:1000,comma:true},
+    {label:'Población',key:'POB',u:'',d:0,div:1,comma:true},{label:'Pob. Hombres',key:'POBH',u:'',d:0,div:1,comma:true},{label:'Pob. Mujeres',key:'POBM',u:'',d:0,div:1,comma:true},
+    {label:'TPM',key:'TPM',u:'%',d:2},{label:'UF',key:'UF',u:' CLP',d:0,comma:true},{label:'USD/CLP',key:'USD',u:' CLP',d:0,comma:true},
+    {label:'IMACEC',key:'IMACEC',u:'',d:1},{label:'IPC',key:'IPC',u:'%',d:2},{label:'Desempleo',key:'DESEMPLEO',u:'%',d:1},
+    {label:'PIB var%',key:'PIB',u:'%',d:1},{label:'IPSA',key:'IPSA',u:'',d:0,comma:true}
+  ];
+  document.getElementById('kpiGrid').innerHTML = items.map(k=>{
+    const latest=lastValid(data,k.key); if(!latest) return `<div class="kpi-card"><div class="label">${k.label}</div><div class="value">—</div><div class="change">Sin dato</div></div>`;
+    const dt=data[latest.idx].fecha; const [ly,lm]=dt.split('-').map(Number); const prevKey=`${ly-1}-${String(lm).padStart(2,'0')}`;
+    const prevRow=data.find(r=>r.fecha===prevKey); const prevVal=prevRow?prevRow[k.key]:null;
+    const raw = k.mult ? latest.val*k.mult : latest.val;
+    const val = k.div ? raw/k.div : raw;
+    let ch=''; const prevRaw = prevVal!==null&&prevVal!==undefined&&!isNaN(prevVal) ? (k.mult?prevVal*k.mult:prevVal) : null;
+    if(prevRaw!==null&&prevRaw!==0){const pct=((raw-prevRaw)/Math.abs(prevRaw))*100;ch=(pct>=0?'▲':'▼')+' '+Math.abs(pct).toFixed(1)+'% vs año ant.';}
+    const up=ch.startsWith('▲'); const valStr=k.comma?fmtNum(val,k.d):(k.usd?'$'+fmtNum(val,k.d,'en-US'):val.toFixed(k.d));
+    return `<div class="kpi-card"><div class="label">${k.label}</div><div class="value">${valStr}${k.u}</div><div class="change ${up?'up':'down'}">${ch||'—'}</div></div>`;
+  }).join('');
+}
+function buildIndChips(){document.getElementById('indChips').innerHTML=Object.entries(indCfg).map(([k,v])=>`<span class="chip${k===activeInd?' active':''}" onclick="switchInd('${k}')">${v.label.split('(')[0].trim()}</span>`).join('');}
+function switchInd(k){activeInd=k;buildIndChips();selPrez.clear();dateFrom=1958;dateTo=2026;document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo;buildAll();}
+function toggleAggregation(){forceAnnual=!forceAnnual;buildAll();}
+function applyDateFilter(){const f=parseInt(document.getElementById('dateFrom').value)||1958;const t=parseInt(document.getElementById('dateTo').value)||2026;dateFrom=Math.max(1958,Math.min(f,t));dateTo=Math.min(2026,Math.max(f,t));document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo;selPrez.clear();buildAll();}
+function buildAll(){buildKPIs();buildChart();buildPrezBar();filterEvents();}
+
+// ============================================================
+// DATA — Mundo (Banco Mundial)
+// ============================================================
+let world = {};
+const CHILE='#f87171';
+const OTHERS=['#60a5fa','#4ade80','#a78bfa','#fb923c','#22d3ee','#fbbf24','#f472b6','#86efac','#c4b5fd','#5eead4','#fca5a5','#94a3b8'];
+const PALETTE={}; let pi=0;
+function colorFor(name){if(name==='Chile')return CHILE;if(!PALETTE[name])PALETTE[name]=OTHERS[pi++%OTHERS.length];return PALETTE[name];}
+function yearsRange(){const all=new Set();Object.values(world).forEach(d=>Object.keys(d).forEach(y=>all.add(parseInt(y))));return [...all].sort((a,b)=>a-b);}
+function seriesFor(name){const d=world[name]||{};const yrs=yearsRange();return yrs.map(y=>d[String(y)]??null);}
+
+// 5 gráficos storytelling
+let charts = {};
+function renderMundo() {
+  const yrs = yearsRange();
+  // 1. Evolución
+  const sel = ['Chile','Argentina','Perú','México','Brasil','EE.UU.','Noruega','China','India'];
+  charts.c1 = new Chart(document.getElementById('sc1'),{type:'line',data:{labels:yrs,datasets:sel.map(n=>({label:n,data:seriesFor(n),borderColor:colorFor(n),backgroundColor:colorFor(n),borderWidth:n==='Chile'?3:1.5,pointRadius:0,tension:0.15,spanGaps:true}))},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{color:'#cbd5e1',boxWidth:12,font:{size:10}}}},scales:{x:{ticks:{maxTicksLimit:12,color:'#64748b',font:{size:9}},grid:{color:'#1e293b'}},y:{ticks:{color:'#64748b',font:{size:9},callback:v=>'$'+(v/1000).toFixed(0)+'k'},grid:{color:'#1e293b'}}}}});
+  // 2. Ranking 2023
+  const arr=Object.entries(world).map(([n,d])=>[n,d['2023']]).filter(x=>x[1]!=null).sort((a,b)=>a[1]-b[1]);
+  charts.c2=new Chart(document.getElementById('sc2'),{type:'bar',data:{labels:arr.map(x=>x[0]),datasets:[{label:'PIB per cápita 2023 (USD)',data:arr.map(x=>x[1]),backgroundColor:arr.map(([n])=>n==='Chile'?'#f87171':'#60a5fa')}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'k',color:'#64748b',font:{size:9}},grid:{color:'#1e293b'}},y:{ticks:{color:'#cbd5e1',font:{size:9}},grid:{display:false}}}}});
+  // 3. Índice 1990=100
+  const focus=['Chile','China','India','Corea del Sur','Perú','Argentina','EE.UU.','Noruega'];
+  charts.c3=new Chart(document.getElementById('sc3'),{type:'line',data:{labels:yrs,datasets:focus.map(n=>{const d=world[n]||{};const b=d['1990'];const data=yrs.map(y=>{const v=d[String(y)];if(b==null||v==null)return null;return v/b*100;});return {label:n,data,borderColor:colorFor(n),borderWidth:n==='Chile'?3:1.5,pointRadius:0,tension:0.2,spanGaps:true};})},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{color:'#cbd5e1',boxWidth:12,font:{size:10}}}},scales:{x:{ticks:{maxTicksLimit:12,color:'#64748b',font:{size:9}},grid:{color:'#1e293b'}},y:{ticks:{color:'#64748b',font:{size:9},callback:v=>v+'x'},grid:{color:'#1e293b'}}}}});
+  // 4. Chile vs mediana
+  const median=yrs.map(y=>{const vals=Object.values(world).map(d=>d[String(y)]).filter(v=>v!=null).sort((a,b)=>a-b);if(!vals.length)return null;const m=Math.floor(vals.length/2);return vals.length%2?vals[m]:(vals[m-1]+vals[m])/2;});
+  charts.c4=new Chart(document.getElementById('sc4'),{type:'line',data:{labels:yrs,datasets:[{label:'Chile',data:seriesFor('Chile'),borderColor:CHILE,borderWidth:3,pointRadius:0,tension:0.15,spanGaps:true},{label:'Mediana 23 países',data:median,borderColor:'#94a3b8',borderWidth:1.5,borderDash:[5,4],pointRadius:0,tension:0.15,spanGaps:true}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{color:'#cbd5e1',boxWidth:12,font:{size:10}}}},scales:{x:{ticks:{maxTicksLimit:12,color:'#64748b',font:{size:9}},grid:{color:'#1e293b'}},y:{ticks:{color:'#64748b',font:{size:9},callback:v=>'$'+(v/1000).toFixed(0)+'k'},grid:{color:'#1e293b'}}}}});
+  // 5. Por región
+  const regions={'Sudamérica (s/ Chile)':['Argentina','Perú','Brasil'],'Europa':['España','Reino Unido','Alemania','Francia','Noruega','Finlandia'],'Asia':['China','India','Japón','Corea del Sur'],'Norteamérica':['EE.UU.','México'],'África':['Nigeria','Sudáfrica','Etiopía','Egipto','Kenia','Angola','Argelia'],'Eurasia':['Rusia']};
+  const avail=Object.keys(world); const rlabels=[],rvals=[];
+  Object.entries(regions).forEach(([reg,list])=>{const found=list.filter(c=>avail.includes(c));if(!found.length)return;const v=found.map(c=>world[c]['2023']).filter(x=>x!=null);if(v.length){rlabels.push(reg);rvals.push(v.reduce((a,b)=>a+b,0)/v.length);}});
+  charts.c5=new Chart(document.getElementById('sc5'),{type:'bar',data:{labels:rlabels,datasets:[{label:'Promedio PIB pc 2023 (USD)',data:rvals,backgroundColor:['#4ade80','#60a5fa','#fb923c','#22d3ee','#fbbf24','#a78bfa']}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#cbd5e1',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#64748b',font:{size:9},callback:v=>'$'+(v/1000).toFixed(0)+'k'},grid:{color:'#1e293b'}}}}});
+}
+
+// ============================================================
+// INIT
+// ============================================================
+(async()=>{
+  await loadMacroData();
+  buildIndChips();
+  buildAll();
+  try {
+    const r = await fetch('./data/world-gdp.json'); const j = await r.json(); world = j.data;
+    document.getElementById('scGrid').innerHTML = `
+      <div class="sc-card"><h3>1. La brecha que no se cierra</h3><div class="bigidea">Chile creció sostenidamente, pero EE.UU. y Noruega se alejan: en 2023 Chile tiene 1/5 del PIB per cápita de Noruega.</div><canvas id="sc1"></canvas><div class="note">Línea roja = Chile. Escala lineal en USD.</div></div>
+      <div class="sc-card"><h3>2. ¿Dónde cae Chile hoy?</h3><div class="bigidea">Chile lidera a sus pares sudamericanos, pero está a mitad de tabla global.</div><canvas id="sc2"></canvas><div class="note">Ranking 2023, barras horizontales. Chile en rojo destacado.</div></div>
+      <div class="sc-card"><h3>3. ¿Quién corrió más desde 1990?</h3><div class="bigidea">China multiplicó su PIB per cápita por 12x; Chile por 4x. La distancia relativa con Asia se amplió.</div><canvas id="sc3"></canvas><div class="note">Índice base 1990 = 100.</div></div>
+      <div class="sc-card"><h3>4. Convergencia: Chile vs mediana mundial</h3><div class="bigidea">Chile superó la mediana de los países comparados a partir de 2005.</div><canvas id="sc4"></canvas><div class="note">Chile (rojo) vs mediana de los 23 países.</div></div>
+      <div class="sc-card"><h3>5. El vecindario importa</h3><div class="bigidea">Chile lidera a Sudamérica, pero África subsahariana se queda rezagada.</div><canvas id="sc5"></canvas><div class="note">Promedio 2023 por bloque regional.</div></div>`;
+    renderMundo();
+  } catch(e){ document.getElementById('scGrid').innerHTML='<p style="color:#f87171;font-size:0.8rem">Error cargando datos mundiales.</p>'; }
+})();
+</script>
+</body>
+</html>

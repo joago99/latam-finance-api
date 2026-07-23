@@ -1,0 +1,408 @@
+{
+  "metadata": {
+    "code": "F049.POB.STO.INE1.01.A",
+    "name": "Población total, INE (número de personas)",
+    "name_en": "National population by gender, INE (number of people) - Total",
+    "unit": "personas",
+    "fetched_at": "2026-07-23T01:35:25.602173",
+    "first_obs": "01-01-1992",
+    "last_obs": "01-01-2070"
+  },
+  "data": [
+    {
+      "fecha": "01-01-1992",
+      "valor": "13770793",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1993",
+      "valor": "13991127",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1994",
+      "valor": "14206429",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1995",
+      "valor": "14414046",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1996",
+      "valor": "14613776",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1997",
+      "valor": "14809841",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1998",
+      "valor": "15001623",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-1999",
+      "valor": "15185799",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2000",
+      "valor": "15365623",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2001",
+      "valor": "15543565",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2002",
+      "valor": "15715924",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2003",
+      "valor": "15882092",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2004",
+      "valor": "16041612",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2005",
+      "valor": "16198348",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2006",
+      "valor": "16356738",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2007",
+      "valor": "16516863",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2008",
+      "valor": "16682228",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2009",
+      "valor": "16855484",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2010",
+      "valor": "17030393",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2011",
+      "valor": "17204567",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2012",
+      "valor": "17380597",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2013",
+      "valor": "17559507",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2014",
+      "valor": "17749360",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2015",
+      "valor": "17954875",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2016",
+      "valor": "18190964",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2017",
+      "valor": "18460529",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2018",
+      "valor": "18754494",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2019",
+      "valor": "19040037",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2020",
+      "valor": "19235540",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2021",
+      "valor": "19391613",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2022",
+      "valor": "19581575",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2023",
+      "valor": "19756365",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2024",
+      "valor": "19904328",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2025",
+      "valor": "20036669",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2026",
+      "valor": "20150948",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2027",
+      "valor": "20252145",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2028",
+      "valor": "20342246",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2029",
+      "valor": "20421403",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2030",
+      "valor": "20489812",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2031",
+      "valor": "20546653",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2032",
+      "valor": "20590711",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2033",
+      "valor": "20621533",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2034",
+      "valor": "20639005",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2035",
+      "valor": "20643490",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2036",
+      "valor": "20635825",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2037",
+      "valor": "20617132",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2038",
+      "valor": "20588655",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2039",
+      "valor": "20551753",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2040",
+      "valor": "20508117",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2041",
+      "valor": "20459180",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2042",
+      "valor": "20405521",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2043",
+      "valor": "20347272",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2044",
+      "valor": "20284551",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2045",
+      "valor": "20217414",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2046",
+      "valor": "20145968",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2047",
+      "valor": "20070235",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2048",
+      "valor": "19990194",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2049",
+      "valor": "19905775",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2050",
+      "valor": "19816858",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2051",
+      "valor": "19723225",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2052",
+      "valor": "19624629",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2053",
+      "valor": "19520801",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2054",
+      "valor": "19411448",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2055",
+      "valor": "19296388",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2056",
+      "valor": "19175470",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2057",
+      "valor": "19048653",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2058",
+      "valor": "18916047",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2059",
+      "valor": "18777806",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2060",
+      "valor": "18634210",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2061",
+      "valor": "18485577",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2062",
+      "valor": "18332247",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2063",
+      "valor": "18174541",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2064",
+      "valor": "18012787",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2065",
+      "valor": "17847299",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2066",
+      "valor": "17678364",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2067",
+      "valor": "17506235",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2068",
+      "valor": "17331111",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2069",
+      "valor": "17153173",
+      "status": "OK"
+    },
+    {
+      "fecha": "01-01-2070",
+      "valor": "16972558",
+      "status": "OK"
+    }
+  ]
+}

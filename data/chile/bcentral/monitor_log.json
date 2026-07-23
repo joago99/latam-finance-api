@@ -1,0 +1,199 @@
+[
+  {
+    "date": "2026-07-22",
+    "summary": {
+      "ok": 9,
+      "warning": 4,
+      "error": 0,
+      "total": 13
+    },
+    "catalog": {
+      "catalog_issues": [
+        "UTM (F073.UTR.PRE.Z.M): NO encontrada en catálogo DAILY",
+        "IMACEC (F032.IMC.IND.Z.Z.EP18.Z.Z.0.M): NO encontrada en catálogo DAILY",
+        "IPC_var_mensual (G073.IPC.VAR.2023.M): NO encontrada en catálogo DAILY",
+        "Desempleo (F049.DES.TAS.HIST.10.M): NO encontrada en catálogo DAILY",
+        "PIB_var_anual (F019.PIB.VAR.CH.T): NO encontrada en catálogo DAILY",
+        "TPM (F022.TPM.TIN.D001.NO.Z.D): NO encontrada en catálogo MONTHLY",
+        "UF (F073.UFF.PRE.Z.D): NO encontrada en catálogo MONTHLY",
+        "Dolar_Observado (F073.TCO.PRE.Z.D): NO encontrada en catálogo MONTHLY",
+        "Euro (F072.CLP.EUR.N.O.D): NO encontrada en catálogo MONTHLY",
+        "PIB_var_anual (F019.PIB.VAR.CH.T): NO encontrada en catálogo MONTHLY",
+        "IPSA (F013.IBC.IND.N.7.LAC.CL.CLP.BLO.D): NO encontrada en catálogo MONTHLY",
+        "IGPA (F013.IBG.IND.N.7.LAC.CL.CLP.BLO.D): NO encontrada en catálogo MONTHLY",
+        "Cobre_USD (F019.PPB.PRE.100.D): NO encontrada en catálogo MONTHLY",
+        "Petroleo_WTI (F019.PPB.PRE.41B.D): NO encontrada en catálogo MONTHLY",
+        "TPM (F022.TPM.TIN.D001.NO.Z.D): NO encontrada en catálogo QUARTERLY",
+        "UF (F073.UFF.PRE.Z.D): NO encontrada en catálogo QUARTERLY",
+        "Dolar_Observado (F073.TCO.PRE.Z.D): NO encontrada en catálogo QUARTERLY",
+        "Euro (F072.CLP.EUR.N.O.D): NO encontrada en catálogo QUARTERLY",
+        "UTM (F073.UTR.PRE.Z.M): NO encontrada en catálogo QUARTERLY",
+        "IMACEC (F032.IMC.IND.Z.Z.EP18.Z.Z.0.M): NO encontrada en catálogo QUARTERLY",
+        "IPC_var_mensual (G073.IPC.VAR.2023.M): NO encontrada en catálogo QUARTERLY",
+        "Desempleo (F049.DES.TAS.HIST.10.M): NO encontrada en catálogo QUARTERLY",
+        "IPSA (F013.IBC.IND.N.7.LAC.CL.CLP.BLO.D): NO encontrada en catálogo QUARTERLY",
+        "IGPA (F013.IBG.IND.N.7.LAC.CL.CLP.BLO.D): NO encontrada en catálogo QUARTERLY",
+        "Cobre_USD (F019.PPB.PRE.100.D): NO encontrada en catálogo QUARTERLY",
+        "Petroleo_WTI (F019.PPB.PRE.41B.D): NO encontrada en catálogo QUARTERLY"
+      ],
+      "catalog_ok": false
+    },
+    "series": [
+      {
+        "name": "TPM",
+        "code": "F022.TPM.TIN.D001.NO.Z.D",
+        "status": "ok",
+        "issues": [
+          "Sin datos nuevos desde última descarga (23-07-2026)"
+        ],
+        "last_obs": "23-07-2026",
+        "days_since_last": -1,
+        "stored_records": 10759,
+        "live_records": 32,
+        "obs_count": 32
+      },
+      {
+        "name": "UF",
+        "code": "F073.UFF.PRE.Z.D",
+        "status": "ok",
+        "issues": [
+          "Sin datos nuevos desde última descarga (09-08-2026)"
+        ],
+        "last_obs": "09-08-2026",
+        "days_since_last": -18,
+        "stored_records": 17906,
+        "live_records": 49,
+        "obs_count": 49
+      },
+      {
+        "name": "Dolar_Observado",
+        "code": "F073.TCO.PRE.Z.D",
+        "status": "ok",
+        "issues": [
+          "Sin datos nuevos desde última descarga (23-07-2026)"
+        ],
+        "last_obs": "23-07-2026",
+        "days_since_last": -1,
+        "stored_records": 16055,
+        "live_records": 32,
+        "obs_count": 32
+      },
+      {
+        "name": "Euro",
+        "code": "F072.CLP.EUR.N.O.D",
+        "status": "ok",
+        "issues": [
+          "Sin datos nuevos desde última descarga (23-07-2026)"
+        ],
+        "last_obs": "23-07-2026",
+        "days_since_last": -1,
+        "stored_records": 10063,
+        "live_records": 32,
+        "obs_count": 32
+      },
+      {
+        "name": "UTM",
+        "code": "F073.UTR.PRE.Z.M",
+        "status": "ok",
+        "issues": [
+          "Sin datos nuevos desde última descarga (01-08-2026)"
+        ],
+        "last_obs": "01-08-2026",
+        "days_since_last": -10,
+        "stored_records": 440,
+        "live_records": 3,
+        "obs_count": 3
+      },
+      {
+        "name": "IMACEC",
+        "code": "F032.IMC.IND.Z.Z.EP18.Z.Z.0.M",
+        "status": "warning",
+        "issues": [
+          "Serie responde pero sin observaciones recientes"
+        ]
+      },
+      {
+        "name": "IPC_var_mensual",
+        "code": "G073.IPC.VAR.2023.M",
+        "status": "warning",
+        "issues": [
+          "Último dato tiene 51 días (>30)",
+          "Sin datos nuevos desde última descarga (01-06-2026)"
+        ],
+        "last_obs": "01-06-2026",
+        "days_since_last": 51,
+        "stored_records": 330,
+        "live_records": 1,
+        "obs_count": 1
+      },
+      {
+        "name": "Desempleo",
+        "code": "F049.DES.TAS.HIST.10.M",
+        "status": "warning",
+        "issues": [
+          "Serie responde pero sin observaciones recientes"
+        ]
+      },
+      {
+        "name": "PIB_var_anual",
+        "code": "F019.PIB.VAR.CH.T",
+        "status": "warning",
+        "issues": [
+          "Serie responde pero sin observaciones recientes"
+        ]
+      },
+      {
+        "name": "IPSA",
+        "code": "F013.IBC.IND.N.7.LAC.CL.CLP.BLO.D",
+        "status": "ok",
+        "issues": [
+          "Sin datos nuevos desde última descarga (20-07-2026)"
+        ],
+        "last_obs": "20-07-2026",
+        "days_since_last": 2,
+        "stored_records": 13714,
+        "live_records": 29,
+        "obs_count": 29
+      },
+      {
+        "name": "IGPA",
+        "code": "F013.IBG.IND.N.7.LAC.CL.CLP.BLO.D",
+        "status": "ok",
+        "issues": [
+          "Sin datos nuevos desde última descarga (20-07-2026)"
+        ],
+        "last_obs": "20-07-2026",
+        "days_since_last": 2,
+        "stored_records": 13349,
+        "live_records": 29,
+        "obs_count": 29
+      },
+      {
+        "name": "Cobre_USD",
+        "code": "F019.PPB.PRE.100.D",
+        "status": "ok",
+        "issues": [
+          "Sin datos nuevos desde última descarga (23-07-2026)"
+        ],
+        "last_obs": "23-07-2026",
+        "days_since_last": -1,
+        "stored_records": 5040,
+        "live_records": 32,
+        "obs_count": 32
+      },
+      {
+        "name": "Petroleo_WTI",
+        "code": "F019.PPB.PRE.41B.D",
+        "status": "ok",
+        "issues": [
+          "Sin datos nuevos desde última descarga (20-07-2026)"
+        ],
+        "last_obs": "20-07-2026",
+        "days_since_last": 2,
+        "stored_records": 14810,
+        "live_records": 29,
+        "obs_count": 29
+      }
+    ]
+  }
+]

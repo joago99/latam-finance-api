@@ -1,0 +1,20 @@
+{
+  "fetched_at": "2026-07-22",
+  "series": [
+    {
+      "name": "IPC_Lima",
+      "records": 384,
+      "path": "C:\\Users\\joaqu\\latam-finance-api\\data\\peru\\bcrp\\IPC_Lima.json"
+    },
+    {
+      "name": "Encaje_Bancario_MN",
+      "records": 360,
+      "path": "C:\\Users\\joaqu\\latam-finance-api\\data\\peru\\bcrp\\Encaje_Bancario_MN.json"
+    },
+    {
+      "name": "Encaje_Bancario_ME",
+      "records": 373,
+      "path": "C:\\Users\\joaqu\\latam-finance-api\\data\\peru\\bcrp\\Encaje_Bancario_ME.json"
+    }
+  ]
+}
