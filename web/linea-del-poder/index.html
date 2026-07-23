@@ -327,23 +327,31 @@ function buildChart() {
     }
   });
 
-  // Hito markers - map to nearest label point with value
+  // Hito markers - find the absolute closest label with a value
   const hitoPoints = [];
   const seen = new Set();
   hitos.forEach(h => {
     if (h.impacto !== 'alto') return;
-    const hPrefix = h.fecha.substring(0,7);
-    // Find closest label index that has a value
+    const [hy, hm, hd] = h.fecha.split('-').map(Number);
+    const hMonths = hy * 12 + hm; // absolute month index
+
     let best = -1, bestDist = Infinity;
     for (let i = 0; i < trimmed.length; i++) {
       if (!trimmed[i].value || isNaN(trimmed[i].value)) continue;
+      let ly, lm;
       const l = trimmed[i].label;
-      const lKey = l.length === 4 ? l + '-06' : l.substring(0,7);
-      if (lKey < hPrefix) continue;
-      const dist = lKey.localeCompare(hPrefix);
+      if (l.length === 4) {
+        ly = parseInt(l); lm = 6; // mid-year for annual labels
+      } else {
+        [ly, lm] = l.split('-').map(Number);
+      }
+      const lMonths = ly * 12 + lm;
+      const dist = Math.abs(lMonths - hMonths);
       if (dist < bestDist) { bestDist = dist; best = i; }
     }
-    if (best >= 0 && !seen.has(best)) {
+    // Only place if within 18 months (annual) or 3 months (monthly)
+    const maxDist = (trimmed[0].label.length === 4) ? 18 : 3;
+    if (best >= 0 && bestDist <= maxDist && !seen.has(best)) {
       seen.add(best);
       hitoPoints.push({x:best, y:trimmed[best].value, title:h.titulo, cat:h.categoria});
     }
