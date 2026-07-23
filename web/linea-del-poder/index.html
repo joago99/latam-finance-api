@@ -332,38 +332,14 @@ function buildChart() {
     }
   });
 
-  // Hito markers — simple direct matching
-  const hitoPoints = [];
-  const seen = new Set();
-
-  hitos.forEach(h => {
-    if (h.impacto !== 'alto') return;
-    const hKey = h.fecha.substring(0,7); // "1990-03"
-
-    // Buscar el índice exacto en labels donde coincida el prefijo YYYY-MM
-    const idx = labels.findIndex(l => {
-      const lKey = l.length === 4 ? null : l.substring(0,7); // solo mensual
-      return lKey === hKey;
-    });
-
-    if (idx >= 0 && series[idx] !== null && !isNaN(series[idx]) && !seen.has(idx)) {
-      seen.add(idx);
-      hitoPoints.push({x:idx, y:series[idx], title:h.titulo, cat:h.categoria});
-    }
-  });
+  // (Los hitos ya no se dibujan en el gráfico; se muestran como lista lateral)
+  // Código anterior de markers naranjos removido intencionalmente.
 
   const ds = [{
     label: cfg.label, data: series, borderColor: cfg.color,
     backgroundColor: cfg.color + '08', borderWidth: 1.5,
     pointRadius: 0, pointHoverRadius: 4, tension: 0.1, fill: false, spanGaps: true
   }];
-  if (hitoPoints.length) {
-    ds.push({
-      label:'Hitos', data:hitoPoints.map(h=>({x:h.x,y:h.y})),
-      type:'scatter', backgroundColor:'#d97706', borderColor:'#fff', borderWidth:1,
-      pointRadius:5, pointHoverRadius:9, showLine:false, order:1
-    });
-  }
 
   if (mainChart) mainChart.destroy();
   mainChart = new Chart(document.getElementById('mainChart'), {
@@ -376,7 +352,6 @@ function buildChart() {
         legend:{display:true,labels:{color:'#475569',font:{size:9},filter:i=>i.datasetIndex===0,usePointStyle:true}},
         tooltip:{callbacks:{
           label:ctx=>{
-            if(ctx.datasetIndex===1){const hp=hitoPoints[ctx.dataIndex];return hp?['📰 '+hp.title,'Tipo: '+hp.cat]:'';}
             const v=ctx.parsed.y;return isNaN(v)||v===null?'Sin dato':cfg.label+': '+v.toFixed(cfg.dec);
           },
           afterBody:ctx=>{
@@ -451,12 +426,22 @@ function filterEvents() {
   f = f.filter(h => {const y=parseInt(h.fecha.substring(0,4)); return y>=dateFrom&&y<=dateTo;});
   title.textContent += ' (' + f.length + ')';
   f.sort((a,b) => a.fecha < b.fecha ? 1 : -1);
+  // Limit: 10 por presidente normal, 20 para dictadura
+  const limit = selPrez.size === 1 && presidentes.find(p=>p.id===[...selPrez][0])?.nombre === 'Dictadura' ? 20 : 10;
+  if (selPrez.size <= 1) {
+    f = f.slice(0, limit);
+  }
   list.innerHTML = f.map(h => `<div class="ev-item"><div class="ev-date">${h.fecha}</div><div class="ev-title"><span class="tag ${h.categoria}">${h.categoria}</span>${h.titulo}</div><div class="ev-desc">${h.descripcion}</div></div>`).join('');
 }
 
 // ============================================================
 // KPIs
 // ============================================================
+function fmtNum(v, dec) {
+  if (v === null || v === undefined || isNaN(v)) return '—';
+  return Number(v).toLocaleString('es-CL', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+}
+
 function lastValid(data, key) {
   for (let i = data.length-1; i >= 0; i--) {
     const v = data[i][key];
@@ -471,17 +456,17 @@ function buildKPIs() {
   const items = [
     {label:'PIB per cápita',key:'PIBPC',u:' USD',d:0},
     {label:'PIB total',key:'PIBTOT',u:'M USD',d:0},
-    {label:'Población',key:'POB',u:'M',d:1,div:1e6},
-    {label:'Pob. Hombres',key:'POBH',u:'M',d:1,div:1e6},
-    {label:'Pob. Mujeres',key:'POBM',u:'M',d:1,div:1e6},
+    {label:'Población',key:'POB',u:'',d:0,div:1,comma:true},
+    {label:'Pob. Hombres',key:'POBH',u:'',d:0,div:1,comma:true},
+    {label:'Pob. Mujeres',key:'POBM',u:'',d:0,div:1,comma:true},
     {label:'TPM',key:'TPM',u:'%',d:2},
-    {label:'UF',key:'UF',u:' CLP',d:0},
-    {label:'USD/CLP',key:'USD',u:' CLP',d:0},
+    {label:'UF',key:'UF',u:' CLP',d:0,comma:true},
+    {label:'USD/CLP',key:'USD',u:' CLP',d:0,comma:true},
     {label:'IMACEC',key:'IMACEC',u:'',d:1},
     {label:'IPC',key:'IPC',u:'%',d:2},
     {label:'Desempleo',key:'DESEMPLEO',u:'%',d:1},
     {label:'PIB var%',key:'PIB',u:'%',d:1},
-    {label:'IPSA',key:'IPSA',u:'',d:0}
+    {label:'IPSA',key:'IPSA',u:'',d:0,comma:true}
   ];
   document.getElementById('kpiGrid').innerHTML = items.map(k => {
     const latest = lastValid(data, k.key);
@@ -498,7 +483,8 @@ function buildKPIs() {
       ch = (pct>=0?'▲':'▼')+' '+Math.abs(pct).toFixed(1)+'% vs año ant.';
     }
     const up = ch.startsWith('▲');
-    return `<div class="kpi-card"><div class="label">${k.label}</div><div class="value">${val.toFixed(k.d)}${k.u}</div><div class="change ${up?'up':'down'}">${ch||'—'}</div></div>`;
+    const valStr = k.comma ? fmtNum(val, k.d) : val.toFixed(k.d);
+    return `<div class="kpi-card"><div class="label">${k.label}</div><div class="value">${valStr}${k.u}</div><div class="change ${up?'up':'down'}">${ch||'—'}</div></div>`;
   }).join('');
 }
 
