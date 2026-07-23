@@ -1,47 +1,56 @@
-# La Línea
+# La Línea, por CápsulaData
 
-**Análisis macroeconómico de Chile desde 1958 hasta hoy.**
+**La economía de Chile desde 1958, contada con datos.**
 
-La Línea integra datos de fuentes oficiales — Banco Central de Chile, Instituto Nacional de Estadísticas y Banco Mundial — en una sola capa de información limpia y consultable, con visualización interactiva y contexto histórico.
-
-## Datos que utilizamos
-
-- **Indicadores macro mensuales** (BCCh): TPM, UF, Dólar observado, Euro, UTM, IMACEC, IPC, Desempleo, PIB, IPSA, Cobre, Petróleo WTI, PIB per cápita.
-- **Población nacional por sexo** (INE): Total, hombres y mujeres, desde 1992.
-- **Comparación internacional** (Banco Mundial): PIB per cápita (USD) de 24 economías, serie 1960-2023.
-- **Población mundial** (Banco Mundial): Total mundial, Latinoamérica y 24 países.
-- **Contexto histórico**: 63 hitos — terremotos, reformas, crisis, procesos políticos — organizados por período presidencial.
-- **Períodos presidenciales**: 12 gobiernos desde Jorge Alessandri (1958) hasta Gabriel Boric, con bandas de color por ideología.
-
-## Lo que hace
-
-- Dashboard interactivo con 13 indicadores económicos, filtrables por fecha y presidente.
-- Gráficos de comparación internacional: evolución histórica, ranking 2023, índice de crecimiento, convergencia con mediana mundial y distribución poblacional.
-- Los períodos presidenciales se muestran como bandas de color dentro del gráfico principal.
-- Los hitos históricos más importantes aparecen señalados como puntos sobre la línea del indicador.
-- Filtro por presidente: al seleccionarlo, el gráfico y la lista de eventos se acotan al período exacto.
-- Modo de agregación automática: rangos mayores a 20 años agrupan datos en promedios anuales.
-
-## Cómo se sirve
-
-- Versión local: servidor Python (FastAPI) que expone los datos como API REST y sirve la página web.
-- Versión online: copia estática con los datos congelados en JSON, publicada en GitHub Pages.
-- Sin build tools: HTML + JavaScript vanilla + Chart.js.
-
-## Fuentes
-
-| Fuente | Datos | Período |
-|--------|-------|---------|
-| Banco Central de Chile (BCCh) | TPM, UF, USD, EUR, UTM, IMACEC, IPC, Desempleo, PIB, IPSA, Cobre, WTI, PIBPC | 1958–2026 |
-| Instituto Nacional de Estadísticas (INE) | Población total, hombres y mujeres | 1992–2026 |
-| Banco Mundial — NY.GDP.PCAP.CD | PIB per cápita (USD), 24 países | 1960–2023 |
-| Banco Mundial — SP.POP.TOTL | Población total mundial y por país | 1960–2023 |
-
-## Enlaces
-
-- **Online:** https://joago99.github.io/la-linea-web/
-- **Local:** http://127.0.0.1:8080/ (con gateway) o http://127.0.0.1:8099/ (estático)
+La Línea es un dashboard interactivo que cruza 13 indicadores macroeconómicos con 68 años de historia política. Una sola fuente para entender la relación entre las cifras y los eventos que marcaron al país.
 
 ---
 
-*Powered by CápsulaData*
+## Qué problema resuelve
+
+Los datos macro de Chile existen — BCCh, INE, Banco Mundial — pero están dispersos, con formatos distintos, documentación inconsistente y sin conexión entre sí. Para responder "¿qué pasó con la inflación durante el gobierno de Allende?" o "¿cómo se compara el PIB per cápita de Chile con el de Noruega?", necesitabas abrir cinco fuentes distintas, limpiar los datos y armarlos a mano.
+
+La Línea integra todo en un lugar, con contexto histórico y comparación internacional.
+
+---
+
+## Dashboard Chile
+
+- **13 indicadores**: TPM, UF, USD, EUR, UTM, IMACEC, IPC, Desempleo, PIB, IPSA, Cobre, WTI, PIB per cápita.
+- **Población por sexo**: total, hombres y mujeres (desde 1992, INE).
+- **Filtro por período presidencial**: cada gobierno se ve como una banda de color en el eje del gráfico. Al hacer clic, el dashboard se acota a ese período.
+- **Bandas de ideología**: izquierda (rojo), centro (gris), derecha (azul), con 5 niveles de intensidad.
+- **Datos combinados**: Dólar y Euro en una misma serie. Población total + hombres + mujeres en un gráfico mixto (línea + barras).
+- **Agregación automática**: rangos >20 años agrupan en promedios anuales.
+
+## Chile vs el Mundo
+
+Comparación del PIB per cápita de Chile con 23 economías:
+
+1. **Evolución histórica** — 9 países seleccionados. Chile en rojo siempre.
+2. **Ranking 2023** — Barras horizontales ordenadas. Chile en rojo destacado.
+3. **Crecimiento desde 1990** — Índice base 100. Chile vs potencias asiáticas y pares regionales.
+4. **Convergencia** — Chile vs mediana de los 23 países.
+5. **Ranking de población** — Los 24 países ordenados por habitantes.
+
+## Datos que utilizamos
+
+| Fuente | Indicador | Cobertura |
+|--------|-----------|-----------|
+| Banco Central de Chile | TPM, UF, USD, EUR, UTM, IMACEC, IPC, Desempleo, PIB, IPSA, Cobre, WTI, PIBPC | 1958–2026 |
+| INE | Población total, hombres, mujeres | 1992–2026 |
+| Banco Mundial (NY.GDP.PCAP.CD) | PIB per cápita (USD), 24 países | 1960–2023 |
+| Banco Mundial (SP.POP.TOTL) | Población total, 24 países + regiones | 1960–2023 |
+
+---
+
+## Live demo
+
+👉 [**Abrir La Línea**](https://joago99.github.io/la-linea-web/)
+(Copia estática en GitHub Pages. Sin backend, sin API keys.)
+
+👉 **Versión local con gateway:** `python api/gateway.py` → http://127.0.0.1:8080/
+
+---
+
+*Proyecto de CápsulaData. Datos macro que se entienden.*
