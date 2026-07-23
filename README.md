@@ -1,94 +1,47 @@
-# LatAm Finance API — Fase 1: Chile
+# La Línea
 
-**Gateway unificado de datos macroeconómicos, políticos y periodísticos de América Latina.**
+**Análisis macroeconómico de Chile desde 1958 hasta hoy.**
 
-> 🚀 Fase 1: Chile (1990-2026). Perú y Brasil en Fase 2.
+La Línea integra datos de fuentes oficiales — Banco Central de Chile, Instituto Nacional de Estadísticas y Banco Mundial — en una sola capa de información limpia y consultable, con visualización interactiva y contexto histórico.
 
-## 📊 Demo visual
+## Datos que utilizamos
 
-Abrir en navegador:
-```
-http://127.0.0.1:8080/dashboard
-```
+- **Indicadores macro mensuales** (BCCh): TPM, UF, Dólar observado, Euro, UTM, IMACEC, IPC, Desempleo, PIB, IPSA, Cobre, Petróleo WTI, PIB per cápita.
+- **Población nacional por sexo** (INE): Total, hombres y mujeres, desde 1992.
+- **Comparación internacional** (Banco Mundial): PIB per cápita (USD) de 24 economías, serie 1960-2023.
+- **Población mundial** (Banco Mundial): Total mundial, Latinoamérica y 24 países.
+- **Contexto histórico**: 63 hitos — terremotos, reformas, crisis, procesos políticos — organizados por período presidencial.
+- **Períodos presidenciales**: 12 gobiernos desde Jorge Alessandri (1958) hasta Gabriel Boric, con bandas de color por ideología.
 
-O abrir directamente el archivo:
-```
-web/linea-del-poder/index.html
-```
+## Lo que hace
 
-## 🔧 Stack
+- Dashboard interactivo con 13 indicadores económicos, filtrables por fecha y presidente.
+- Gráficos de comparación internacional: evolución histórica, ranking 2023, índice de crecimiento, convergencia con mediana mundial y distribución poblacional.
+- Los períodos presidenciales se muestran como bandas de color dentro del gráfico principal.
+- Los hitos históricos más importantes aparecen señalados como puntos sobre la línea del indicador.
+- Filtro por presidente: al seleccionarlo, el gráfico y la lista de eventos se acotan al período exacto.
+- Modo de agregación automática: rangos mayores a 20 años agrupan datos en promedios anuales.
 
-| Capa | Tecnología |
-|------|-----------|
-| API Gateway | FastAPI (Python 3.11+) |
-| Dashboard | HTML5 + Chart.js 4 (sin build) |
-| Datos estáticos | JSON (presidentes, hitos) |
-| Datos macro | BCCh BDE (requiere credenciales) / placeholder |
-| Caché | Redis (planeado) |
+## Cómo se sirve
 
-## 📁 Estructura
+- Versión local: servidor Python (FastAPI) que expone los datos como API REST y sirve la página web.
+- Versión online: copia estática con los datos congelados en JSON, publicada en GitHub Pages.
+- Sin build tools: HTML + JavaScript vanilla + Chart.js.
 
-```
-latam-finance-api/
-├── api/
-│   └── gateway.py              # FastAPI server (puerto 8080)
-├── data/
-│   ├── chile/
-│   │   ├── presidentes.json    # 8 presidentes (1990-2026)
-│   │   └── hitos.json          # 38 hitos históricos
-│   └── peru/
-│       └── bcrp/               # Datos reales BCRP (sin auth)
-├── scripts/
-│   ├── fetch_bcentral.py       # Fetcher BCCh (requiere credenciales)
-│   └── fetch_bcrp_peru.py      # Fetcher BCRP (sin auth — funcional)
-├── web/
-│   └── linea-del-poder/
-│       └── index.html          # Dashboard interactivo
-└── README.md
-```
+## Fuentes
 
-## 🚀 Quickstart
+| Fuente | Datos | Período |
+|--------|-------|---------|
+| Banco Central de Chile (BCCh) | TPM, UF, USD, EUR, UTM, IMACEC, IPC, Desempleo, PIB, IPSA, Cobre, WTI, PIBPC | 1958–2026 |
+| Instituto Nacional de Estadísticas (INE) | Población total, hombres y mujeres | 1992–2026 |
+| Banco Mundial — NY.GDP.PCAP.CD | PIB per cápita (USD), 24 países | 1960–2023 |
+| Banco Mundial — SP.POP.TOTL | Población total mundial y por país | 1960–2023 |
 
-```bash
-# Instalar dependencias
-pip install fastapi uvicorn bcchapi requests
+## Enlaces
 
-# Iniciar API
-cd latam-finance-api
-python api/gateway.py
+- **Online:** https://joago99.github.io/la-linea-web/
+- **Local:** http://127.0.0.1:8080/ (con gateway) o http://127.0.0.1:8099/ (estático)
 
-# Abrir dashboard
-# http://127.0.0.1:8080/dashboard
-```
+---
 
-## 📡 Endpoints API
-
-| Método | Ruta | Descripción |
-|--------|------|-------------|
-| GET | `/health` | Health check |
-| GET | `/api/v1/chile/presidentes` | Lista de presidentes (1990-2026) |
-| GET | `/api/v1/chile/presidentes/{id}` | Presidente específico |
-| GET | `/api/v1/chile/hitos` | Hitos históricos (filtrable: `?categoria=`, `?presidente_id=`, `?desde=`, `?hasta=`) |
-| GET | `/api/v1/chile/timeline` | Timeline unificado (presidentes + hitos) |
-| GET | `/dashboard` | Dashboard interactivo "La Línea del Poder" |
-
-## 🔑 Credenciales pendientes
-
-Para datos macro reales de Chile:
-1. Registrarse en https://si3.bcentral.cl/estadisticas/principal1/web_services/index.htm
-2. Obtener usuario/contraseña
-3. Configurar `BCCH_USER` y `BCCH_PASS` como variables de entorno
-4. Ejecutar `python scripts/fetch_bcentral.py`
-
-## 🗺️ Roadmap
-
-- [ ] **Fase 1.1**: Integrar BCCh con datos reales (IMACEC, IPC, TPM, UF, USD)
-- [ ] **Fase 1.2**: Agregar datos SII (empresas por región/rubro)
-- [ ] **Fase 1.3**: Integrar noticias (NewsAPI / GNews) correlacionadas con timeline
-- [ ] **Fase 1.4**: Dashboard cliente — subir datos propios (CSV) y cruzar con macro
-- [ ] **Fase 2**: Perú (BCRPData ya funciona) + Brasil (BCB SGS)
-- [ ] **Fase 3**: Colombia + México
-
-## 📄 Licencia
-
-Propietaria. Todos los derechos reservados.
+*Powered by CápsulaData*
