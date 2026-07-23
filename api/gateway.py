@@ -37,7 +37,10 @@ WEB_DIR = Path(__file__).resolve().parents[1] / "web"
 # =====================
 @app.get("/")
 def public_index():
-    """Página pública 'La Línea' powered by CápsulaData."""
+    """Página pública 'La Línea' powered by CápsulaData (scroll largo: landing + dashboard Chile + comparación mundo)."""
+    unified = WEB_DIR / "la-linea" / "index.html"
+    if unified.exists():
+        return FileResponse(unified)
     public_html = WEB_DIR / "public" / "index.html"
     if public_html.exists():
         return FileResponse(public_html)

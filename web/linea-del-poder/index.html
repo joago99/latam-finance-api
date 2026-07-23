@@ -454,8 +454,8 @@ function buildKPIs() {
   const data = filteredMacro();
   if (!data.length) return;
   const items = [
-    {label:'PIB per cápita',key:'PIBPC',u:' USD',d:0,usd:true},
-    {label:'PIB total',key:'PIBTOT',u:'M USD',d:0},
+    {label:'PIB per cápita',key:'PIBPC',u:' USD',d:0,usd:true,mult:1000},
+    {label:'PIB total',key:'PIBTOT',u:'M USD',d:0,mult:1000,comma:true},
     {label:'Población',key:'POB',u:'',d:0,div:1,comma:true},
     {label:'Pob. Hombres',key:'POBH',u:'',d:0,div:1,comma:true},
     {label:'Pob. Mujeres',key:'POBM',u:'',d:0,div:1,comma:true},
@@ -476,10 +476,12 @@ function buildKPIs() {
     const prevKey = `${ly-1}-${String(lm).padStart(2,'0')}`;
     const prevRow = data.find(r => r.fecha === prevKey);
     const prevVal = prevRow ? prevRow[k.key] : null;
-    const val = k.div ? latest.val / k.div : latest.val;
+    const raw = k.mult ? latest.val * k.mult : latest.val;
+    const val = k.div ? raw / k.div : raw;
     let ch = '';
-    if (prevVal !== null && prevVal !== undefined && !isNaN(prevVal) && prevVal !== 0) {
-      const pct = ((latest.val-prevVal)/Math.abs(prevVal))*100;
+    const prevRaw = prevVal !== null && prevVal !== undefined && !isNaN(prevVal) ? (k.mult ? prevVal*k.mult : prevVal) : null;
+    if (prevRaw !== null && prevRaw !== 0) {
+      const pct = ((raw-prevRaw)/Math.abs(prevRaw))*100;
       ch = (pct>=0?'▲':'▼')+' '+Math.abs(pct).toFixed(1)+'% vs año ant.';
     }
     const up = ch.startsWith('▲');
