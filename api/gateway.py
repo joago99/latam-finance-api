@@ -33,6 +33,17 @@ CHILE_DIR = DATA_DIR / "chile"
 WEB_DIR = Path(__file__).resolve().parents[1] / "web"
 
 # =====================
+# Public landing page
+# =====================
+@app.get("/")
+def public_index():
+    """Página pública 'La Línea' powered by CápsulaData."""
+    public_html = WEB_DIR / "public" / "index.html"
+    if public_html.exists():
+        return FileResponse(public_html)
+    raise HTTPException(status_code=404, detail="Página pública no encontrada")
+
+# =====================
 # Helper
 # =====================
 def _load_json(path: Path) -> dict:

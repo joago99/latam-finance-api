@@ -28,6 +28,8 @@ SERIES_FILES = [
     "Petroleo_WTI.json",
     "PIB_per_capita.json",
     "Poblacion.json",
+    "Pob_Hombres.json",
+    "Pob_Mujeres.json",
 ]
 
 # Short clean names for the unified output
@@ -46,6 +48,8 @@ SHORT_NAMES = {
     "Petroleo_WTI": "WTI",
     "PIB_per_capita": "PIBPC",
     "Poblacion": "POB",
+    "Pob_Hombres": "POBH",
+    "Pob_Mujeres": "POBM",
 }
 
 

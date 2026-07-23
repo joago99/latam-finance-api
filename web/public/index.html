@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Línea — CápsulaData</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f172a;--card:#1e293b;--text:#f8fafc;--muted:#94a3b8;--accent:#60a5fa;--accent2:#38bdf8;--border:#334155}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+.la-linea{font-family:'Playfair Display',serif;letter-spacing:-0.02em;font-style:italic}
+header{position:fixed;top:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(15,23,42,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+header .brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem}
+header .brand .sub{font-family:'Inter';font-size:0.55rem;color:var(--muted);display:block;margin-top:-2px;letter-spacing:0.05em;text-transform:uppercase}
+header nav a{color:var(--muted);text-decoration:none;margin-left:1.5rem;font-size:0.8rem;transition:color .2s}
+header nav a:hover{color:var(--text)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 4rem;position:relative;background:radial-gradient(circle at 50% 30%,#1e3a5f 0%,#0f172a 60%)}
+.hero .big{font-size:clamp(3rem,10vw,7rem);font-family:'Playfair Display',serif;font-style:italic;font-weight:700;line-height:0.95;background:linear-gradient(120deg,#60a5fa,#38bdf8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .powered{margin-top:1.5rem;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+.hero p.lead{max-width:600px;margin:2rem auto 0;font-size:1.1rem;color:var(--muted)}
+.hero .cta{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn{background:var(--accent);color:#fff;padding:0.7rem 1.5rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.9rem;transition:all .2s}
+.btn:hover{background:var(--accent2);transform:translateY(-2px)}
+.btn.outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+section{padding:5rem 2rem;max-width:1100px;margin:0 auto}
+.section-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;margin-bottom:1rem}
+.section-sub{color:var(--muted);max-width:600px;margin-bottom:3rem}
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem}
+.service{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem;transition:transform .2s,border-color .2s}
+.service:hover{transform:translateY(-4px);border-color:var(--accent)}
+.service .icon{font-size:1.8rem;margin-bottom:1rem}
+.service h3{font-size:1.2rem;margin-bottom:0.5rem}
+.service p{color:var(--muted);font-size:0.85rem}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.5rem;margin-top:2rem}
+.metric{text-align:center;padding:1.5rem}
+.metric .num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--accent)}
+.metric .lbl{color:var(--muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em}
+.preview{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-top:2rem}
+.preview canvas{width:100%!important;max-height:350px}
+footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.8rem}
+footer .brand{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--text);margin-bottom:0.5rem}
+footer .commercial{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--accent);margin-bottom:1rem}
+@media(max-width:768px){header nav{display:none}.services{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">La Línea<span class="sub">Powered by CápsulaData</span></div>
+<nav>
+<a href="#servicios">Servicios</a>
+<a href="#metricas">Datos</a>
+<a href="/dashboard">Dashboard</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="big">La Línea</div>
+<div class="powered">Powered by CápsulaData</div>
+<p class="lead">Análisis de grandes volúmenes de datos para entender, diagnosticar y predecir la economía de Chile. Desde 1958 hasta hoy.</p>
+<div class="cta">
+<a href="/dashboard" class="btn">Explorar dashboard</a>
+<a href="#servicios" class="btn outline">Ver servicios</a>
+</div>
+</section>
+
+<section id="servicios">
+<h2 class="section-title">Qué hacemos</h2>
+<p class="section-sub">Convertimos datos complejos en decisiones. Tres pilares:</p>
+<div class="services">
+<div class="service">
+<div class="icon">🔍</div>
+<h3>Entender</h3>
+<p>Integramos y organizamos millones de registros de fuentes oficiales (BCCh, INE, SII) en una sola capa de datos limpia y consultable.</p>
+</div>
+<div class="service">
+<div class="icon">🩺</div>
+<h3>Diagnosticar</h3>
+<p>Dashboards interactivos que revelan patrones, anomalías y correlaciones entre indicadores macroeconómicos y eventos históricos.</p>
+</div>
+<div class="service">
+<div class="icon">🔮</div>
+<h3>Predecir</h3>
+<p>Modelos sobre series de tiempo para proyectar inflación, tipo de cambio y crecimiento, con margen de error explícito.</p>
+</div>
+</div>
+</section>
+
+<section id="metricas">
+<h2 class="section-title">Datos en vivo</h2>
+<p class="section-sub">Muestra del dashboard "La Línea del Poder" con datos reales del Banco Central de Chile.</p>
+<div class="metrics">
+<div class="metric"><div class="num">14</div><div class="lbl">Series macro</div></div>
+<div class="metric"><div class="num">68</div><div class="lbl">Años de datos</div></div>
+<div class="metric"><div class="num">12</div><div class="lbl">Presidentes</div></div>
+<div class="metric"><div class="num">36</div><div class="lbl">Hitos históricos</div></div>
+</div>
+<div class="preview"><canvas id="previewChart"></canvas></div>
+</section>
+
+<footer>
+<div class="brand">La Línea</div>
+<div class="commercial">Powered by CápsulaData</div>
+<p>Análisis de grandes datos · Entender · Diagnosticar · Predecir</p>
+<p style="margin-top:1rem;opacity:0.6">Datos: Banco Central de Chile (BCCh) · Instituto Nacional de Estadísticas (INE)</p>
+</footer>
+
+<script>
+// Preview mini chart: dólar anual
+const ctx = document.getElementById('previewChart');
+const labels = ['1990','1995','2000','2005','2010','2015','2020','2025'];
+const data = [350,460,520,560,540,690,800,936];
+new Chart(ctx,{
+  type:'line',
+  data:{labels,datasets:[{label:'USD/CLP (anual)',data,borderColor:'#60a5fa',backgroundColor:'rgba(96,165,250,0.1)',borderWidth:2,pointRadius:3,fill:true,tension:0.3}]},
+  options:{responsive:true,plugins:{legend:{labels:{color:'#94a3b8'}}},scales:{x:{ticks:{color:'#64748b'},grid:{color:'#334155'}},y:{ticks:{color:'#64748b'},grid:{color:'#334155'}}}}
+});
+</script>
+</body>
+</html>

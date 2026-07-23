@@ -41,6 +41,8 @@ SERIES = [
     # ---- Anuales (bonus) ----
     ("PIB_per_capita",   "F019.PIBPC.FLU.CH.A",      "ANNUAL",  "USD PPP"),
     ("Poblacion",        "F049.POB.STO.INE1.01.A",   "ANNUAL",  "personas"),
+    ("Pob_Hombres",      "F049.POB.STO.INE1.02.A",   "ANNUAL",  "personas"),
+    ("Pob_Mujeres",      "F049.POB.STO.INE1.03.A",   "ANNUAL",  "personas"),
 ]
 
 

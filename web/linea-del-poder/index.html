@@ -164,7 +164,9 @@ const seriesMeta = {
   COBRE: {desde:'2012-10',unidad:'USD/oz',desc:'Cobre. Último valor del mes. BCCh.'},
   WTI:   {desde:'1986-01',unidad:'USD/bbl',desc:'Petróleo WTI. Último valor del mes. BCCh.'},
   PIBPC: {desde:'1990-01',unidad:'USD',desc:'PIB per cápita PPP (FMI-WEO). Dato anual. BCCh.'},
-  PIBTOT:{desde:'1992-01',unidad:'M USD',desc:'PIB total = PIB per cápita × población. BCCh/INE.'}
+  POB:  {desde:'1992-01',unidad:'personas',desc:'Población total INE. Dato anual.'},
+  POBH: {desde:'1992-01',unidad:'personas',desc:'Población hombres INE. Dato anual.'},
+  POBM: {desde:'1992-01',unidad:'personas',desc:'Población mujeres INE. Dato anual.'}
 };
 
 const indCfg = {
@@ -181,7 +183,10 @@ const indCfg = {
   COBRE: {label:'Cobre (USD/oz)',color:'#b45309',dec:2},
   WTI:   {label:'Petróleo WTI',color:'#475569',dec:2},
   PIBPC: {label:'PIB per cápita',color:'#0d9488',dec:0},
-  PIBTOT:{label:'PIB total',color:'#6366f1',dec:0}
+  PIBTOT:{label:'PIB total',color:'#6366f1',dec:0},
+  POB:  {label:'Población',color:'#475569',dec:0},
+  POBH: {label:'Pob. Hombres',color:'#2563eb',dec:0},
+  POBM: {label:'Pob. Mujeres',color:'#db2777',dec:0}
 };
 
 // ============================================================
@@ -327,33 +332,23 @@ function buildChart() {
     }
   });
 
-  // Hito markers - find the absolute closest label with a value
+  // Hito markers — simple direct matching
   const hitoPoints = [];
   const seen = new Set();
+
   hitos.forEach(h => {
     if (h.impacto !== 'alto') return;
-    const [hy, hm, hd] = h.fecha.split('-').map(Number);
-    const hMonths = hy * 12 + hm; // absolute month index
+    const hKey = h.fecha.substring(0,7); // "1990-03"
 
-    let best = -1, bestDist = Infinity;
-    for (let i = 0; i < trimmed.length; i++) {
-      if (!trimmed[i].value || isNaN(trimmed[i].value)) continue;
-      let ly, lm;
-      const l = trimmed[i].label;
-      if (l.length === 4) {
-        ly = parseInt(l); lm = 6; // mid-year for annual labels
-      } else {
-        [ly, lm] = l.split('-').map(Number);
-      }
-      const lMonths = ly * 12 + lm;
-      const dist = Math.abs(lMonths - hMonths);
-      if (dist < bestDist) { bestDist = dist; best = i; }
-    }
-    // Only place if within 18 months (annual) or 3 months (monthly)
-    const maxDist = (trimmed[0].label.length === 4) ? 18 : 3;
-    if (best >= 0 && bestDist <= maxDist && !seen.has(best)) {
-      seen.add(best);
-      hitoPoints.push({x:best, y:trimmed[best].value, title:h.titulo, cat:h.categoria});
+    // Buscar el índice exacto en labels donde coincida el prefijo YYYY-MM
+    const idx = labels.findIndex(l => {
+      const lKey = l.length === 4 ? null : l.substring(0,7); // solo mensual
+      return lKey === hKey;
+    });
+
+    if (idx >= 0 && series[idx] !== null && !isNaN(series[idx]) && !seen.has(idx)) {
+      seen.add(idx);
+      hitoPoints.push({x:idx, y:series[idx], title:h.titulo, cat:h.categoria});
     }
   });
 
@@ -477,6 +472,8 @@ function buildKPIs() {
     {label:'PIB per cápita',key:'PIBPC',u:' USD',d:0},
     {label:'PIB total',key:'PIBTOT',u:'M USD',d:0},
     {label:'Población',key:'POB',u:'M',d:1,div:1e6},
+    {label:'Pob. Hombres',key:'POBH',u:'M',d:1,div:1e6},
+    {label:'Pob. Mujeres',key:'POBM',u:'M',d:1,div:1e6},
     {label:'TPM',key:'TPM',u:'%',d:2},
     {label:'UF',key:'UF',u:' CLP',d:0},
     {label:'USD/CLP',key:'USD',u:' CLP',d:0},
