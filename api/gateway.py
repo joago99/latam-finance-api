@@ -246,6 +246,15 @@ def world_gdp_pcap():
     }
 
 
+@app.get("/api/v1/world/pop")
+def world_pop():
+    path = WORLD_DIR / "pop_wb.json"
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="Datos de población no encontrados.")
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return {"metadata": {"fuente": "Banco Mundial — SP.POP.TOTL", "indicador": "Población total"}, "data": data}
+
+
 @app.get("/comparacion")
 @app.get("/comparacion/")
 @app.get("/mundo")
