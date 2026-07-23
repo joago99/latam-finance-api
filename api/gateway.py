@@ -214,6 +214,16 @@ def serve_dashboard():
     return FileResponse(WEB_DIR / "linea-del-poder" / "index.html")
 
 
+@app.get("/empresa")
+@app.get("/empresa/")
+def serve_empresa():
+    """Página corporativa de CápsulaData (la empresa detrás de La Línea)."""
+    p = WEB_DIR / "empresa" / "index.html"
+    if p.exists():
+        return FileResponse(p)
+    return {"error": "Página de empresa no encontrada"}
+
+
 # =====================
 # Comparación internacional (Banco Mundial)
 # =====================

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CápsulaData — Datos macro que se entienden</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f172a;--card:#1e293b;--text:#f8fafc;--muted:#94a3b8;--accent:#60a5fa;--accent2:#38bdf8;--border:#334155;--chile:#f87171}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem;border-bottom:1px solid var(--border)}
+header .brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem}
+header .brand .sub{font-family:'Inter';font-size:0.55rem;color:var(--muted);display:block;margin-top:-2px;letter-spacing:0.05em;text-transform:uppercase}
+header nav a{color:var(--muted);text-decoration:none;margin-left:1.5rem;font-size:0.85rem}
+header nav a:hover{color:var(--text)}
+.hero{padding:5rem 2rem 3rem;text-align:center;background:radial-gradient(circle at 50% 20%,#1e3a5f 0%,#0f172a 65%)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,6vw,4rem);font-weight:700;line-height:1.05;background:linear-gradient(120deg,#60a5fa,#38bdf8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:640px;margin:1.5rem auto 0;color:var(--muted);font-size:1.05rem}
+.hero .cta{margin-top:2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{background:var(--accent);color:#fff;padding:0.7rem 1.5rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.9rem;transition:all .2s}
+.btn:hover{background:var(--accent2);transform:translateY(-2px)}
+.btn.outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+section.block{padding:3.5rem 2rem;max-width:1000px;margin:0 auto;border-top:1px solid var(--border)}
+.section-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;margin-bottom:0.5rem}
+.section-sub{color:var(--muted);max-width:680px;margin-bottom:2rem;font-size:0.9rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.6rem}
+.card .icon{font-size:1.6rem;margin-bottom:0.8rem}
+.card h3{font-size:1.1rem;margin-bottom:0.4rem}
+.card p{color:var(--muted);font-size:0.82rem}
+.product{background:var(--card);border:1px solid var(--chile);border-radius:12px;padding:2rem;margin-top:1.5rem;display:flex;gap:2rem;align-items:center;flex-wrap:wrap}
+.product .info{flex:1;min-width:260px}
+.product h3{font-size:1.4rem;margin-bottom:0.4rem}
+.product p{color:var(--muted);font-size:0.85rem}
+.product a{margin-top:1rem;display:inline-block}
+footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;color:var(--muted);font-size:0.8rem}
+footer a{color:var(--accent);text-decoration:none}
+@media(max-width:768px){header nav{display:none}.product{flex-direction:column}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">CápsulaData<span class="sub">Datos macro que se entienden</span></div>
+<nav>
+<a href="#que">Qué hacemos</a>
+<a href="#producto">La Línea</a>
+<a href="#contacto">Contacto</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Convertimos el ruido de los datos en señal</h1>
+<p>En CápsulaData integramos fuentes oficiales de economías de Latinoamérica y el mundo en una capa limpia, consultable y visual. Nuestro producto estrella: <strong>La Línea</strong>, el dashboard de la economía de Chile desde 1958.</p>
+<div class="cta">
+<a href="#producto" class="btn">Ver La Línea</a>
+<a href="#contacto" class="btn outline">Hablemos</a>
+</div>
+</section>
+
+<section class="block" id="que">
+<h2 class="section-title">Qué hacemos</h2>
+<p class="section-sub">Tres servicios para equipos que necesitan decisiones basadas en datos, no en intuición.</p>
+<div class="cards">
+<div class="card"><div class="icon">🔗</div><h3>Integración de datos</h3><p>Unimos millones de registros de BCCh, INE y Banco Mundial en una sola fuente confiable, actualizada y documentada.</p></div>
+<div class="card"><div class="icon">📊</div><h3>Dashboards a medida</h3><p>Construimos visualizaciones interactivas que revelan patrones, anomalías y correlaciones entre indicadores y eventos.</p></div>
+<div class="card"><div class="icon">🤖</div><h3>Modelos predictivos</h3><p>Proyecciones de inflación, tipo de cambio y crecimiento sobre series de tiempo, con margen de error explícito.</p></div>
+</div>
+</section>
+
+<section class="block" id="producto">
+<h2 class="section-title">La Línea</h2>
+<p class="section-sub">Nuestro laboratorio público. Una línea de tiempo viva de la economía chilena, con comparación internacional.</p>
+<div class="product">
+<div class="info">
+<h3>La economía de Chile, 1958 – hoy</h3>
+<p>Explora PIB, inflación, tipo de cambio, población y más. Filtra por presidente, compara con 23 economías del mundo. Todo con fuentes oficiales y código abierto.</p>
+<a href="https://joago99.github.io/la-linea-web/" target="_blank" rel="noopener" class="btn">Abrir La Línea</a>
+</div>
+</div>
+</section>
+
+<section class="block" id="contacto">
+<h2 class="section-title">Hablemos</h2>
+<p class="section-sub">¿Quieres este tipo de análisis para tu empresa, institución o proyecto de investigación?</p>
+<p style="font-size:0.95rem">Escríbenos o conéctate en LinkedIn:</p>
+<a href="https://www.linkedin.com/in/JoaquinAlmendra" target="_blank" rel="noopener" class="btn" style="margin-top:0.8rem;display:inline-block">LinkedIn de CápsulaData</a>
+</section>
+
+<footer>
+<p>CápsulaData · Datos macro que se entienden</p>
+<p style="margin-top:0.5rem;opacity:0.6">Fuentes: Banco Central de Chile (BCCh) · Instituto Nacional de Estadísticas (INE) · Banco Mundial</p>
+</footer>
+</body>
+</html>
