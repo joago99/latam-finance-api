@@ -55,6 +55,10 @@ def main():
     # --- capsula-servicios.html (página de servicios CápsulaData, tema claro) ---
     svc = open(os.path.join(ROOT, "web", "capsula-servicios", "index.html"), encoding="utf-8").read()
     open(os.path.join(DIST, "capsula-servicios.html"), "w", encoding="utf-8").write(svc)
+    # logo de CápsulaData
+    logo = os.path.join(ROOT, "web", "capsula-servicios", "logo.png")
+    if os.path.exists(logo):
+        shutil.copy(logo, os.path.join(DIST, "logo.png"))
 
     # --- CNAME opcional (descomenta si tienes dominio) ---
     # open(os.path.join(DIST, "CNAME"), "w").write("capsuladata.com\n")
