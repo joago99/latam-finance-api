@@ -81,7 +81,7 @@ footer .commercial{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15
 <a href="#mundo">Chile vs Mundo</a>
 <a href="../index.html">CápsulaData</a>
 <a href="../servicios.html">Servicios</a>
-<a href="#contacto">Contacto</a>
+<a href="../index.html#contacto">Contacto</a>
 </nav>
 </header>
 
@@ -92,7 +92,7 @@ footer .commercial{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15
 <p class="lead">Análisis de grandes volúmenes de datos para entender, diagnosticar y predecir la economía. Desde 1958 hasta hoy, con fuentes oficiales.</p>
 <div class="cta">
 <a href="#chile" class="btn">Explorar dashboard</a>
-<a href="#contacto" class="btn outline">Contacto</a>
+<a href="../index.html#contacto" class="btn outline">Contacto</a>
 </div>
 </section>
 
@@ -257,7 +257,7 @@ let macroAll = [], activeInd = 'UF', selPrez = new Set(), dateFrom = 1958, dateT
 
 async function loadMacroData() {
   try {
-    const resp = await fetch('/api/v1/chile/macro');
+    const resp = await fetch('./data/chile-macro.json');
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const json = await resp.json();
     const baseKeys = ['TPM','UF','USD','EUR','UTM','IMACEC','IPC','DESEMPLEO','PIB','IPSA','COBRE','WTI','PIBPC','POB','POBH','POBM'];
@@ -493,8 +493,8 @@ function renderMundo() {
   buildIndChips();
   buildAll();
   try {
-    const r = await fetch('/api/v1/world/gdp-pcap'); const j = await r.json(); world = j.data;
-    const rp = await fetch('/api/v1/world/pop'); const jp = await rp.json(); worldPop = jp.data;
+    const r = await fetch('./data/world-gdp.json'); const j = await r.json(); world = j.data;
+    const rp = await fetch('./data/world-pop.json'); const jp = await rp.json(); worldPop = jp.data;
     renderMundo();
   } catch(e){ console.warn('Mundo error:', e.message); }
 })();

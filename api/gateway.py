@@ -227,11 +227,13 @@ def serve_empresa():
 @app.get("/servicios")
 @app.get("/servicios/")
 def serve_servicios():
-    """Página de servicios de CápsulaData (tema claro)."""
-    p = WEB_DIR / "capsula-servicios" / "index.html"
-    if not p.exists():
-        raise HTTPException(status_code=404, detail="Página no encontrada")
-    return FileResponse(p)
+    return FileResponse(WEB_DIR / "capsula-servicios" / "index.html")
+
+
+@app.get("/lalinea")
+@app.get("/lalinea/")
+def serve_lalinea():
+    return FileResponse(WEB_DIR / "la-linea" / "index.html")
 
 
 # =====================
