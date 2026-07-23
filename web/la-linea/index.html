@@ -114,7 +114,6 @@ footer .commercial{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15
 <div class="data-note" id="dataNote"></div>
 <div class="prez-bar" id="prezBar"></div>
 <div class="prez-label" id="prezLabel"></div>
-<div class="events"><h3 id="eventsTitle"></h3><div id="eventsList"></div></div>
 </section>
 
 <!-- CHILE VS MUNDO -->
@@ -346,22 +345,9 @@ function buildChart() {
   presidentes.forEach(function(p,i){
     var si = labels.findIndex(function(l){var key=l.length===4?l+'-01-01':l+'-01'; return key>=(p.inicio.substring(0,7)+'-01');});
     var ei = labels.findLastIndex(function(l){var key=l.length===4?l+'-12-01':l+'-01'; return key<=(p.fin.substring(0,7)+'-01');});
-    if(si>=0 && ei>=si && ei<labels.length) prezRanges.push({si:si, ei:ei, color:p.color});
-  });
-  // Hitos visibles como puntos en la línea (más importantes del período)
-  var hitoPts = [];
-  var hitoLabels = [];
-  hitos.forEach(function(h){
-    var hIdx = labels.findIndex(function(l){ var key=l.length===4?l+'-01':l; return key.substring(0,7)===h.fe.substring(0,7); });
-    if(hIdx>=0 && hIdx<series.length && series[hIdx]!==null && !isNaN(series[hIdx])){
-      hitoPts.push({x:hIdx, y:series[hIdx]});
-      hitoLabels.push({idx:hIdx, ti:h.ti, cat:h.cat});
-    }
+    if(si>=0 && ei>=si && ei<labels.length) prezRanges.push({si:si, ei:ei, color:p.color, nombre:p.nombre});
   });
   var ds=[{label:cfg.label,data:series,borderColor:cfg.color,backgroundColor:cfg.color+'1A',borderWidth:1.5,pointRadius:0,pointHoverRadius:4,tension:0.1,fill:false,spanGaps:true}];
-  if(hitoPts.length){
-    ds.push({label:'Hitos',data:hitoPts,showLine:false,pointRadius:5,pointBackgroundColor:hitoPts.map(function(p,i){return{hitos:['reforma','externo','economico','social'].indexOf(hitoLabels[i].cat)>=0?'#f59e0b':'#a78bfa'}[0];}),pointBorderColor:'#f8fafc',pointBorderWidth:1,pointStyle:'triangle',order:1,yAxisID:'y',xAxisID:'x'});
-  }
   if (mainChart) mainChart.destroy();
   mainChart = new Chart(
     document.getElementById('mainChart'),
@@ -386,11 +372,30 @@ function buildChart() {
         beforeDraw: function(chart){
           var ctx = chart.ctx, ca = chart.chartArea, xAxis = chart.scales.x;
           if(!ctx || !ca || !xAxis) return;
+          var stripH = 14, y0 = ca.bottom - stripH;
+          ctx.save();
+          // Strip background clip
+          ctx.beginPath(); ctx.rect(ca.left, y0, ca.width, stripH); ctx.clip();
           prezRanges.forEach(function(r){
             var x1 = xAxis.getPixelForValue(labels[r.si]);
             var x2 = xAxis.getPixelForValue(labels[r.ei]);
-            if(x1 && x2){ ctx.fillStyle = r.color + '18'; ctx.fillRect(x1, ca.top, x2-x1, ca.bottom-ca.top); }
+            if(x1 && x2){ ctx.fillStyle = r.color + '50'; ctx.fillRect(x1, y0, x2-x1, stripH); }
           });
+          ctx.restore();
+          // President labels on the strip
+          ctx.font = '7px Inter, sans-serif'; ctx.textBaseline = 'middle';
+          prezRanges.forEach(function(r){
+            var x1 = xAxis.getPixelForValue(labels[r.si]);
+            var x2 = xAxis.getPixelForValue(labels[r.ei]);
+            if(x1 && x2){
+              ctx.fillStyle = '#f8fafc';
+              ctx.textAlign = 'center';
+              ctx.fillText(r.nombre, (x1+x2)/2, y0 + stripH/2);
+            }
+          });
+          // Top border of the strip
+          ctx.strokeStyle = '#334155'; ctx.lineWidth = 0.5;
+          ctx.beginPath(); ctx.moveTo(ca.left, y0); ctx.lineTo(ca.right, y0); ctx.stroke();
         }
       }
     }
@@ -412,18 +417,7 @@ function buildPrezBar() {
   lbl.innerHTML = sel.length ? sel.map(function(p){return '<span style="border-left:3px solid '+p.color+'">'+p.nombre+'</span>';}).join('') : '<span>← Click para filtrar fechas →</span>';
   presidentes.forEach(function(p){const s=new Date(p.inicio),e=new Date(p.fin),w=((e-s)/86400000/total*100);const seg=document.createElement('div');seg.className='prez-seg'+(selPrez.has(p.id)?' selected':'');seg.style.width=w+'%';seg.style.background=p.color;seg.textContent=p.nombre;seg.title=p.nombre+' ('+p.inicio.substring(0,4)+'–'+p.fin.substring(0,4)+') — '+p.coalicion;seg.onclick=function(){selectPresident(p);};bar.appendChild(seg);});
 }
-function filterEvents() {
-  const list=document.getElementById('eventsList'),title=document.getElementById('eventsTitle');
-  let f=hitos;
-  if (selPrez.size>0){const ranges=[];presidentes.filter(function(p){return selPrez.has(p.id);}).forEach(function(p){ranges.push([p.inicio,p.fin]);});f=hitos.filter(function(h){return ranges.some(function(r){return h.fe>=r[0]&&h.fe<=r[1];});});title.textContent='📰 '+presidentes.filter(function(p){return selPrez.has(p.id);}).map(function(p){return p.nombre;}).join(' + ');}
-  else title.textContent='📰 Todos los hitos (1958–2026)';
-  f=f.filter(function(h){const y=parseInt(h.fe.substring(0,4));return y>=dateFrom&&y<=dateTo;});
-  title.textContent+=' ('+f.length+')';
-  f.sort(function(a,b){return a.fe<b.fe?1:-1;});
-  const limit = selPrez.size===1 && presidentes.find(function(p){return p.id===Array.from(selPrez)[0];}) && presidentes.find(function(p){return p.id===Array.from(selPrez)[0];}).nombre==='Dictadura'?20:10;
-  if (selPrez.size<=1) f=f.slice(0,limit);
-  list.innerHTML=f.map(function(h){return '<div class="ev-item"><div class="ev-date">'+h.fe+'</div><div class="ev-title"><span class="tag '+h.cat+'">'+h.cat+'</span>'+h.ti+'</div><div class="ev-desc">'+h.de+'</div></div>';}).join('');
-}
+function filterEvents() {}
 function fmtNum(v,dec,locale){if(v===null||v===undefined||isNaN(v))return '—';return Number(v).toLocaleString(locale||'es-CL',{minimumFractionDigits:dec,maximumFractionDigits:dec});}
 function lastValid(data,key){for(let i=data.length-1;i>=0;i--){const v=data[i][key];if(v!==null&&v!==undefined&&!isNaN(v))return {val:v,idx:i};}return null;}
 function buildKPIs() {
@@ -451,7 +445,7 @@ function buildIndChips(){document.getElementById('indChips').innerHTML=Object.en
 function switchInd(k){activeInd=k;buildIndChips();selPrez.clear();dateFrom=1958;dateTo=2026;document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo;buildAll();}
 function toggleAggregation(){forceAnnual=!forceAnnual;buildAll();}
 function applyDateFilter(){const f=parseInt(document.getElementById('dateFrom').value)||1958;const t=parseInt(document.getElementById('dateTo').value)||2026;dateFrom=Math.max(1958,Math.min(f,t));dateTo=Math.min(2026,Math.max(f,t));document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo;selPrez.clear();buildAll();}
-function buildAll(){buildKPIs();buildChart();buildPrezBar();filterEvents();}
+function buildAll(){buildKPIs();buildChart();buildPrezBar();}
 
 // ==================== DATA: MUNDO ====================
 let world = {};
