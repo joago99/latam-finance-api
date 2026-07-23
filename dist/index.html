@@ -126,7 +126,7 @@ footer .commercial{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15
 <div class="sc-card"><h3>2. ¿Dónde cae Chile hoy?</h3><div class="bigidea">Chile lidera a sus pares sudamericanos, pero está a mitad de tabla global.</div><canvas id="sc2"></canvas><div class="note">Ranking 2023, barras horizontales. Chile en rojo destacado.</div></div>
 <div class="sc-card"><h3>3. ¿Quién corrió más desde 1990?</h3><div class="bigidea">China multiplicó su PIB per cápita por 12x; Chile por 4x. La distancia relativa con Asia se amplió.</div><canvas id="sc3"></canvas><div class="note">Índice base 1990 = 100.</div></div>
 <div class="sc-card"><h3>4. Convergencia: Chile vs mediana mundial</h3><div class="bigidea">Chile superó la mediana de los países comparados a partir de 2005.</div><canvas id="sc4"></canvas><div class="note">Chile (rojo) vs mediana de los 23 países.</div></div>
-<div class="sc-card"><h3>5. Población: Chile en el mundo</h3><div class="bigidea">Chile tiene el 0,24% de la población mundial. Latinoamérica el 8,2%.</div><canvas id="sc5"></canvas><div class="note">Datos 2023: Población total mundial 8.062M. Fuente: Banco Mundial.</div></div>
+<div class="sc-card"><h3>5. ¿Cuántos somos?</h3><div class="bigidea">Chile tiene 19,7 millones de habitantes: el 0,24% del mundo. India y China concentran el 36% de la población global.</div><canvas id="sc5"></canvas><div class="note">Ranking de población 2023. Chile en rojo; otros países latinoamericanos en azul. Fuente: Banco Mundial.</div></div>
 </div>
 </section>
 
@@ -477,14 +477,18 @@ function renderMundo() {
   charts.c3 = safeChart('sc3', { type: 'line', data: { labels: yrs, datasets: focus.map(function(n){ const d=world[n]||{}; const b=d['1990']; const data=yrs.map(function(y){ const v=d[String(y)]; if(b==null||v==null) return null; return v/b*100; }); return { label: n, data: data, borderColor: n==='Chile'?chileColor:colorFor(n), backgroundColor: n==='Chile'?chileColor:colorFor(n), borderWidth: n==='Chile'?3:1.5, pointRadius: 0, tension: 0.2, spanGaps: true }; }) }, options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': ' + Number(ctx.parsed.y).toLocaleString('en-US', { maximumFractionDigits: 0 }) + 'x'; } } } }, scales: { x: { ticks: { maxTicksLimit: 12, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#64748b', font: { size: 9 }, callback: function(v){ return v + 'x'; } }, grid: { color: '#1e293b' } } } } });
   const median = yrs.map(function(y){ const vals = Object.values(world).map(function(d){ return d[String(y)]; }).filter(function(v){ return v!=null; }).sort(function(a,b){ return a-b; }); if(!vals.length) return null; const m=Math.floor(vals.length/2); return vals.length%2 ? vals[m] : (vals[m-1]+vals[m])/2; });
   charts.c4 = safeChart('sc4', { type: 'line', data: { labels: yrs, datasets: [ { label: 'Chile', data: seriesFor('Chile'), borderColor: chileColor, backgroundColor: chileColor, borderWidth: 3, pointRadius: 0, tension: 0.15, spanGaps: true }, { label: 'Mediana 23 países', data: median, borderColor: '#94a3b8', backgroundColor: '#94a3b8', borderWidth: 1.5, borderDash: [5,4], pointRadius: 0, tension: 0.15, spanGaps: true } ] }, options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': $' + Number(ctx.parsed.y).toLocaleString('en-US', { maximumFractionDigits: 0 }); } } } }, scales: { x: { ticks: { maxTicksLimit: 12, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#64748b', font: { size: 9 }, callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; } }, grid: { color: '#1e293b' } } } } });
-  // Chart 5: Población % del mundo
-  var pChile = worldPop.Chile && worldPop.Chile['2023'] ? worldPop.Chile['2023'] : 0;
-  var pWorld = worldPop.WLD && worldPop.WLD['2023'] ? worldPop.WLD['2023'] : 1;
-  var pLatAm = worldPop.LCN && worldPop.LCN['2023'] ? worldPop.LCN['2023'] : 0;
-  var pctChile = (pChile / pWorld * 100);
-  var pctLatAm = (pLatAm / pWorld * 100);
-  var pctRest = Math.max(0, 100 - pctChile - pctLatAm);
-  charts.c5 = safeChart('sc5', { type: 'doughnut', data: { labels: ['Chile', 'Latinoamérica', 'Resto del mundo'], datasets: [ { data: [pctChile, pctLatAm, pctRest], backgroundColor: ['#f87171', '#60a5fa', '#334155'], borderColor: '#1e293b', borderWidth: 2 } ] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 10 } } }, tooltip: { callbacks: { label: function(ctx){ return ctx.label + ': ' + Number(ctx.parsed).toFixed(2) + '%'; } } } } } });
+  // Chart 5: Ranking de población 2023
+  var popArr = [];
+  if(worldPop && Object.keys(worldPop).length){
+    Object.keys(worldPop).forEach(function(c){
+      if(c!=='WLD' && c!=='LCN' && worldPop[c] && worldPop[c]['2023']){
+        popArr.push({nombre:c, poblacion:worldPop[c]['2023']});
+      }
+    });
+    popArr.sort(function(a,b){return a.poblacion-b.poblacion;});
+  }
+  var latamSet = new Set(['Chile','Argentina','Brasil','Perú','México']);
+  charts.c5 = safeChart('sc5', { type: 'bar', data: { labels: popArr.map(function(x){return x.nombre;}), datasets: [ { label: 'Población 2023', data: popArr.map(function(x){return x.poblacion;}), backgroundColor: popArr.map(function(x){return x.nombre==='Chile'?chileColor:(latamSet.has(x.nombre)?'#60a5fa':'#334155');}), borderColor: popArr.map(function(x){return x.nombre==='Chile'?chileColor:'transparent';}), borderWidth: popArr.map(function(x){return x.nombre==='Chile'?2:0;}) } ] }, options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx){ return Number(ctx.parsed.x).toLocaleString('es-CL') + ' habitantes'; } } } }, scales: { x: { ticks: { callback: function(v){ return (v/1e6).toFixed(0) + 'M'; }, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#cbd5e1', font: { size: 8 } }, grid: { display: false } } } } });
 }
 
 // ==================== INIT ====================
