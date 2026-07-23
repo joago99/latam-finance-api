@@ -23,6 +23,10 @@ header nav a:hover{color:var(--accent)}
 .btn:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 4px 12px rgba(37,99,235,0.25)}
 .btn.outline{background:transparent;border:1.5px solid var(--border);color:var(--text)}
 .btn.outline:hover{border-color:var(--accent);color:var(--accent);box-shadow:none}
+.use-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:1.5rem}
+.use{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.3rem}
+.use h4{font-size:0.9rem;margin-bottom:0.3rem;color:var(--text)}
+.use p{color:var(--muted);font-size:0.78rem}
 section{padding:4rem 2rem;max-width:1100px;margin:0 auto}
 .section-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;margin-bottom:0.5rem;color:var(--text)}
 .section-sub{color:var(--muted);max-width:680px;margin-bottom:2rem;font-size:0.9rem}
@@ -73,25 +77,21 @@ footer a{color:var(--accent);text-decoration:none}
 <p class="section-sub">Cuatro líneas de trabajo para que los datos macro de Latinoamérica trabajen para tu organización.</p>
 <div class="services-grid">
 <div class="svc">
-<div class="icon">📊</div>
 <h3>Análisis de datos</h3>
 <p>Procesamos, limpiamos y cruzamos series macroeconómicas de múltiples fuentes oficiales. Entregamos insights accionables con visualizaciones claras y documentación completa.</p>
 <span class="tag">BCCh · INE · Banco Mundial</span>
 </div>
 <div class="svc">
-<div class="icon">📰</div>
 <h3>Páginas informativas</h3>
 <p>Creamos micrositios y dashboards públicos o privados que comunican indicadores económicos a audiencias no técnicas. Misma seriedad, pero con diseño que se entiende.</p>
 <span class="tag">Dashboards · Reportes · Embeds</span>
 </div>
 <div class="svc">
-<div class="icon">🕷️</div>
 <h3>Scrapper de datos</h3>
 <p>Automatizamos la extracción de datos de portales oficiales, bancos centrales y organismos públicos. Programas que corren solos y entregan datos frescos sin intervención manual.</p>
 <span class="tag">BCCh · SII · SBIF · BCB · BCRP</span>
 </div>
 <div class="svc">
-<div class="icon">📋</div>
 <h3>Informes personalizados</h3>
 <p>Investigaciones y reportes a medida combinando datos macro, contexto político y análisis sectorial. Para presentaciones ejecutivas, estudios de mercado o toma de decisiones.</p>
 <span class="tag">Ejecutivo · Sectorial · Comparativo</span>
@@ -126,6 +126,16 @@ footer a{color:var(--accent);text-decoration:none}
 </div>
 <div class="clients">
 <span>Datos BCCh</span><span>Series INE</span><span>Banco Mundial</span><span>BCRP Perú</span><span>BCB Brasil</span>
+</div>
+</section>
+
+<section id="paraquien">
+<h2 class="section-title">Para quién</h2>
+<p class="section-sub">Creamos dashboards y documentos propios para equipos que necesitan comunicar datos con claridad.</p>
+<div class="use-grid">
+<div class="use"><h4>Dashboards ejecutivos</h4><p>Paneles interactivos con indicadores en tiempo real para comités, directorios y reportes periódicos. Diseñados para ser leídos en segundos.</p></div>
+<div class="use"><h4>Documentos propios</h4><p>Informes, reportes y presentaciones con datos oficiales verificables. Desde un PDF ejecutivo hasta un micrositio público completo.</p></div>
+<div class="use"><h4>APIs de datos</h4><p>Acceso programático a series macro limpias, documentadas y actualizadas. Para integrar en tus propias aplicaciones o modelos.</p></div>
 </div>
 </section>
 
