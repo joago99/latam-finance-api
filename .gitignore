@@ -1,0 +1,22 @@
+# Credenciales y datos sensibles
+.env
+*.env
+
+# Datos descargados (se regeneran con scripts)
+data/chile/bcentral/*.csv
+data/chile/bcentral/*.json
+!data/chile/bcentral/series_codes.json
+data/peru/
+
+# Logs de monitoreo
+data/chile/bcentral/monitor_log.json
+data/chile/bcentral/fetch_summary.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# IDE
+.vscode/
+.idea/

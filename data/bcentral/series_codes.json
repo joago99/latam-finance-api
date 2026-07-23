@@ -1,0 +1,10 @@
+{
+  "series": [
+    {"id": "F074.TPM.TIN.D.NO.M", "name": "TPM", "unit": "%", "freq": "D"},
+    {"id": "F083.IND.UF.CLF.D", "name": "UF", "unit": "CLP", "freq": "D"},
+    {"id": "F084.IND.IVP.CLF.D", "name": "IVP", "unit": "CLP", "freq": "D"},
+    {"id": "F085.IND.UTM.CLF.M", "name": "UTM", "unit": "CLP", "freq": "M"},
+    {"id": "F073.DOLAR.OBS.BACK.D", "name": "DOLAR_OBS", "unit": "CLP", "freq": "D"},
+    {"id": "F072.EURO.OBS.BACK.D", "name": "EURO", "unit": "CLP", "freq": "D"}
+  ]
+}

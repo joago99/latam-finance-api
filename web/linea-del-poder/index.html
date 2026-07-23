@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Línea — Chile 1958-2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js">
+</script>
+<style>
+:root{--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--accent:#2563eb;--border:#e2e8f0;--positive:#16a34a;--negative:#dc2626;--warn:#d97706}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--card);border-bottom:1px solid var(--border);padding:0.5rem 1.2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:0.4rem;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+header h1{font-size:1.2rem;font-weight:700;letter-spacing:-0.02em;color:var(--accent)}
+.badge{background:var(--accent);color:#fff;padding:0.15rem 0.5rem;border-radius:999px;font-size:0.6rem;font-weight:600}
+main{max-width:1400px;margin:0 auto;padding:0.75rem}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:0.5rem;margin-bottom:0.6rem}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:0.5rem;padding:0.65rem;box-shadow:0 1px 2px rgba(0,0,0,0.03)}
+.kpi-card .label{color:var(--muted);font-size:0.56rem;text-transform:uppercase;letter-spacing:0.04em}
+.kpi-card .value{font-size:1.1rem;font-weight:700;margin:0.06rem 0}
+.kpi-card .change{font-size:0.58rem}
+.kpi-card .change.up{color:var(--positive)}.kpi-card .change.down{color:var(--negative)}
+.controls{display:flex;gap:0.35rem;margin-bottom:0.5rem;flex-wrap:wrap;align-items:center}
+.chip{background:var(--card);border:1px solid var(--border);color:var(--muted);padding:0.22rem 0.5rem;border-radius:999px;cursor:pointer;font-size:0.6rem;transition:all 0.1s;white-space:nowrap}
+.chip:hover{border-color:var(--accent);color:var(--text)}
+.chip.active{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+.date-input{background:var(--card);border:1px solid var(--border);color:var(--text);padding:0.18rem 0.35rem;border-radius:4px;font-size:0.6rem;width:54px}
+.date-input:focus{border-color:var(--accent);outline:none}
+.btn-sm{background:var(--accent);color:#fff;border:none;padding:0.22rem 0.5rem;border-radius:4px;font-size:0.6rem;font-weight:600;cursor:pointer}
+.btn-sm:hover{opacity:0.9}
+.btn-sm.outline{background:var(--card);color:var(--text);border:1px solid var(--border)}
+.chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:0.5rem;padding:0.7rem 0.7rem 0.2rem;margin-bottom:0.4rem;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.chart-wrap canvas{width:100%!important;max-height:460px}
+.data-note{font-size:0.56rem;color:var(--muted);text-align:center;margin:-0.15rem 0 0.5rem;padding:0.18rem;background:var(--card);border:1px solid var(--border);border-radius:4px}
+.prez-bar{display:flex;border-radius:0.25rem;overflow:hidden;margin-bottom:0.15rem;height:26px;cursor:pointer;font-size:0.52rem}
+.prez-seg{display:flex;align-items:center;justify-content:center;font-weight:600;color:#fff;transition:all 0.1s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 0.12rem;border:2px solid transparent;text-shadow:0 1px 1px rgba(0,0,0,0.35)}
+.prez-seg:hover{filter:brightness(1.15);z-index:2}
+.prez-seg.selected{border-color:#1e293b!important;z-index:3;transform:scaleY(1.12)}
+.prez-label{font-size:0.5rem;color:var(--muted);text-align:center;margin-bottom:0.6rem;display:flex;justify-content:center;gap:0.12rem;flex-wrap:wrap}
+.prez-label span{background:var(--bg);padding:0.06rem 0.25rem;border-radius:3px;font-size:0.5rem;border:1px solid var(--border)}
+.events{background:var(--card);border:1px solid var(--border);border-radius:0.5rem;padding:0.7rem;max-height:320px;overflow-y:auto;box-shadow:0 1px 2px rgba(0,0,0,0.03)}
+.events h3{font-size:0.75rem;margin-bottom:0.5rem;color:var(--accent)}
+.ev-item{padding:0.35rem 0.45rem;border-left:3px solid var(--border);margin-bottom:0.18rem;font-size:0.6rem;transition:all 0.1s}
+.ev-item:hover{border-left-color:var(--accent);background:rgba(37,99,235,0.03)}
+.ev-date{color:var(--muted);font-size:0.53rem}
+.ev-title{font-weight:600;margin-top:1px}
+.ev-desc{color:var(--muted);margin-top:1px;font-size:0.56rem}
+.tag{display:inline-block;font-size:0.46rem;padding:0.04rem 0.22rem;border-radius:2px;margin-right:0.1rem;text-transform:uppercase;font-weight:600}
+.tag.economico{background:#dcfce7;color:#166534}.tag.politico{background:#ede9fe;color:#5b21b6}
+.tag.social{background:#fee2e2;color:#991b1b}.tag.reforma{background:#dbeafe;color:#1e40af}
+.tag.externo{background:#fef3c7;color:#92400e}
+@media(max-width:768px){main{padding:0.4rem}.kpi-grid{grid-template-columns:repeat(2,1fr)}header h1{font-size:0.95rem}}
+</style>
+</head>
+<body>
+<header>
+<h1>La Línea</h1>
+<div style="display:flex;gap:0.3rem;align-items:center">
+<span style="font-size:0.6rem;color:var(--muted)">Chile 1958–2026</span>
+<span class="badge">BCCh</span>
+</div>
+</header>
+<main>
+<div class="kpi-grid" id="kpiGrid"><div style="grid-column:1/-1;text-align:center;padding:1.5rem;color:var(--muted);font-size:0.8rem">Cargando datos BCCh...</div></div>
+<div class="controls">
+<span style="font-size:0.6rem;color:var(--muted)">Indicador:</span><span id="indChips"></span>
+<span style="margin-left:auto;font-size:0.6rem;color:var(--muted)">Fechas:</span>
+<input type="number" class="date-input" id="dateFrom" value="1958" min="1958" max="2026" style="width:50px">
+<span style="color:var(--muted)">–</span>
+<input type="number" class="date-input" id="dateTo" value="2026" min="1958" max="2026" style="width:50px">
+<button class="btn-sm" onclick="applyDateFilter()">Filtrar</button>
+<button class="btn-sm outline" id="btnAgg" onclick="toggleAggregation()" title="Agregación anual automática para rangos largos">Auto</button>
+</div>
+<div class="chart-wrap"><canvas id="mainChart"></canvas></div>
+<div class="data-note" id="dataNote"></div>
+<div class="prez-bar" id="prezBar"></div>
+<div class="prez-label" id="prezLabel"></div>
+<div class="events"><h3 id="eventsTitle"></h3><div id="eventsList"></div></div>
+</main>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+// Ideology colors: left=red spectrum, right=blue spectrum, 5 levels
+const ideologyColors = {
+  farLeft:   '#991b1b',
+  left:      '#dc2626',
+  centerLeft:'#f87171',
+  center:    '#78716c',
+  centerRight:'#60a5fa',
+  right:     '#2563eb',
+  farRight:  '#1e3a5f'
+};
+
+const presidentes = [
+ {id:"alessandri",nombre:"Jorge Alessandri",coalicion:"Indep./Derecha",inicio:"1958-11-03",fin:"1964-11-03",color:ideologyColors.centerRight},
+ {id:"frei-montalva",nombre:"Eduardo Frei M.",coalicion:"PDC",inicio:"1964-11-03",fin:"1970-11-03",color:ideologyColors.centerLeft},
+ {id:"allende",nombre:"Salvador Allende",coalicion:"Unidad Popular",inicio:"1970-11-03",fin:"1973-09-11",color:ideologyColors.farLeft},
+ {id:"pinochet",nombre:"Dictadura",coalicion:"Junta Militar",inicio:"1973-09-11",fin:"1990-03-11",color:ideologyColors.center},
+ {id:"aylwin",nombre:"Patricio Aylwin",coalicion:"Concertación",inicio:"1990-03-11",fin:"1994-03-11",color:ideologyColors.centerLeft},
+ {id:"frei",nombre:"Eduardo Frei R-T",coalicion:"Concertación",inicio:"1994-03-11",fin:"2000-03-11",color:ideologyColors.centerLeft},
+ {id:"lagos",nombre:"Ricardo Lagos",coalicion:"Concertación",inicio:"2000-03-11",fin:"2006-03-11",color:ideologyColors.left},
+ {id:"bachelet1",nombre:"M.Bachelet I",coalicion:"Concertación",inicio:"2006-03-11",fin:"2010-03-11",color:ideologyColors.left},
+ {id:"pinera1",nombre:"S.Piñera I",coalicion:"Coalición Cambio",inicio:"2010-03-11",fin:"2014-03-11",color:ideologyColors.right},
+ {id:"bachelet2",nombre:"M.Bachelet II",coalicion:"Nueva Mayoría",inicio:"2014-03-11",fin:"2018-03-11",color:ideologyColors.farLeft},
+ {id:"pinera2",nombre:"S.Piñera II",coalicion:"Chile Vamos",inicio:"2018-03-11",fin:"2022-03-11",color:ideologyColors.right},
+ {id:"boric",nombre:"Gabriel Boric",coalicion:"Apruebo Dignidad",inicio:"2022-03-11",fin:"2026-07-22",color:ideologyColors.farLeft}
+];
+
+const hitos = [
+{fecha:"1960-05-22",titulo:"Terremoto Valdivia 9.5°",categoria:"externo",descripcion:"El más fuerte registrado en la historia",impacto:"alto"},
+{fecha:"1967-07-16",titulo:"Reforma Agraria",categoria:"reforma",descripcion:"Expropiación de latifundios",impacto:"alto"},
+{fecha:"1969-06-26",titulo:"Chilenización del cobre",categoria:"economico",descripcion:"Estado compra 51% de minas",impacto:"alto"},
+{fecha:"1970-09-04",titulo:"Allende electo presidente",categoria:"politico",descripcion:"Primer socialista electo democráticamente",impacto:"alto"},
+{fecha:"1971-07-11",titulo:"Nacionalización del cobre",categoria:"reforma",descripcion:"Ley unánime. 100% del Estado",impacto:"alto"},
+{fecha:"1972-10-01",titulo:"Paro de Octubre",categoria:"social",descripcion:"Desabastecimiento generalizado",impacto:"alto"},
+{fecha:"1973-09-11",titulo:"Golpe de Estado",categoria:"politico",descripcion:"Bombardeo de La Moneda. Inicio dictadura",impacto:"alto"},
+{fecha:"1975-04-24",titulo:"Shock económico",categoria:"reforma",descripcion:"Chicago Boys. Terapia neoliberal",impacto:"alto"},
+{fecha:"1975-12-31",titulo:"PIB cae -12.9%",categoria:"economico",descripcion:"Peor recesión desde Gran Depresión",impacto:"alto"},
+{fecha:"1980-09-11",titulo:"Constitución de 1980",categoria:"politico",descripcion:"Régimen autoritario institucionalizado",impacto:"alto"},
+{fecha:"1980-11-04",titulo:"Sistema AFP (DL 3.500)",categoria:"reforma",descripcion:"Capitalización individual obligatoria",impacto:"alto"},
+{fecha:"1982-06-15",titulo:"Crisis de la Deuda",categoria:"economico",descripcion:"PIB cae -14.5%. Quiebra bancos",impacto:"alto"},
+{fecha:"1983-05-11",titulo:"Protestas nacionales",categoria:"social",descripcion:"Jornadas contra la dictadura",impacto:"alto"},
+{fecha:"1988-10-05",titulo:"Plebiscito: Triunfa el NO (56%)",categoria:"politico",descripcion:"Fin del régimen. Transición democrática",impacto:"alto"},
+{fecha:"1990-03-11",titulo:"Retorno a la democracia",categoria:"politico",descripcion:"Aylwin asume tras 17 años",impacto:"alto"},
+{fecha:"1991-03-04",titulo:"Informe Rettig",categoria:"politico",descripcion:"2.279 víctimas de DDHH",impacto:"alto"},
+{fecha:"1997-07-02",titulo:"Crisis Asiática",categoria:"externo",descripcion:"Tailandia devalúa el baht",impacto:"alto"},
+{fecha:"1999-01-01",titulo:"Recesión PIB -0.7%",categoria:"economico",descripcion:"Desempleo supera 11%",impacto:"alto"},
+{fecha:"1999-09-01",titulo:"Libre flotación del peso",categoria:"reforma",descripcion:"BC abandona banda cambiaria",impacto:"alto"},
+{fecha:"2002-11-18",titulo:"TLC Chile – UE",categoria:"reforma",descripcion:"Acuerdo con Unión Europea",impacto:"alto"},
+{fecha:"2003-06-06",titulo:"TLC Chile – EEUU",categoria:"reforma",descripcion:"Libre comercio con principal socio",impacto:"alto"},
+{fecha:"2005-09-16",titulo:"Reforma Constitucional",categoria:"reforma",descripcion:"Fin senadores designados",impacto:"alto"},
+{fecha:"2006-05-30",titulo:"Revolución Pingüina",categoria:"social",descripcion:"800 colegios paralizados",impacto:"alto"},
+{fecha:"2008-09-15",titulo:"Crisis Subprime",categoria:"externo",descripcion:"Quiebra Lehman Brothers",impacto:"alto"},
+{fecha:"2010-02-27",titulo:"Terremoto 27-F 8.8°",categoria:"externo",descripcion:"525 fallecidos. Daños US$30.000M",impacto:"alto"},
+{fecha:"2011-06-15",titulo:"Movilizaciones estudiantes",categoria:"social",descripcion:"800.000 personas por educación gratuita",impacto:"alto"},
+{fecha:"2016-07-24",titulo:"Protestas No+AFP",categoria:"social",descripcion:"1.3 millones marchan contra AFP",impacto:"alto"},
+{fecha:"2019-10-18",titulo:"Estallido Social",categoria:"social",descripcion:"Estado de Emergencia. 34 muertos",impacto:"alto"},
+{fecha:"2019-11-15",titulo:"Acuerdo por la Paz",categoria:"politico",descripcion:"Plebiscito nueva Constitución",impacto:"alto"},
+{fecha:"2020-03-11",titulo:"Pandemia COVID-19",categoria:"externo",descripcion:"Chile cierra fronteras",impacto:"alto"},
+{fecha:"2020-07-24",titulo:"1er retiro 10% AFP",categoria:"reforma",descripcion:"US$20.000M retirados",impacto:"alto"},
+{fecha:"2022-09-04",titulo:"Rechazo Constitución",categoria:"politico",descripcion:"62% rechaza propuesta",impacto:"alto"},
+{fecha:"2022-12-01",titulo:"Inflación 14.1%",categoria:"economico",descripcion:"Máximo en 30 años",impacto:"alto"},
+{fecha:"2023-04-14",titulo:"Ley de 40 Horas",categoria:"reforma",descripcion:"Jornada de 45 a 40h",impacto:"alto"},
+{fecha:"2023-05-17",titulo:"Royalty Minero",categoria:"reforma",descripcion:"US$1.350M/año",impacto:"alto"},
+{fecha:"2023-12-17",titulo:"2do Rechazo Constitucional",categoria:"politico",descripcion:"Cierre del proceso constituyente",impacto:"alto"}
+];
+
+// ============================================================
+// META
+// ============================================================
+const seriesMeta = {
+  TPM:   {desde:'1997-02',unidad:'%',desc:'Tasa de Política Monetaria. Promedio mensual del dato diario. BCCh.'},
+  UF:    {desde:'1977-08',unidad:'CLP',desc:'Unidad de Fomento. Último valor del mes. BCCh.'},
+  USD:   {desde:'1982-08',unidad:'CLP',desc:'Dólar observado. Último valor del mes. BCCh.'},
+  EUR:   {desde:'1999-01',unidad:'CLP',desc:'Euro. Último valor del mes. BCCh.'},
+  UTM:   {desde:'1990-01',unidad:'CLP',desc:'Unidad Tributaria Mensual. BCCh.'},
+  IMACEC:{desde:'1996-01',unidad:'índice',desc:'IMACEC empalmado, índice base 2018=100. BCCh.'},
+  IPC:   {desde:'1999-01',unidad:'%',desc:'IPC variación mensual. BCCh.'},
+  DESEMPLEO:{desde:'1986-02',unidad:'%',desc:'Tasa de desocupación nacional. INE/BCCh.'},
+  PIB:   {desde:'1997-01',unidad:'%',desc:'PIB variación anual (trimestral). BCCh.'},
+  IPSA:  {desde:'1989-01',unidad:'pts',desc:'IPSA. BCCh.'},
+  COBRE: {desde:'2012-10',unidad:'USD/oz',desc:'Cobre. Último valor del mes. BCCh.'},
+  WTI:   {desde:'1986-01',unidad:'USD/bbl',desc:'Petróleo WTI. Último valor del mes. BCCh.'},
+  PIBPC: {desde:'1990-01',unidad:'USD',desc:'PIB per cápita PPP (FMI-WEO). Dato anual. BCCh.'},
+  PIBTOT:{desde:'1992-01',unidad:'M USD',desc:'PIB total = PIB per cápita × población. BCCh/INE.'}
+};
+
+const indCfg = {
+  TPM:   {label:'TPM (%)',color:'#2563eb',dec:2},
+  UF:    {label:'UF (CLP)',color:'#7c3aed',dec:0},
+  USD:   {label:'Dólar (CLP)',color:'#16a34a',dec:0},
+  EUR:   {label:'Euro (CLP)',color:'#d97706',dec:0},
+  UTM:   {label:'UTM (CLP)',color:'#0891b2',dec:0},
+  IMACEC:{label:'IMACEC (índice)',color:'#ea580c',dec:1},
+  IPC:   {label:'IPC (% mensual)',color:'#db2777',dec:2},
+  DESEMPLEO:{label:'Desempleo (%)',color:'#e11d48',dec:1},
+  PIB:   {label:'PIB (% anual)',color:'#059669',dec:1},
+  IPSA:  {label:'IPSA (pts)',color:'#4f46e5',dec:0},
+  COBRE: {label:'Cobre (USD/oz)',color:'#b45309',dec:2},
+  WTI:   {label:'Petróleo WTI',color:'#475569',dec:2},
+  PIBPC: {label:'PIB per cápita',color:'#0d9488',dec:0},
+  PIBTOT:{label:'PIB total',color:'#6366f1',dec:0}
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let macroAll = [];
+let activeInd = 'USD';
+let selPrez = new Set();
+let dateFrom = 1958, dateTo = 2026;
+let forceAnnual = false;
+let mainChart;
+
+// ============================================================
+// DATA
+// ============================================================
+async function loadMacroData() {
+  try {
+    const resp = await fetch('/api/v1/chile/macro');
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const json = await resp.json();
+    macroAll = (json.data || []).map(r => {
+      const entry = {fecha: r.fecha};
+      for (const k of Object.keys(indCfg)) {
+        if (k === 'PIBTOT') continue; // computed below
+        const v = r[k];
+        entry[k] = (v !== null && v !== undefined) ? parseFloat(v) : null;
+      }
+      // Compute PIB total = per cápita × población (both in raw values)
+      if (entry.PIBPC !== null && r.POB !== null && r.POB !== undefined) {
+        const pob = parseFloat(r.POB);
+        if (!isNaN(pob) && pob > 0) {
+          entry.PIBTOT = (entry.PIBPC * pob) / 1e6; // millions USD PPP
+        }
+      }
+      return entry;
+    }).filter(r => r.fecha >= '1958-01');
+    document.getElementById('kpiGrid').innerHTML = '';
+    return true;
+  } catch (e) {
+    document.getElementById('kpiGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:1rem;color:#dc2626;font-size:0.8rem">Error cargando datos. ¿Servidor corriendo?</div>';
+    return false;
+  }
+}
+
+function filteredMacro() {
+  return macroAll.filter(d => {
+    const y = parseInt(d.fecha.substring(0,4));
+    return y >= dateFrom && y <= dateTo;
+  });
+}
+
+function shouldUseAnnual() {
+  if (forceAnnual) return true;
+  return (dateTo - dateFrom) > 20;
+}
+
+function aggregateAnnual(monthly, ind) {
+  const years = {};
+  monthly.forEach(d => {
+    const y = d.fecha.substring(0,4);
+    if (!years[y]) years[y] = {sum:0, count:0};
+    if (d[ind] !== null && d[ind] !== undefined && !isNaN(d[ind])) {
+      years[y].sum += d[ind];
+      years[y].count++;
+    }
+  });
+  const result = [];
+  Object.keys(years).sort().forEach(y => {
+    result.push({label:y, value:years[y].count>0 ? years[y].sum/years[y].count : null});
+  });
+  return result;
+}
+
+// ============================================================
+// CHART
+// ============================================================
+function buildChart() {
+  const monthly = filteredMacro();
+  const useAnnual = shouldUseAnnual();
+  const cfg = indCfg[activeInd];
+
+  let labels, series;
+  const rawPairs = [];
+
+  if (useAnnual) {
+    const ann = aggregateAnnual(monthly, activeInd);
+    labels = ann.map(a => a.label);
+    series = ann.map(a => a.value === null ? NaN : a.value);
+    document.getElementById('btnAgg').textContent = 'Anual';
+    document.getElementById('btnAgg').className = 'btn-sm';
+  } else {
+    labels = monthly.map(d => d.fecha);
+    series = monthly.map(d => {
+      const v = d[activeInd];
+      return (v === null || v === undefined) ? NaN : v;
+    });
+    document.getElementById('btnAgg').textContent = 'Mensual';
+    document.getElementById('btnAgg').className = 'btn-sm outline';
+  }
+
+  // Build pairs for hito matching
+  for (let i = 0; i < labels.length; i++) {
+    rawPairs.push({label: labels[i], value: series[i], idx: i});
+  }
+
+  // Trim leading/trailing NaN
+  let first = 0, last = rawPairs.length - 1;
+  while (first < rawPairs.length && isNaN(rawPairs[first].value)) first++;
+  while (last >= 0 && isNaN(rawPairs[last].value)) last--;
+  if (first > last || first >= rawPairs.length) {
+    if (mainChart) mainChart.destroy(); return;
+  }
+  first = Math.max(0, first - 1);
+  last = Math.min(rawPairs.length - 1, last + 1);
+  const trimmed = rawPairs.slice(first, last + 1);
+  labels = trimmed.map(p => p.label);
+  series = trimmed.map(p => isNaN(p.value) ? null : p.value);
+
+  // Data note
+  const meta = seriesMeta[activeInd];
+  document.getElementById('dataNote').textContent =
+    `ℹ ${cfg.label.split('(')[0].trim()}: datos desde ${meta?.desde||'?'}. ${meta?.desc||''} Agregación: ${useAnnual?'anual':'mensual'}.`;
+
+  // Presidential bands
+  const annotations = {};
+  presidentes.forEach((p, i) => {
+    const si = labels.findIndex(l => {
+      const key = l.length === 4 ? l + '-01-01' : l + '-01';
+      return key >= (p.inicio.substring(0,7)+'-01');
+    });
+    const ei = labels.findLastIndex(l => {
+      const key = l.length === 4 ? l + '-12-01' : l + '-01';
+      return key <= (p.fin.substring(0,7)+'-01');
+    });
+    if (si >= 0 && ei >= si && ei < labels.length) {
+      annotations['box'+i] = {
+        type:'box', xMin:si, xMax:ei,
+        backgroundColor: p.color + '0D',
+        borderColor: p.color + '25',
+        borderWidth: 0,
+        drawTime: 'beforeDatasetsDraw'
+      };
+    }
+  });
+
+  // Hito markers - map to nearest label point with value
+  const hitoPoints = [];
+  const seen = new Set();
+  hitos.forEach(h => {
+    if (h.impacto !== 'alto') return;
+    const hPrefix = h.fecha.substring(0,7);
+    // Find closest label index that has a value
+    let best = -1, bestDist = Infinity;
+    for (let i = 0; i < trimmed.length; i++) {
+      if (!trimmed[i].value || isNaN(trimmed[i].value)) continue;
+      const l = trimmed[i].label;
+      const lKey = l.length === 4 ? l + '-06' : l.substring(0,7);
+      if (lKey < hPrefix) continue;
+      const dist = lKey.localeCompare(hPrefix);
+      if (dist < bestDist) { bestDist = dist; best = i; }
+    }
+    if (best >= 0 && !seen.has(best)) {
+      seen.add(best);
+      hitoPoints.push({x:best, y:trimmed[best].value, title:h.titulo, cat:h.categoria});
+    }
+  });
+
+  const ds = [{
+    label: cfg.label, data: series, borderColor: cfg.color,
+    backgroundColor: cfg.color + '08', borderWidth: 1.5,
+    pointRadius: 0, pointHoverRadius: 4, tension: 0.1, fill: false, spanGaps: true
+  }];
+  if (hitoPoints.length) {
+    ds.push({
+      label:'Hitos', data:hitoPoints.map(h=>({x:h.x,y:h.y})),
+      type:'scatter', backgroundColor:'#d97706', borderColor:'#fff', borderWidth:1,
+      pointRadius:5, pointHoverRadius:9, showLine:false, order:1
+    });
+  }
+
+  if (mainChart) mainChart.destroy();
+  mainChart = new Chart(document.getElementById('mainChart'), {
+    type:'line', data:{labels, datasets:ds},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        annotation:{annotations},
+        legend:{display:true,labels:{color:'#475569',font:{size:9},filter:i=>i.datasetIndex===0,usePointStyle:true}},
+        tooltip:{callbacks:{
+          label:ctx=>{
+            if(ctx.datasetIndex===1){const hp=hitoPoints[ctx.dataIndex];return hp?['📰 '+hp.title,'Tipo: '+hp.cat]:'';}
+            const v=ctx.parsed.y;return isNaN(v)||v===null?'Sin dato':cfg.label+': '+v.toFixed(cfg.dec);
+          },
+          afterBody:ctx=>{
+            if(ctx[0].datasetIndex===1)return[];
+            const l=labels[ctx[0].dataIndex],prefix=l.length===4?l:l.substring(0,7);
+            const hm=hitos.filter(h=>h.fecha.substring(0,7)===prefix||(l.length===4&&h.fecha.substring(0,4)===l));
+            return hm.length?['','📰 '+hm.length+' hito(s):',...hm.map(h=>' • '+h.titulo)]:[];
+          }
+        }}
+      },
+      scales:{
+        x:{ticks:{color:'#64748b',font:{size:8},maxTicksLimit:40,callback:(v,ix)=>labels[ix]?.length===4?labels[ix]:labels[ix]?.endsWith?.('-01')?labels[ix].substring(0,4):''},grid:{color:'#e2e8f0'}},
+        y:{ticks:{color:'#64748b',callback:v=>isNaN(v)?'':v.toFixed(cfg.dec)},grid:{color:'#e2e8f0'}}
+      }
+    }
+  });
+}
+
+// ============================================================
+// PRESIDENT BAR
+// ============================================================
+function selectPresident(p) {
+  if (selPrez.has(p.id)) { selPrez.delete(p.id); }
+  else { selPrez.clear(); selPrez.add(p.id); }
+  // Update date filter
+  if (selPrez.size === 1) {
+    const sp = [...selPrez][0];
+    const pr = presidentes.find(x => x.id === sp);
+    if (pr) {
+      dateFrom = parseInt(pr.inicio.substring(0,4));
+      dateTo = parseInt(pr.fin.substring(0,4));
+      document.getElementById('dateFrom').value = dateFrom;
+      document.getElementById('dateTo').value = dateTo;
+    }
+  } else if (selPrez.size === 0) {
+    dateFrom = 1958; dateTo = 2026;
+    document.getElementById('dateFrom').value = dateFrom;
+    document.getElementById('dateTo').value = dateTo;
+  }
+  buildAll();
+}
+
+function buildPrezBar() {
+  const bar = document.getElementById('prezBar'), lbl = document.getElementById('prezLabel');
+  const tS = new Date('1958-01-01'), tE = new Date('2026-07-01'), total = (tE-tS)/86400000;
+  bar.innerHTML = ''; lbl.innerHTML = '';
+  const sel = presidentes.filter(p => selPrez.has(p.id));
+  lbl.innerHTML = sel.length
+    ? sel.map(p => `<span style="border-left:3px solid ${p.color}">${p.nombre}</span>`).join('')
+    : '<span>← Click para filtrar fechas →</span>';
+  presidentes.forEach(p => {
+    const s = new Date(p.inicio), e = new Date(p.fin), w = ((e-s)/86400000/total*100);
+    const seg = document.createElement('div');
+    seg.className = 'prez-seg' + (selPrez.has(p.id) ? ' selected' : '');
+    seg.style.width = w+'%'; seg.style.background = p.color;
+    seg.textContent = p.nombre;
+    seg.title = `${p.nombre} (${p.inicio.substring(0,4)}–${p.fin.substring(0,4)}) — ${p.coalicion}`;
+    seg.onclick = () => selectPresident(p);
+    bar.appendChild(seg);
+  });
+}
+
+function filterEvents() {
+  const list = document.getElementById('eventsList'), title = document.getElementById('eventsTitle');
+  let f = hitos;
+  if (selPrez.size > 0) {
+    const ranges = [];
+    presidentes.filter(p => selPrez.has(p.id)).forEach(p => ranges.push([p.inicio, p.fin]));
+    f = hitos.filter(h => ranges.some(([s,e]) => h.fecha >= s && h.fecha <= e));
+    title.textContent = '📰 ' + presidentes.filter(p=>selPrez.has(p.id)).map(p=>p.nombre).join(' + ');
+  } else { title.textContent = '📰 Todos los hitos (1958–2026)'; }
+  f = f.filter(h => {const y=parseInt(h.fecha.substring(0,4)); return y>=dateFrom&&y<=dateTo;});
+  title.textContent += ' (' + f.length + ')';
+  f.sort((a,b) => a.fecha < b.fecha ? 1 : -1);
+  list.innerHTML = f.map(h => `<div class="ev-item"><div class="ev-date">${h.fecha}</div><div class="ev-title"><span class="tag ${h.categoria}">${h.categoria}</span>${h.titulo}</div><div class="ev-desc">${h.descripcion}</div></div>`).join('');
+}
+
+// ============================================================
+// KPIs
+// ============================================================
+function lastValid(data, key) {
+  for (let i = data.length-1; i >= 0; i--) {
+    const v = data[i][key];
+    if (v !== null && v !== undefined && !isNaN(v)) return {val:v, idx:i};
+  }
+  return null;
+}
+
+function buildKPIs() {
+  const data = filteredMacro();
+  if (!data.length) return;
+  const items = [
+    {label:'PIB per cápita',key:'PIBPC',u:' USD',d:0},
+    {label:'PIB total',key:'PIBTOT',u:'M USD',d:0},
+    {label:'Población',key:'POB',u:'M',d:1,div:1e6},
+    {label:'TPM',key:'TPM',u:'%',d:2},
+    {label:'UF',key:'UF',u:' CLP',d:0},
+    {label:'USD/CLP',key:'USD',u:' CLP',d:0},
+    {label:'IMACEC',key:'IMACEC',u:'',d:1},
+    {label:'IPC',key:'IPC',u:'%',d:2},
+    {label:'Desempleo',key:'DESEMPLEO',u:'%',d:1},
+    {label:'PIB var%',key:'PIB',u:'%',d:1},
+    {label:'IPSA',key:'IPSA',u:'',d:0}
+  ];
+  document.getElementById('kpiGrid').innerHTML = items.map(k => {
+    const latest = lastValid(data, k.key);
+    if (!latest) return `<div class="kpi-card"><div class="label">${k.label}</div><div class="value">—</div><div class="change">Sin dato</div></div>`;
+    const dt = data[latest.idx].fecha;
+    const [ly, lm] = dt.split('-').map(Number);
+    const prevKey = `${ly-1}-${String(lm).padStart(2,'0')}`;
+    const prevRow = data.find(r => r.fecha === prevKey);
+    const prevVal = prevRow ? prevRow[k.key] : null;
+    const val = k.div ? latest.val / k.div : latest.val;
+    let ch = '';
+    if (prevVal !== null && prevVal !== undefined && !isNaN(prevVal) && prevVal !== 0) {
+      const pct = ((latest.val-prevVal)/Math.abs(prevVal))*100;
+      ch = (pct>=0?'▲':'▼')+' '+Math.abs(pct).toFixed(1)+'% vs año ant.';
+    }
+    const up = ch.startsWith('▲');
+    return `<div class="kpi-card"><div class="label">${k.label}</div><div class="value">${val.toFixed(k.d)}${k.u}</div><div class="change ${up?'up':'down'}">${ch||'—'}</div></div>`;
+  }).join('');
+}
+
+// ============================================================
+// CONTROLS
+// ============================================================
+function buildIndChips() {
+  document.getElementById('indChips').innerHTML = Object.entries(indCfg).map(([k,v]) =>
+    `<span class="chip${k===activeInd?' active':''}" onclick="switchInd('${k}')">${v.label.split('(')[0].trim()}</span>`
+  ).join('');
+}
+function switchInd(k) {activeInd=k;buildIndChips();selPrez.clear();dateFrom=1958;dateTo=2026;document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo;buildAll()}
+function toggleAggregation() {forceAnnual=!forceAnnual;buildAll()}
+function applyDateFilter() {
+  const f=parseInt(document.getElementById('dateFrom').value)||1958;
+  const t=parseInt(document.getElementById('dateTo').value)||2026;
+  dateFrom=Math.max(1958,Math.min(f,t));dateTo=Math.min(2026,Math.max(f,t));
+  document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo;
+  selPrez.clear(); buildAll();
+}
+function buildAll() {buildKPIs();buildChart();buildPrezBar();filterEvents()}
+
+// ============================================================
+// INIT
+// ============================================================
+async function init() {
+  const ok = await loadMacroData();
+  if (!ok) return;
+  buildIndChips();
+  buildAll();
+}
+init();
+</script>
+</body>
+</html>

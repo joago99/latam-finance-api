@@ -1,0 +1,264 @@
+{
+  "metadata": {
+    "country": "Chile",
+    "description": "Períodos presidenciales desde 1958 hasta 2026",
+    "source": "Datos históricos públicos - Biblioteca del Congreso Nacional de Chile",
+    "last_updated": "2026-07-22"
+  },
+  "presidentes": [
+    {
+      "id": "alessandri",
+      "nombre": "Jorge Alessandri Rodríguez",
+      "coalicion": "Independiente (apoyado por Conservadores y Liberales)",
+      "partido": "Independiente",
+      "inicio": "1958-11-03",
+      "fin": "1964-11-03",
+      "color": "#2c3e50",
+      "color_hex": "#2c3e50",
+      "periodo_historico": "República Presidencial",
+      "eventos_clave": [
+        "1959: Inicio de la Reforma Agraria (primera etapa)",
+        "1960: Terremoto de Valdivia 9.5° — el más fuerte registrado en la historia",
+        "1960: Creación del INDAP",
+        "1961: Chile sede del Mundial de Fútbol 1962",
+        "1962: Ley de Reforma Agraria N° 15.020",
+        "1963: Inicio de la reforma tributaria progresiva",
+        "1964: Creación de la CUT (Central Única de Trabajadores)"
+      ]
+    },
+    {
+      "id": "frei-montalva",
+      "nombre": "Eduardo Frei Montalva",
+      "coalicion": "Partido Demócrata Cristiano",
+      "partido": "PDC",
+      "inicio": "1964-11-03",
+      "fin": "1970-11-03",
+      "color": "#1a5276",
+      "color_hex": "#1a5276",
+      "periodo_historico": "República Presidencial",
+      "eventos_clave": [
+        "1965: Reforma educacional — ampliación masiva de matrícula escolar",
+        "1965: Creación del Ministerio de Vivienda y Urbanismo",
+        "1967: Ley de Reforma Agraria — expropiación de latifundios",
+        "1967: Ley de Sindicalización Campesina",
+        "1967: Chilenización del cobre — 51% de El Teniente",
+        "1969: Nacionalización pactada del cobre — compra del 51% de Chuquicamata",
+        "1970: Polarización política previa a elecciones"
+      ]
+    },
+    {
+      "id": "allende",
+      "nombre": "Salvador Allende Gossens",
+      "coalicion": "Unidad Popular",
+      "partido": "PS",
+      "inicio": "1970-11-03",
+      "fin": "1973-09-11",
+      "color": "#c0392b",
+      "color_hex": "#c0392b",
+      "periodo_historico": "República Presidencial",
+      "eventos_clave": [
+        "1971: Nacionalización del cobre — Ley aprobada por unanimidad en el Congreso",
+        "1971: Estatización de la banca y grandes industrias",
+        "1971: Reforma Agraria acelerada — expropiación masiva",
+        "1972: Crisis económica — desabastecimiento e hiperinflación",
+        "1972: Paro de octubre — gremios de transporte y comercio",
+        "1972: Inflación anual alcanza 255%",
+        "1973: Elecciones parlamentarias — UP obtiene 44% de los votos",
+        "1973: Golpe de Estado — 11 de septiembre — Bombardeo de La Moneda",
+        "1973: Muerte de Salvador Allende — Inicio de la dictadura militar"
+      ]
+    },
+    {
+      "id": "pinochet",
+      "nombre": "Augusto Pinochet Ugarte (Dictadura Militar)",
+      "coalicion": "Junta Militar de Gobierno",
+      "partido": "Militar",
+      "inicio": "1973-09-11",
+      "fin": "1990-03-11",
+      "color": "#4a4a4a",
+      "color_hex": "#4a4a4a",
+      "periodo_historico": "Dictadura Militar",
+      "eventos_clave": [
+        "1973: Disolución del Congreso Nacional — Supresión de partidos políticos",
+        "1973: Toque de queda y estado de sitio permanente",
+        "1974: Creación de la DINA — represión sistemática",
+        "1975: 'El Ladrillo' — Plan económico neoliberal (Chicago Boys)",
+        "1975: Shock económico — PIB cae -12.9% — Desempleo 19%",
+        "1976: Chile se retira de la Comunidad Andina",
+        "1976: Atentado a Orlando Letelier en Washington D.C.",
+        "1978: Ley de Amnistía — auto-perdón a violaciones de DDHH",
+        "1980: Nueva Constitución — Plebiscito con irregularidades",
+        "1980: Reforma previsional — Creación del sistema de AFP (DL 3.500)",
+        "1981: Burbuja económica — auge del crédito y endeudamiento externo",
+        "1982: Crisis de la deuda — PIB cae -14.5% — Quiebra masiva de bancos",
+        "1983: Intervención estatal de la banca — Tipo de cambio fijo abandonado",
+        "1983: Primeras protestas nacionales contra la dictadura",
+        "1984: Devaluación del peso — Dólar pasa de $39 a $120",
+        "1985: Acuerdo con el FMI — Privatizaciones masivas",
+        "1985: Terremoto de Algarrobo 7.8° — Zona central devastada",
+        "1986: Atentado contra Pinochet — Frente Patriótico Manuel Rodríguez",
+        "1988: Plebiscito del SÍ y el NO — Triunfo del NO (56%)",
+        "1989: Elecciones presidenciales — Triunfo de Patricio Aylwin",
+        "1989: Reforma constitucional pactada — 54 reformas a la Constitución de 1980"
+      ]
+    },
+    {
+      "id": "aylwin",
+      "nombre": "Patricio Aylwin Azócar",
+      "coalicion": "Concertación de Partidos por la Democracia",
+      "partido": "PDC",
+      "inicio": "1990-03-11",
+      "fin": "1994-03-11",
+      "color": "#2471a3",
+      "color_hex": "#2471a3",
+      "periodo_historico": "Transición Democrática",
+      "eventos_clave": [
+        "1990: Retorno a la democracia — Reforma tributaria para financiar gasto social",
+        "1990: Creación de la Comisión Nacional de Verdad y Reconciliación (Informe Rettig)",
+        "1991: Reforma laboral — Ley de Centrales Sindicales",
+        "1991: Asesinato de Jaime Guzmán",
+        "1992: Primer superávit fiscal desde 1950",
+        "1993: Firma del TLC con México"
+      ]
+    },
+    {
+      "id": "frei",
+      "nombre": "Eduardo Frei Ruiz-Tagle",
+      "coalicion": "Concertación de Partidos por la Democracia",
+      "partido": "PDC",
+      "inicio": "1994-03-11",
+      "fin": "2000-03-11",
+      "color": "#1f618d",
+      "color_hex": "#1f618d",
+      "periodo_historico": "Democracia",
+      "eventos_clave": [
+        "1995: Inicio de concesiones de infraestructura (carreteras, aeropuertos)",
+        "1996: TLC con Canadá",
+        "1997: Reforma al Poder Judicial",
+        "1997: Crisis financiera asiática comienza a impactar la región",
+        "1998: Chile entra en desaceleración económica por crisis externa",
+        "1999: Recesión — PIB cae -0.7% — Desempleo supera 11%",
+        "1999: Detención de Pinochet en Londres"
+      ]
+    },
+    {
+      "id": "lagos",
+      "nombre": "Ricardo Lagos Escobar",
+      "coalicion": "Concertación de Partidos por la Democracia",
+      "partido": "PS-PPD",
+      "inicio": "2000-03-11",
+      "fin": "2006-03-11",
+      "color": "#d35400",
+      "color_hex": "#d35400",
+      "periodo_historico": "Democracia",
+      "eventos_clave": [
+        "2000: Recuperación económica post-crisis asiática",
+        "2001: Reforma Procesal Penal entra en vigencia",
+        "2002: Chile firma TLC con la Unión Europea",
+        "2003: TLC con Estados Unidos",
+        "2003: TLC con Corea del Sur",
+        "2004: Caso MOP-Gate",
+        "2005: Reforma Constitucional — Fin de senadores designados y vitalicios"
+      ]
+    },
+    {
+      "id": "bachelet1",
+      "nombre": "Michelle Bachelet Jeria",
+      "coalicion": "Concertación de Partidos por la Democracia",
+      "partido": "PS",
+      "inicio": "2006-03-11",
+      "fin": "2010-03-11",
+      "color": "#922b21",
+      "color_hex": "#922b21",
+      "periodo_historico": "Democracia",
+      "eventos_clave": [
+        "2006: Revolución Pingüina — Movilizaciones estudiantiles masivas",
+        "2007: Crisis del Transantiago",
+        "2007: Reforma Previsional — Pilar Solidario",
+        "2008: Crisis financiera global (Subprime)",
+        "2009: Plan de estímulo fiscal (US$ 4.000 millones)",
+        "2010: Chile entra a la OCDE",
+        "2010: Terremoto 8.8° (27-F) — Daños US$ 30.000 millones"
+      ]
+    },
+    {
+      "id": "pinera1",
+      "nombre": "Sebastián Piñera Echenique",
+      "coalicion": "Coalición por el Cambio",
+      "partido": "RN",
+      "inicio": "2010-03-11",
+      "fin": "2014-03-11",
+      "color": "#2980b9",
+      "color_hex": "#2980b9",
+      "periodo_historico": "Democracia",
+      "eventos_clave": [
+        "2010: Reconstrucción post-terremoto 27-F",
+        "2010: Rescate de los 33 mineros",
+        "2011: Movilizaciones estudiantiles masivas",
+        "2012: Reforma tributaria para educación",
+        "2013: PIB per cápita alcanza US$ 20.000",
+        "2014: Terremoto en Iquique 8.2°"
+      ]
+    },
+    {
+      "id": "bachelet2",
+      "nombre": "Michelle Bachelet Jeria",
+      "coalicion": "Nueva Mayoría",
+      "partido": "PS",
+      "inicio": "2014-03-11",
+      "fin": "2018-03-11",
+      "color": "#7b241c",
+      "color_hex": "#7b241c",
+      "periodo_historico": "Democracia",
+      "eventos_clave": [
+        "2014: Reforma Tributaria — Impuesto empresas 27%",
+        "2015: Caso Caval",
+        "2015: Desaceleración económica — fin superciclo del cobre",
+        "2016: Reforma Laboral",
+        "2016: Protestas No+AFP — 1.3 millones marchan",
+        "2017: Ley de aborto en 3 causales"
+      ]
+    },
+    {
+      "id": "pinera2",
+      "nombre": "Sebastián Piñera Echenique",
+      "coalicion": "Chile Vamos",
+      "partido": "RN",
+      "inicio": "2018-03-11",
+      "fin": "2022-03-11",
+      "color": "#2471a3",
+      "color_hex": "#2471a3",
+      "periodo_historico": "Democracia",
+      "eventos_clave": [
+        "2019: Estallido Social — Octubre",
+        "2019: Acuerdo por la Paz y Nueva Constitución",
+        "2020: Pandemia COVID-19",
+        "2020: Retiros del 10% AFP — Tres retiros",
+        "2020: Plebiscito constitucional — 78% Aprueba",
+        "2021: Elección de constituyentes"
+      ]
+    },
+    {
+      "id": "boric",
+      "nombre": "Gabriel Boric Font",
+      "coalicion": "Apruebo Dignidad",
+      "partido": "CS",
+      "inicio": "2022-03-11",
+      "fin": "2026-07-22",
+      "color": "#117a65",
+      "color_hex": "#117a65",
+      "periodo_historico": "Democracia",
+      "eventos_clave": [
+        "2022: Rechazo de la nueva Constitución (62%)",
+        "2022: Inflación alcanza 14.1% anual",
+        "2023: Ley de 40 horas laborales",
+        "2023: Royalty minero",
+        "2023: Segundo rechazo constitucional",
+        "2024: Caso Audio — crisis política",
+        "2024: Sistema frontal — Daños US$ 400 millones",
+        "2025: Inflación retorna a meta 3%",
+        "2025: Reforma previsional destrabada"
+      ]
+    }
+  ]
+}
