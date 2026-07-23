@@ -52,6 +52,10 @@ def main():
     emp = emp.replace('src="/vendor/chart.umd.min.js"', 'src="./vendor/chart.umd.min.js"')
     open(os.path.join(DIST, "empresa.html"), "w", encoding="utf-8").write(emp)
 
+    # --- capsula-servicios.html (página de servicios CápsulaData, tema claro) ---
+    svc = open(os.path.join(ROOT, "web", "capsula-servicios", "index.html"), encoding="utf-8").read()
+    open(os.path.join(DIST, "capsula-servicios.html"), "w", encoding="utf-8").write(svc)
+
     # --- CNAME opcional (descomenta si tienes dominio) ---
     # open(os.path.join(DIST, "CNAME"), "w").write("capsuladata.com\n")
 

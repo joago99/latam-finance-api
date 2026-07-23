@@ -218,10 +218,20 @@ def serve_dashboard():
 @app.get("/empresa/")
 def serve_empresa():
     """Página corporativa de CápsulaData (la empresa detrás de La Línea)."""
-    p = WEB_DIR / "empresa" / "index.html"
-    if p.exists():
-        return FileResponse(p)
-    return {"error": "Página de empresa no encontrada"}
+    path = WEB_DIR / "empresa" / "index.html"
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="Página no encontrada")
+    return FileResponse(path)
+
+
+@app.get("/servicios")
+@app.get("/servicios/")
+def serve_servicios():
+    """Página de servicios de CápsulaData (tema claro)."""
+    p = WEB_DIR / "capsula-servicios" / "index.html"
+    if not p.exists():
+        raise HTTPException(status_code=404, detail="Página no encontrada")
+    return FileResponse(p)
 
 
 # =====================
