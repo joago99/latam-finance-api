@@ -121,7 +121,13 @@ footer .commercial{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15
 <section class="block" id="mundo">
 <h2 class="section-title">Chile vs el Mundo</h2>
 <p class="section-sub">PIB per cápita (USD corrientes) comparado con 23 economías. Siempre con Chile como referencia. Datos: Banco Mundial (NY.GDP.PCAP.CD), 1960–2023.</p>
-<div class="sc-grid" id="scGrid"></div>
+<div class="sc-grid" id="scGrid">
+<div class="sc-card"><h3>1. La brecha que no se cierra</h3><div class="bigidea">Chile creció sostenidamente, pero EE.UU. y Noruega se alejan: en 2023 Chile tiene 1/5 del PIB per cápita de Noruega.</div><canvas id="sc1"></canvas><div class="note">Línea roja = Chile. Escala lineal en USD.</div></div>
+<div class="sc-card"><h3>2. ¿Dónde cae Chile hoy?</h3><div class="bigidea">Chile lidera a sus pares sudamericanos, pero está a mitad de tabla global.</div><canvas id="sc2"></canvas><div class="note">Ranking 2023, barras horizontales. Chile en rojo destacado.</div></div>
+<div class="sc-card"><h3>3. ¿Quién corrió más desde 1990?</h3><div class="bigidea">China multiplicó su PIB per cápita por 12x; Chile por 4x. La distancia relativa con Asia se amplió.</div><canvas id="sc3"></canvas><div class="note">Índice base 1990 = 100.</div></div>
+<div class="sc-card"><h3>4. Convergencia: Chile vs mediana mundial</h3><div class="bigidea">Chile superó la mediana de los países comparados a partir de 2005.</div><canvas id="sc4"></canvas><div class="note">Chile (rojo) vs mediana de los 23 países.</div></div>
+<div class="sc-card"><h3>5. Población: Chile en el mundo</h3><div class="bigidea">Chile tiene el 0,24% de la población mundial. Latinoamérica el 8,2%.</div><canvas id="sc5"></canvas><div class="note">Datos 2023: Población total mundial 8.062M. Fuente: Banco Mundial.</div></div>
+</div>
 </section>
 
 <!-- CONTACTO -->
@@ -336,13 +342,26 @@ function buildChart() {
   const trimmed = rawPairs.slice(first,last+1); labels = trimmed.map(function(p){return p.label;}); series = trimmed.map(function(p){return isNaN(p.value)?null:p.value;});
   const meta = seriesMeta[activeInd];
   document.getElementById('dataNote').textContent = 'ℹ ' + cfg.label.split('(')[0].trim() + ': datos desde ' + (meta?meta.desde:'?') + '. ' + (meta?meta.desc:'') + ' Agregación: ' + (useAnnual?'anual':'mensual') + '.';
-  const annotations = {};
+  var prezRanges = [];
   presidentes.forEach(function(p,i){
-    const si = labels.findIndex(function(l){const key=l.length===4?l+'-01-01':l+'-01'; return key>=(p.inicio.substring(0,7)+'-01');});
-    const ei = labels.findLastIndex(function(l){const key=l.length===4?l+'-12-01':l+'-01'; return key<=(p.fin.substring(0,7)+'-01');});
-    if (si>=0 && ei>=si && ei<labels.length) annotations['box'+i]={type:'box',xMin:si,xMax:ei,backgroundColor:p.color+'1A',borderColor:p.color+'33',borderWidth:0,drawTime:'beforeDatasetsDraw'};
+    var si = labels.findIndex(function(l){var key=l.length===4?l+'-01-01':l+'-01'; return key>=(p.inicio.substring(0,7)+'-01');});
+    var ei = labels.findLastIndex(function(l){var key=l.length===4?l+'-12-01':l+'-01'; return key<=(p.fin.substring(0,7)+'-01');});
+    if(si>=0 && ei>=si && ei<labels.length) prezRanges.push({si:si, ei:ei, color:p.color});
   });
-  const ds=[{label:cfg.label,data:series,borderColor:cfg.color,backgroundColor:cfg.color+'1A',borderWidth:1.5,pointRadius:0,pointHoverRadius:4,tension:0.1,fill:false,spanGaps:true}];
+  // Hitos visibles como puntos en la línea (más importantes del período)
+  var hitoPts = [];
+  var hitoLabels = [];
+  hitos.forEach(function(h){
+    var hIdx = labels.findIndex(function(l){ var key=l.length===4?l+'-01':l; return key.substring(0,7)===h.fe.substring(0,7); });
+    if(hIdx>=0 && hIdx<series.length && series[hIdx]!==null && !isNaN(series[hIdx])){
+      hitoPts.push({x:hIdx, y:series[hIdx]});
+      hitoLabels.push({idx:hIdx, ti:h.ti, cat:h.cat});
+    }
+  });
+  var ds=[{label:cfg.label,data:series,borderColor:cfg.color,backgroundColor:cfg.color+'1A',borderWidth:1.5,pointRadius:0,pointHoverRadius:4,tension:0.1,fill:false,spanGaps:true}];
+  if(hitoPts.length){
+    ds.push({label:'Hitos',data:hitoPts,showLine:false,pointRadius:5,pointBackgroundColor:hitoPts.map(function(p,i){return{hitos:['reforma','externo','economico','social'].indexOf(hitoLabels[i].cat)>=0?'#f59e0b':'#a78bfa'}[0];}),pointBorderColor:'#f8fafc',pointBorderWidth:1,pointStyle:'triangle',order:1,yAxisID:'y',xAxisID:'x'});
+  }
   if (mainChart) mainChart.destroy();
   mainChart = new Chart(
     document.getElementById('mainChart'),
@@ -354,7 +373,6 @@ function buildChart() {
         maintainAspectRatio: false,
         interaction: { mode: 'index', intersect: false },
         plugins: {
-          annotation: { annotations: annotations },
           legend: { display: true, labels: { color: '#cbd5e1', font: { size: 9 }, filter: function(i){ return i.datasetIndex===0; }, usePointStyle: true } },
           tooltip: { callbacks: {
             label: function(ctx){ const v=ctx.parsed.y; if(isNaN(v)||v===null) return 'Sin dato'; const m=seriesMeta[activeInd]||{}; const u=m.unidad||''; let txt=cfg.label+': '+v.toFixed(cfg.dec); if(u) txt+=' '+u; return txt; },
@@ -364,6 +382,15 @@ function buildChart() {
         scales: {
           x: { ticks: { color: '#64748b', font: { size: 8 }, maxTicksLimit: 40, callback: function(v,ix){ var s = labels[ix]; if(!s) return ''; return s.length===4 ? s : (s.indexOf('-01')===4 ? s.substring(0,4) : ''); } }, grid: { color: '#1e293b' } },
           y: { ticks: { color: '#64748b', callback: function(v){ return isNaN(v) ? '' : v.toFixed(cfg.dec); } }, grid: { color: '#1e293b' } }
+        },
+        beforeDraw: function(chart){
+          var ctx = chart.ctx, ca = chart.chartArea, xAxis = chart.scales.x;
+          if(!ctx || !ca || !xAxis) return;
+          prezRanges.forEach(function(r){
+            var x1 = xAxis.getPixelForValue(labels[r.si]);
+            var x2 = xAxis.getPixelForValue(labels[r.ei]);
+            if(x1 && x2){ ctx.fillStyle = r.color + '18'; ctx.fillRect(x1, ca.top, x2-x1, ca.bottom-ca.top); }
+          });
         }
       }
     }
@@ -372,15 +399,9 @@ function buildChart() {
 function selectPresident(p) {
   if (selPrez.has(p.id)) selPrez.delete(p.id); else { selPrez.clear(); selPrez.add(p.id); }
   if (selPrez.size===1) {
-    const sp=[].concat([].slice.call(selPrez))[0];
-    const idx=presidentes.findIndex(function(x){return x.id===sp;});
-    const prev=presidentes[Math.max(0,idx-1)];
-    const next=presidentes[Math.min(presidentes.length-1,idx+1)];
-    dateFrom=parseInt(prev.inicio.substring(0,4));
-    dateTo=parseInt(next.fin.substring(0,4));
-    document.getElementById('dateFrom').value=dateFrom; document.getElementById('dateTo').value=dateTo;
-  }
-  else if (selPrez.size===0) { dateFrom=1958;dateTo=2026;document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo; }
+    const pr=presidentes.find(function(x){return x.id===[].concat([].slice.call(selPrez))[0];});
+    if(pr){dateFrom=parseInt(pr.inicio.substring(0,4));dateTo=parseInt(pr.fin.substring(0,4));document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo;}
+  } else if (selPrez.size===0) { dateFrom=1958;dateTo=2026;document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo; }
   buildAll();
 }
 function buildPrezBar() {
@@ -474,14 +495,8 @@ function renderMundo() {
   try {
     const r = await fetch('./data/world-gdp.json'); const j = await r.json(); world = j.data;
     const rp = await fetch('./data/world-pop.json'); const jp = await rp.json(); worldPop = jp.data;
-    document.getElementById('scGrid').innerHTML =
-      '<div class="sc-card"><h3>1. La brecha que no se cierra</h3><div class="bigidea">Chile creció sostenidamente, pero EE.UU. y Noruega se alejan: en 2023 Chile tiene 1/5 del PIB per cápita de Noruega.</div><canvas id="sc1"></canvas><div class="note">Línea roja = Chile. Escala lineal en USD.</div></div>'+
-      '<div class="sc-card"><h3>2. ¿Dónde cae Chile hoy?</h3><div class="bigidea">Chile lidera a sus pares sudamericanos, pero está a mitad de tabla global.</div><canvas id="sc2"></canvas><div class="note">Ranking 2023, barras horizontales. Chile en rojo destacado.</div></div>'+
-      '<div class="sc-card"><h3>3. ¿Quién corrió más desde 1990?</h3><div class="bigidea">China multiplicó su PIB per cápita por 12x; Chile por 4x. La distancia relativa con Asia se amplió.</div><canvas id="sc3"></canvas><div class="note">Índice base 1990 = 100.</div></div>'+
-      '<div class="sc-card"><h3>4. Convergencia: Chile vs mediana mundial</h3><div class="bigidea">Chile superó la mediana de los países comparados a partir de 2005.</div><canvas id="sc4"></canvas><div class="note">Chile (rojo) vs mediana de los 23 países.</div></div>'+
-      '<div class="sc-card"><h3>5. Población: Chile en el mundo</h3><div class="bigidea">Chile tiene el 0,24% de la población mundial. Latinoamérica el 8,2%.</div><canvas id="sc5"></canvas><div class="note">Datos 2023: Población total mundial 8.062M. Fuente: Banco Mundial.</div></div>';
     renderMundo();
-  } catch(e){ document.getElementById('scGrid').innerHTML='<p style="color:#f87171;font-size:0.8rem">Error cargando datos mundiales.</p>'; }
+  } catch(e){ console.warn('Mundo error:', e.message); }
 })();
 </script>
 </body>
