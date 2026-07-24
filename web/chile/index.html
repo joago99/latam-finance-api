@@ -80,46 +80,21 @@ footer .commercial{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15
 </head>
 <body>
 <header>
-<div class="brand">La Línea<span class="sub">Proyectos demo · CápsulaData</span></div>
+<div class="brand">Chile 1958–2026<span class="sub">Proyecto demo · CápsulaData</span></div>
 <nav>
-<a href="#chile">Dashboard Chile</a>
-<a href="#mundo">Chile vs Mundo</a>
-<a href="#proyectos">Proyectos</a>
-<a href="./index.html">CápsulaData</a>
-<a href="./servicios.html">Servicios</a>
+<a href="https://joago99.github.io/capsuladata/lalinea">← La Línea</a>
+<a href="https://joago99.github.io/capsuladata/">CápsulaData</a>
 </nav>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-<div class="big">La Línea</div>
-<div class="powered">Powered by CápsulaData</div>
-<p class="lead">Análisis de grandes volúmenes de datos para entender, diagnosticar y predecir la economía. Desde 1958 hasta hoy, con fuentes oficiales.</p>
-<div class="cta">
-<a href="#chile" class="btn">Explorar dashboard</a>
-<a href="#contacto" class="btn outline">Contacto</a>
-</div>
-</section>
-
-<section class="block" id="proyectos">
-<h2 class="section-title">La Línea · Espacio de proyectos demo</h2>
-<p class="section-sub">La Línea es el laboratorio público de CápsulaData: aquí publicamos los proyectos demo que construimos con datos públicos reales. Cada uno es un análisis propio, documentado y reproducible. Estos son los proyectos disponibles hoy:</p>
-<div class="cards">
-<div class="card">
-<h3>Chile 1958–2026</h3>
-<p>Dashboard macroeconómico histórico: PIB, inflación, tipo de cambio, tasas, empleo, cobre, petróleo y población. 13 indicadores, 68 años de historia. <strong>Disponible.</strong></p>
-<a href="./lalinea/chile/" class="btn" style="margin-top:0.6rem;display:inline-block">Abrir proyecto →</a>
-</div>
-<div class="card">
-<h3>Exportaciones de cerezas</h3>
-<p>Análisis de volúmenes, destinos, precios y estacionalidad de exportaciones de cereza chilena. Datos ODEPA 2005/24. <strong>Disponible.</strong></p>
-<a href="./lalinea/cerezas/" class="btn" style="margin-top:0.6rem;display:inline-block">Abrir proyecto →</a>
-</div>
-<div class="card">
-<h3>Bombas de hormigón</h3>
-<p>Metodología y análisis del mercado de bombas de hormigón y repuestos en Chile: arancel, actores y triangulación de fuentes. <strong>Disponible.</strong></p>
-<a href="./lalinea/bombas-hormigon/" class="btn" style="margin-top:0.6rem;display:inline-block">Abrir proyecto →</a>
-</div>
+<div class="big">Chile 1958–2026</div>
+<div class="powered">Proyecto demo · CápsulaData</div>
+<p class="lead">Dashboard macroeconómico histórico de Chile: PIB, inflación, tipo de cambio, tasas, empleo, cobre, petróleo y población. 13 indicadores, 68 años de historia, con datos del Banco Central e INE.</p>
+<div class="cta" style="gap:0.8rem">
+<a href="#chile" class="btn">Ver dashboard</a>
+<a href="https://joago99.github.io/capsuladata/lalinea" class="btn outline">← Volver a La Línea</a>
 </div>
 </section>
 
@@ -145,29 +120,13 @@ footer .commercial{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15
 <div class="prez-label" id="prezLabel"></div>
 </section>
 
-<!-- CHILE VS MUNDO -->
-<section class="block" id="mundo">
-<h2 class="section-title">Chile vs el Mundo</h2>
-<p class="section-sub">PIB per cápita (USD corrientes) comparado con 23 economías. Siempre con Chile como referencia. Datos: Banco Mundial (NY.GDP.PCAP.CD), 1960–2023.</p>
-<div class="sc-grid" id="scGrid">
-<div class="sc-card"><h3>1. La brecha que no se cierra</h3><div class="bigidea">Chile creció sostenidamente, pero EE.UU. y Noruega se alejan: en 2023 Chile tiene 1/5 del PIB per cápita de Noruega.</div><canvas id="sc1"></canvas><div class="note">Línea roja = Chile. Escala lineal en USD.</div></div>
-<div class="sc-card"><h3>2. ¿Dónde cae Chile hoy?</h3><div class="bigidea">Chile lidera a sus pares sudamericanos, pero está a mitad de tabla global.</div><canvas id="sc2"></canvas><div class="note">Ranking 2023, barras horizontales. Chile en rojo destacado.</div></div>
-<div class="sc-card"><h3>3. ¿Quién corrió más desde 1990?</h3><div class="bigidea">China multiplicó su PIB per cápita por 12x; Chile por 4x. La distancia relativa con Asia se amplió.</div><canvas id="sc3"></canvas><div class="note">Índice base 1990 = 100.</div></div>
-<div class="sc-card"><h3>4. Convergencia: Chile vs mediana mundial</h3><div class="bigidea">Chile superó la mediana de los países comparados a partir de 2005.</div><canvas id="sc4"></canvas><div class="note">Chile (rojo) vs mediana de los 23 países.</div></div>
-<div class="sc-card"><h3>5. ¿Cuántos somos?</h3><div class="bigidea">Chile tiene 19,7 millones de habitantes: el 0,24% del mundo. India y China concentran el 36% de la población global.</div><canvas id="sc5"></canvas><div class="note">Ranking de población 2023. Chile en rojo; otros países latinoamericanos en azul. Fuente: Banco Mundial.</div></div>
-</div>
-</section>
-
 <!-- CONTACTO -->
 <footer id="contacto">
-<div class="brand">La Línea</div>
-<div class="commercial">Powered by CápsulaData</div>
-<p>Análisis de grandes datos · Entender · Diagnosticar · Predecir</p>
-<p style="margin-top:1rem;opacity:0.6">Fuentes: Banco Central de Chile (BCCh) · Instituto Nacional de Estadísticas (INE) · Banco Mundial</p>
-<div class="contacto-mini">
-<p style="margin-top:1.5rem;font-size:0.9rem">¿Quieres este tipo de análisis para tu empresa o proyecto?</p>
-<a href="https://www.linkedin.com/in/JoaquinAlmendra" target="_blank" rel="noopener" class="btn" style="margin-top:0.8rem;display:inline-block">Conéctemos en LinkedIn</a>
-</div>
+<div class="brand">Chile 1958–2026</div>
+<div class="commercial">Proyecto demo · CápsulaData</div>
+<p>Análisis de datos públicos · Fuentes oficiales · Metodología documentada</p>
+<p style="margin-top:1rem;opacity:0.6">Fuentes: Banco Central de Chile (BCCh) · Instituto Nacional de Estadísticas (INE)</p>
+<p style="margin-top:0.3rem"><a href="https://joago99.github.io/capsuladata/lalinea" style="color:var(--accent)">← Volver a La Línea</a></p>
 </footer>
 
 <script>
@@ -476,55 +435,10 @@ function toggleAggregation(){forceAnnual=!forceAnnual;buildAll();}
 function applyDateFilter(){const f=parseInt(document.getElementById('dateFrom').value)||1958;const t=parseInt(document.getElementById('dateTo').value)||2026;dateFrom=Math.max(1958,Math.min(f,t));dateTo=Math.min(2026,Math.max(f,t));document.getElementById('dateFrom').value=dateFrom;document.getElementById('dateTo').value=dateTo;selPrez.clear();buildAll();}
 function buildAll(){buildKPIs();buildChart();buildPrezBar();}
 
-// ==================== DATA: MUNDO ====================
-let world = {};
-let worldPop = {};
-const CHILE='#f87171';
-const OTHERS=['#60a5fa','#4ade80','#a78bfa','#fb923c','#22d3ee','#fbbf24','#f472b6','#86efac','#c4b5fd','#5eead4','#fca5a5','#94a3b8'];
-const PALETTE={}; let pi=0;
-function colorFor(name){if(name==='Chile')return CHILE;if(!PALETTE[name])PALETTE[name]=OTHERS[pi++%OTHERS.length];return PALETTE[name];}
-function yearsRange(){const all=new Set();Object.values(world).forEach(function(d){Object.keys(d).forEach(function(y){all.add(parseInt(y));});});return Array.from(all).sort(function(a,b){return a-b;});}
-function seriesFor(name){const d=world[name]||{};const yrs=yearsRange();return yrs.map(function(y){return d[String(y)]!=null?d[String(y)]:null;});}
-
-let charts = {};
-function renderMundo() {
-  const yrs = yearsRange();
-  const chileColor = '#f87171';
-  const sel = ['Chile','Argentina','Perú','México','Brasil','EE.UU.','Noruega','China','India'];
-  // Helper seguro: si el canvas no existe o hay error, no bloquea los demás
-  function safeChart(id, cfg) { try { var el=document.getElementById(id); if(!el) return; return new Chart(el, cfg); } catch(e) { console.warn('Chart '+id+' failed:', e.message); return null; } }
-  charts.c1 = safeChart('sc1', { type: 'line', data: { labels: yrs, datasets: sel.map(function(n){ return { label: n, data: seriesFor(n), borderColor: n==='Chile'?chileColor:colorFor(n), backgroundColor: n==='Chile'?chileColor:colorFor(n), borderWidth: n==='Chile'?3:1.5, pointRadius: 0, tension: 0.15, spanGaps: true }; }) }, options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': $' + Number(ctx.parsed.y).toLocaleString('en-US', { maximumFractionDigits: 0 }); } } } }, scales: { x: { ticks: { maxTicksLimit: 12, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#64748b', font: { size: 9 }, callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; } }, grid: { color: '#1e293b' } } } } });
-  const arr = Object.entries(world).map(function(e){ return [e[0], e[1]['2023']]; }).filter(function(x){ return x[1]!=null; }).sort(function(a,b){ return a[1]-b[1]; });
-  charts.c2 = safeChart('sc2', { type: 'bar', data: { labels: arr.map(function(x){ return x[0]; }), datasets: [ { label: 'PIB per cápita 2023 (USD)', data: arr.map(function(x){ return x[1]; }), backgroundColor: arr.map(function(x){ return x[0]==='Chile'?chileColor:'#60a5fa'; }), borderColor: arr.map(function(x){ return x[0]==='Chile'?chileColor:'#3b82f6'; }), borderWidth: arr.map(function(x){ return x[0]==='Chile'?2:0; }) } ] }, options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx){ return '$' + Number(ctx.parsed.x).toLocaleString('en-US', { maximumFractionDigits: 0 }); } } } }, scales: { x: { ticks: { callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; }, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#cbd5e1', font: { size: 9 } }, grid: { display: false } } } } });
-  const focus = ['Chile','China','India','Corea del Sur','Perú','Argentina','EE.UU.','Noruega'];
-  charts.c3 = safeChart('sc3', { type: 'line', data: { labels: yrs, datasets: focus.map(function(n){ const d=world[n]||{}; const b=d['1990']; const data=yrs.map(function(y){ const v=d[String(y)]; if(b==null||v==null) return null; return v/b*100; }); return { label: n, data: data, borderColor: n==='Chile'?chileColor:colorFor(n), backgroundColor: n==='Chile'?chileColor:colorFor(n), borderWidth: n==='Chile'?3:1.5, pointRadius: 0, tension: 0.2, spanGaps: true }; }) }, options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': ' + Number(ctx.parsed.y).toLocaleString('en-US', { maximumFractionDigits: 0 }) + 'x'; } } } }, scales: { x: { ticks: { maxTicksLimit: 12, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#64748b', font: { size: 9 }, callback: function(v){ return v + 'x'; } }, grid: { color: '#1e293b' } } } } });
-  const median = yrs.map(function(y){ const vals = Object.values(world).map(function(d){ return d[String(y)]; }).filter(function(v){ return v!=null; }).sort(function(a,b){ return a-b; }); if(!vals.length) return null; const m=Math.floor(vals.length/2); return vals.length%2 ? vals[m] : (vals[m-1]+vals[m])/2; });
-  charts.c4 = safeChart('sc4', { type: 'line', data: { labels: yrs, datasets: [ { label: 'Chile', data: seriesFor('Chile'), borderColor: chileColor, backgroundColor: chileColor, borderWidth: 3, pointRadius: 0, tension: 0.15, spanGaps: true }, { label: 'Mediana 23 países', data: median, borderColor: '#94a3b8', backgroundColor: '#94a3b8', borderWidth: 1.5, borderDash: [5,4], pointRadius: 0, tension: 0.15, spanGaps: true } ] }, options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': $' + Number(ctx.parsed.y).toLocaleString('en-US', { maximumFractionDigits: 0 }); } } } }, scales: { x: { ticks: { maxTicksLimit: 12, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#64748b', font: { size: 9 }, callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; } }, grid: { color: '#1e293b' } } } } });
-  // Chart 5: Ranking de población 2023
-  var popArr = [];
-  if(worldPop && Object.keys(worldPop).length){
-    Object.keys(worldPop).forEach(function(c){
-      if(c!=='WLD' && c!=='LCN' && worldPop[c] && worldPop[c]['2023']){
-        popArr.push({nombre:c, poblacion:worldPop[c]['2023']});
-      }
-    });
-    popArr.sort(function(a,b){return a.poblacion-b.poblacion;});
-  }
-  var latamSet = new Set(['Chile','Argentina','Brasil','Perú','México']);
-  charts.c5 = safeChart('sc5', { type: 'bar', data: { labels: popArr.map(function(x){return x.nombre;}), datasets: [ { label: 'Población 2023', data: popArr.map(function(x){return x.poblacion;}), backgroundColor: popArr.map(function(x){return x.nombre==='Chile'?chileColor:(latamSet.has(x.nombre)?'#60a5fa':'#334155');}), borderColor: popArr.map(function(x){return x.nombre==='Chile'?chileColor:'transparent';}), borderWidth: popArr.map(function(x){return x.nombre==='Chile'?2:0;}) } ] }, options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx){ return Number(ctx.parsed.x).toLocaleString('es-CL') + ' habitantes'; } } } }, scales: { x: { ticks: { callback: function(v){ return (v/1e6).toFixed(0) + 'M'; }, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#cbd5e1', font: { size: 8 } }, grid: { display: false } } } } });
-}
-
 // ==================== INIT ====================
 (async function(){
   await loadMacroData();
   buildIndChips();
   buildAll();
-  try {
-    const r = await fetch('./data/world-gdp.json'); const j = await r.json(); world = j.data;
-    const rp = await fetch('./data/world-pop.json'); const jp = await rp.json(); worldPop = jp.data;
-    renderMundo();
-  } catch(e){ console.warn('Mundo error:', e.message); }
 })();
 </script>
-</body>
-</html>

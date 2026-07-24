@@ -79,10 +79,18 @@ def main():
 
     print(f"Build estático en {DIST}")
     print(f"  - index.html (CápsulaData empresa)")
-    print(f"  - lalinea.html (La Línea dashboard)")
+    print(f"  - lalinea.html (La Línea hub)")
     print(f"  - servicios.html (Servicios)")
 
-    # 4) cerezas -> lalinea/cerezas/index.html
+    # 4) chile -> lalinea/chile/index.html
+    ch = open(os.path.join(ROOT, "web", "chile", "index.html"), encoding="utf-8").read()
+    ch_dir = os.path.join(DIST, "lalinea", "chile")
+    os.makedirs(ch_dir, exist_ok=True)
+    ch = ch.replace('../../vendor/chart.umd.min.js', '../../../vendor/chart.umd.min.js')
+    ch = ch.replace('./data/chile-macro.json', '../../../data/chile-macro.json')
+    open(os.path.join(ch_dir, "index.html"), "w", encoding="utf-8").write(ch)
+
+    # 5) cerezas -> lalinea/cerezas/index.html
     cz = open(os.path.join(ROOT, "web", "cerezas", "index.html"), encoding="utf-8").read()
     cz_dir = os.path.join(DIST, "lalinea", "cerezas")
     os.makedirs(cz_dir, exist_ok=True)
@@ -90,15 +98,16 @@ def main():
     cz = cz.replace('../../data/cerezas-export.json', '../../../data/cerezas-export.json')
     open(os.path.join(cz_dir, "index.html"), "w", encoding="utf-8").write(cz)
 
-    # 5) bombas-hormigon -> lalinea/bombas-hormigon/index.html
+    # 6) bombas-hormigon -> lalinea/bombas-hormigon/index.html
     bh = open(os.path.join(ROOT, "web", "bombas-hormigon", "index.html"), encoding="utf-8").read()
     bh_dir = os.path.join(DIST, "lalinea", "bombas-hormigon")
     os.makedirs(bh_dir, exist_ok=True)
     bh = bh.replace('../../vendor/chart.umd.min.js', '../../../vendor/chart.umd.min.js')
     open(os.path.join(bh_dir, "index.html"), "w", encoding="utf-8").write(bh)
 
-    print(f"  - cerezas/index.html")
-    print(f"  - bombas-hormigon/index.html")
+    print(f"  - lalinea/chile/index.html")
+    print(f"  - lalinea/cerezas/index.html")
+    print(f"  - lalinea/bombas-hormigon/index.html")
     print(f"  - logo.png")
     print(f"  - data/chile-macro.json ({len(clean)} filas)")
     print(f"  - data/world-gdp.json ({len(world)} países)")
