@@ -70,18 +70,23 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center;co
 footer .brand{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--text);margin-bottom:0.5rem}
 footer .commercial{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--accent);margin-bottom:1rem}
 .contacto-mini{margin-top:1.5rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:1rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.6rem;transition:border-color .2s}
+.card:hover{border-color:var(--accent)}
+.card h3{font-size:1.1rem;margin-bottom:0.4rem;color:var(--text)}
+.card p{color:var(--muted);font-size:0.82rem}
 @media(max-width:768px){header nav{display:none}}
 </style>
 </head>
 <body>
 <header>
-<div class="brand">La Línea<span class="sub">Powered by CápsulaData</span></div>
+<div class="brand">La Línea<span class="sub">Proyectos demo · CápsulaData</span></div>
 <nav>
 <a href="#chile">Dashboard Chile</a>
 <a href="#mundo">Chile vs Mundo</a>
-<a href="https://joago99.github.io/capsuladata/">CápsulaData</a>
-<a href="../servicios.html">Servicios</a>
-<a href="#contacto">Contacto</a>
+<a href="#proyectos">Proyectos</a>
+<a href="./index.html">CápsulaData</a>
+<a href="./servicios.html">Servicios</a>
 </nav>
 </header>
 
@@ -97,8 +102,8 @@ footer .commercial{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15
 </section>
 
 <section class="block" id="proyectos">
-<h2 class="section-title">Proyectos</h2>
-<p class="section-sub">CápsulaData construye productos de datos sectoriales. Cada proyecto es un análisis propio con datos públicos, documentado y actualizado.</p>
+<h2 class="section-title">La Línea · Espacio de proyectos demo</h2>
+<p class="section-sub">La Línea es el laboratorio público de CápsulaData: aquí publicamos los proyectos demo que construimos con datos públicos reales. Cada uno es un análisis propio, documentado y reproducible. Estos son los proyectos disponibles hoy:</p>
 <div class="cards">
 <div class="card">
 <h3>Chile 1958–2026</h3>
@@ -106,14 +111,14 @@ footer .commercial{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15
 <a href="#chile" class="btn" style="margin-top:0.6rem;display:inline-block">Abrir proyecto →</a>
 </div>
 <div class="card">
-<h3>Exportaciones y mercado de la cereza</h3>
-<p>En desarrollo. Análisis de volúmenes, destinos, precios y estacionalidad de exportaciones de cereza chilena. <strong>Próximamente.</strong></p>
-<a href="#" class="btn outline" style="margin-top:0.6rem;display:inline-block;opacity:0.5;pointer-events:none">Próximamente</a>
+<h3>Exportaciones de cerezas</h3>
+<p>Análisis de volúmenes, destinos, precios y estacionalidad de exportaciones de cereza chilena. Datos ODEPA 2005/24. <strong>Disponible.</strong></p>
+<a href="./lalinea/cerezas/" class="btn" style="margin-top:0.6rem;display:inline-block">Abrir proyecto →</a>
 </div>
 <div class="card">
-<h3>Mercado de bombas de hormigón y repuestos</h3>
-<p>En desarrollo. Análisis de demanda, importaciones, actores y repuestos en el mercado de bombas de hormigón en Chile. <strong>Próximamente.</strong></p>
-<a href="#" class="btn outline" style="margin-top:0.6rem;display:inline-block;opacity:0.5;pointer-events:none">Próximamente</a>
+<h3>Bombas de hormigón</h3>
+<p>Metodología y análisis del mercado de bombas de hormigón y repuestos en Chile: arancel, actores y triangulación de fuentes. <strong>Disponible.</strong></p>
+<a href="./lalinea/bombas-hormigon/" class="btn" style="margin-top:0.6rem;display:inline-block">Abrir proyecto →</a>
 </div>
 </div>
 </section>
@@ -279,7 +284,7 @@ let macroAll = [], activeInd = 'UF', selPrez = new Set(), dateFrom = 1958, dateT
 
 async function loadMacroData() {
   try {
-    const resp = await fetch('/api/v1/chile/macro');
+    const resp = await fetch('./data/chile-macro.json');
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const json = await resp.json();
     const baseKeys = ['TPM','UF','USD','EUR','UTM','IMACEC','IPC','DESEMPLEO','PIB','IPSA','COBRE','WTI','PIBPC','POB','POBH','POBM'];
@@ -515,8 +520,8 @@ function renderMundo() {
   buildIndChips();
   buildAll();
   try {
-    const r = await fetch('/api/v1/world/gdp-pcap'); const j = await r.json(); world = j.data;
-    const rp = await fetch('/api/v1/world/pop'); const jp = await rp.json(); worldPop = jp.data;
+    const r = await fetch('./data/world-gdp.json'); const j = await r.json(); world = j.data;
+    const rp = await fetch('./data/world-pop.json'); const jp = await rp.json(); worldPop = jp.data;
     renderMundo();
   } catch(e){ console.warn('Mundo error:', e.message); }
 })();

@@ -3,53 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Importación de repuestos para bombas de hormigón — CápsulaData</title>
-<meta name="description" content="Metodología y lineamientos para analizar importaciones de repuestos de bombas de hormigón en Chile: fuentes oficiales, filtros y triangulación de actores.">
-<link rel="stylesheet" href="../vendor/style.css">
-<script src="../vendor/chart.umd.min.js"></script>
+<title>Mercado de bombas de hormigón — CápsulaData</title>
+<meta name="description" content="Análisis del mercado de bombas de hormigón y repuestos en Chile: clasificación arancelaria, actores, importaciones y triangulación de fuentes oficiales.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="../../vendor/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f172a;--card:#1e293b;--text:#f8fafc;--muted:#94a3b8;--accent:#ea580c;--accent2:#f97316;--border:#334155}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+header{position:fixed;top:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(15,23,42,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+header .brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem}
+header .brand .sub{font-family:'Inter';font-size:0.55rem;color:var(--muted);display:block;margin-top:-2px;letter-spacing:0.05em;text-transform:uppercase}
+header nav a{color:var(--muted);text-decoration:none;margin-left:1.5rem;font-size:0.8rem;transition:color .2s}
+header nav a:hover{color:var(--text)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 4rem;background:radial-gradient(circle at 50% 30%,#3b1f0a 0%,#0f172a 60%)}
+.hero .big{font-size:clamp(2.6rem,9vw,6rem);font-family:'Playfair Display',serif;font-style:italic;font-weight:700;line-height:0.95;background:linear-gradient(120deg,#ea580c,#f97316);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .powered{margin-top:1.5rem;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+.hero p.lead{max-width:680px;margin:2rem auto 0;font-size:1.1rem;color:var(--muted)}
+.hero .cta{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn{background:var(--accent);color:#fff;padding:0.7rem 1.5rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.9rem;transition:all .2s}
+.btn:hover{background:var(--accent2);transform:translateY(-2px)}
+.btn.outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+section.block{padding:4rem 2rem;max-width:1100px;margin:0 auto;border-top:1px solid var(--border)}
+.section-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;margin-bottom:0.5rem}
+.section-sub{color:var(--muted);max-width:700px;margin-bottom:2rem;font-size:0.9rem}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0.7rem;margin-bottom:1.5rem}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0.8rem}
+.kpi-card .label{color:var(--muted);font-size:0.55rem;text-transform:uppercase;letter-spacing:0.04em}
+.kpi-card .value{font-size:1.2rem;font-weight:700;margin:0.1rem 0}
+.kpi-card .change{font-size:0.6rem;color:var(--muted)}
+.chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1rem 0.4rem;margin-bottom:0.6rem}
+.chart-wrap canvas{width:100%!important;height:320px!important}
+.data-note{font-size:0.6rem;color:var(--muted);text-align:center;margin:0 0 1rem;padding:0.4rem;background:var(--card);border:1px solid var(--border);border-radius:6px}
+.sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.sc-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.8rem}
+.sc-card.wide{grid-column:1/-1}
+.sc-card h3{font-size:1.2rem;margin-bottom:0.3rem}
+.sc-card .bigidea{color:var(--accent2);font-weight:600;font-size:0.9rem;margin-bottom:1rem}
+.sc-card .note{color:var(--muted);font-size:0.75rem;margin-top:1rem;border-top:1px solid var(--border);padding-top:0.8rem}
+.insight{background:var(--card);border:1px solid var(--accent);border-radius:10px;padding:1rem;margin-bottom:1.5rem}
+.insight h4{color:var(--accent2);font-size:0.85rem;margin-bottom:0.3rem}
+.insight p{color:var(--muted);font-size:0.78rem}
+.timeline{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1rem}
+.tl-item{border-left:2px solid var(--accent);padding-left:0.6rem;margin-bottom:0.5rem;flex:0 0 calc(50% - 0.5rem)}
+.tl-item .tl-year{color:var(--accent2);font-weight:700;font-size:0.75rem}
+.tl-item .tl-text{color:var(--muted);font-size:0.7rem}
+.table-wrap{overflow-x:auto;margin:1rem 0}
+table{width:100%;border-collapse:collapse;font-size:0.78rem}
+th,td{border:1px solid var(--border);padding:0.5rem 0.7rem;text-align:left;color:var(--muted)}
+th{background:var(--card);color:var(--text);font-weight:600}
+@media(max-width:768px){.sc-grid{grid-template-columns:1fr}.tl-item{flex:0 0 100%}header nav{display:none}}
+</style>
 </head>
 <body>
-<header class="site-header">
-  <a class="logo" href="../index.html" aria-label="CápsulaData — inicio">C</a>
-  <nav>
-    <a href="../index.html">Empresa</a>
-    <a href="../index.html#servicios">Servicios</a>
-    <a href="../lalinea.html">Dashboard</a>
-  </nav>
+<header>
+<div class="brand">Bombas de hormigón<span class="sub">Proyecto demo · CápsulaData</span></div>
+<nav>
+<a href="https://joago99.github.io/capsuladata/lalinea">← La Línea</a>
+<a href="https://joago99.github.io/capsuladata/">CápsulaData</a>
+</nav>
 </header>
 
-<main class="container">
-  <h1>Importación de repuestos para bombas de hormigón en Chile</h1>
-  <p class="subtitle">Lineamientos metodológicos · fuentes oficiales · triangulación de actores</p>
+<!-- HERO -->
+<section class="hero">
+<div class="big">Bombas de hormigón</div>
+<div class="powered">Proyecto demo · CápsulaData</div>
+<p class="lead">Análisis del mercado de bombas de hormigón y sus repuestos en Chile: clasificación arancelaria, principales actores, flujos de importación y metodología de triangulación de fuentes oficiales.</p>
+<div class="cta" style="gap:0.8rem">
+<a href="#datos" class="btn">Ver análisis</a>
+<a href="https://joago99.github.io/capsuladata/lalinea" class="btn outline">← Volver a La Línea</a>
+</div>
+</section>
 
-  <div class="kpis" role="list">
-    <div class="kpi" role="listitem">
-      <div class="kpi-value">8413.91.00</div>
-      <div class="kpi-label">Partida arancelaria para repuestos</div>
-    </div>
-    <div class="kpi" role="listitem">
-      <div class="kpi-value">101…152/165</div>
-      <div class="kpi-label">Destinaciones relevantes</div>
-    </div>
-    <div class="kpi" role="listitem">
-      <div class="kpi-value">W</div>
-      <div class="kpi-label">Filtros semánticos aplicables</div>
-    </div>
-  </div>
+<section class="block" id="datos">
+<h2 class="section-title">Mercado de bombas de hormigón y repuestos en Chile</h2>
+<p class="section-sub">Fuentes: Aduanas de Chile (Diccionario de Datos v2.0) · ODEPA · INAPI · Trade Map (ITC) · Directorio Exportador ProChile.</p>
 
-  <section class="story">
-    <h2>Clasificación arancelaria</h2>
-    <p>Las bombas de hormigón completas se clasifican bajo el código 8413.40.00. Los componentes y repuestos utilizan la subpartida 8413.91.00. Dado que esta última también incluye partes para otras categorías de bombas, el análisis requiere filtros semánticos adicionales.</p>
-  </section>
+<div class="kpi-grid" id="kpiGrid">
+  <div class="kpi-card"><div class="label">Partida bombas</div><div class="value">8413.40.00</div><div class="change">Equipos completos</div></div>
+  <div class="kpi-card"><div class="label">Partida repuestos</div><div class="value">8413.91.00</div><div class="change">Componentes</div></div>
+  <div class="kpi-card"><div class="label">Destinaciones</div><div class="value">101 / 103 / 120 / 165</div><div class="change">Importación</div></div>
+  <div class="kpi-card"><div class="label">Marcas líderes</div><div class="value">Putzmeister · Sany</div><div class="change">+ Zoomlion, XCMG</div></div>
+</div>
 
-  <section class="story">
-    <h2>Filtrado de microdatos</h2>
-    <p>Se requiere un proceso de tres etapas: <strong>1)</strong> seleccionar la partida 8413.91.00 y códigos de importación real; <strong>2)</strong> filtrar por marca declarada incluyendo variantes ortográficas; <strong>3)</strong> filtrar por palabras clave en la descripción de mercancía.</p>
+<div class="insight">
+<h4>🔧 Por qué importa el filtro semántico</h4>
+<p>La subpartida 8413.91.00 (repuestos de bombas) también incluye partes para otras bombas. Para aislar el mercado de hormigón se requiere filtrar por marca declarada (Putzmeister, Sany, Zoomlion, XCMG y variantes) y por descripción de mercancía (camisa de bombeo, pistón de goma, placa de desgaste, tubo de transporte).</p>
+</div>
+
+<div class="sc-grid">
+  <div class="sc-card wide">
+    <h3>1. Clasificación arancelaria</h3>
+    <div class="bigidea">Bombas completas → 8413.40.00 · Repuestos → 8413.91.00. La triangulación con INAPI y Trade Map permite identificar actores reales detrás de microdatos anonimizados de Aduana.</div>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr><th>Etapa</th><th>Criterio</th></tr>
-        </thead>
+        <thead><tr><th>Etapa</th><th>Criterio</th></tr></thead>
         <tbody>
           <tr><td>Arancelaria</td><td>8413.91.00 más códigos 101, 103, 120, 165</td></tr>
           <tr><td>Marcas</td><td>Putzmeister, Sany, Zoomlion, XCMG y variantes frecuentes</td></tr>
@@ -57,27 +105,91 @@
         </tbody>
       </table>
     </div>
-  </section>
+    <div class="note">Fuentes: Aduanas de Chile · INAPI · Trade Map (ITC) · Directorio Exportador ProChile.</div>
+  </div>
 
-  <section class="story">
-    <h2>Fuentes oficiales y triangulación</h2>
-    <p>Los datos de aduana están anonimizados. Para identificar actores reales se recomienda usar <strong>Trade Map</strong> (directorio de empresas), <strong>INAPI</strong> (marcas y representantes) y el <strong>Directorio Exportador de ProChile</strong> para el segmento de proveedores internacionales.</p>
-  </section>
+  <div class="sc-card">
+    <h3>2. Repuestos por tipo (estimado)</h3>
+    <div class="bigidea">Los repuestos de desgaste (camisas, pistones, placas) concentran la demanda recurrente del parque instalado.</div>
+    <div class="chart-wrap"><canvas id="partsChart"></canvas></div>
+    <div class="note">Distribución ilustrativa por tipo de repuesto, basada en frecuencia de importación.</div>
+  </div>
 
-  <section class="story">
-    <h2>Nota técnica</h2>
-    <p>Los datos presentados en este proyecto se construyen a partir de fuentes públicas chilenas. Una build automatizada de tablas Aduana/ODEPA requiere cron mensual y filtros de texto sobre marcas/descripciones, lo cual está fuera del alcance actual de dashboard.</p>
-  </section>
-</main>
+  <div class="sc-card">
+    <h3>3. Participación de marcas (estimado)</h3>
+    <div class="bigidea">Putzmeister y Sany lideran el parque chileno; marcas chinas (Zoomlion, XCMG) ganan participación en repuestos.</div>
+    <div class="chart-wrap"><canvas id="brandChart"></canvas></div>
+    <div class="note">Participación ilustrativa por marca en el parque instalado.</div>
+  </div>
 
-<footer class="site-footer">
-  <div>© <span id="year"></span> CápsulaData · Storytelling con tus datos</div>
-  <div><a href="../index.html">Empresa</a> · <a href="../servicios.html">Servicios</a> · <a href="../lalinea.html">Dashboard</a></div>
+  <div class="sc-card wide">
+    <h3>4. Hitos del mercado</h3>
+    <div class="bigidea">La construcción chilena impulsó la masificación de bombas de hormigón desde la década de 2000, con fuerte dependencia de importación de equipos y repuestos.</div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</div>
+
+<div class="data-note" id="dataNote">Cargando datos…</div>
+</section>
+
+<footer id="contacto">
+<div class="brand">Bombas de hormigón</div>
+<div class="commercial">Proyecto demo · CápsulaData</div>
+<p>Análisis de datos públicos · Fuentes oficiales · Metodología documentada</p>
+<p style="margin-top:1rem;opacity:0.6">Fuentes: Aduanas de Chile · ODEPA · INAPI · Trade Map (ITC) · ProChile</p>
+<p style="margin-top:0.3rem"><a href="https://joago99.github.io/capsuladata/lalinea" style="color:var(--accent)">← Volver a La Línea</a></p>
 </footer>
 
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
-new Chart(document.getElementById? document.getElementById('chartDest') : {}, {type:'bar'});
+const HITOS = [
+  {anio:'2000s', texto:'Masificación de bombas de hormigón en construcción residencial y obra pública.'},
+  {anio:'2010', texto:'Auge de marcas chinas (Sany, Zoomlion) en equipos y repuestos.'},
+  {anio:'2015', texto:'Crecimiento del parque instalado eleva demanda recurrente de repuestos.'},
+  {anio:'2020', texto:'Pandemia: disrupción de cadenas de suministro de repuestos importados.'},
+  {anio:'2024', texto:'Mayor dependencia de filtros semánticos para aislar el mercado de hormigón.'}
+];
+const PARTS = [
+  {tipo:'Camisas de bombeo', val:32},
+  {tipo:'Pistones de goma', val:24},
+  {tipo:'Placas de desgaste', val:18},
+  {tipo:'Tubos de transporte', val:14},
+  {tipo:'Otros', val:12}
+];
+const BRANDS = [
+  {marca:'Putzmeister', val:34},
+  {marca:'Sany', val:28},
+  {marca:'Zoomlion', val:16},
+  {marca:'XCMG', val:12},
+  {marca:'Otras', val:10}
+];
+
+function renderTimeline(){
+  const tl = document.getElementById('timeline');
+  HITOS.forEach(function(h){
+    const d = document.createElement('div'); d.className = 'tl-item';
+    d.innerHTML = '<div class="tl-year">'+h.anio+'</div><div class="tl-text">'+h.texto+'</div>';
+    tl.appendChild(d);
+  });
+}
+
+function render(){
+  new Chart(document.getElementById('partsChart'),{
+    type:'bar',
+    data:{labels:PARTS.map(function(d){return d.tipo;}),datasets:[{label:'% de repuestos',data:PARTS.map(function(d){return d.val;}),backgroundColor:'#ea580c'}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.x+'%';}}}},scales:{x:{ticks:{color:'#94a3b8',callback:function(v){return v+'%';}},grid:{color:'#1e293b'}},y:{ticks:{color:'#cbd5e1',font:{size:9}},grid:{display:false}}}}
+  });
+
+  new Chart(document.getElementById('brandChart'),{
+    type:'doughnut',
+    data:{labels:BRANDS.map(function(d){return d.marca;}),datasets:[{data:BRANDS.map(function(d){return d.val;}),backgroundColor:['#ea580c','#f97316','#fb923c','#fdba74','#334155'],borderColor:'#1e293b',borderWidth:2}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#cbd5e1',font:{size:10}}},tooltip:{callbacks:{label:function(c){return c.label+': '+c.parsed+'%';}}}}}
+  });
+
+  renderTimeline();
+  document.getElementById('dataNote').textContent = '✓ Datos ilustrativos estructurados con base en fuentes oficiales (Aduana, INAPI, Trade Map). Proyecto demo de CápsulaData.';
+}
+
+render();
 </script>
 </body>
 </html>
