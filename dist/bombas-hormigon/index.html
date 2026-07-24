@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Importación de repuestos para bombas de hormigón — CápsulaData</title>
+<meta name="description" content="Metodología y lineamientos para analizar importaciones de repuestos de bombas de hormigón en Chile: fuentes oficiales, filtros y triangulación de actores.">
+<link rel="stylesheet" href="../../vendor/style.css">
+<script src="../../vendor/chart.umd.min.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="../index.html" aria-label="CápsulaData — inicio">C</a>
+  <nav>
+    <a href="../index.html">Empresa</a>
+    <a href="../index.html#servicios">Servicios</a>
+    <a href="../lalinea.html">Dashboard</a>
+  </nav>
+</header>
+
+<main class="container">
+  <h1>Importación de repuestos para bombas de hormigón en Chile</h1>
+  <p class="subtitle">Lineamientos metodológicos · fuentes oficiales · triangulación de actores</p>
+
+  <div class="kpis" role="list">
+    <div class="kpi" role="listitem">
+      <div class="kpi-value">8413.91.00</div>
+      <div class="kpi-label">Partida arancelaria para repuestos</div>
+    </div>
+    <div class="kpi" role="listitem">
+      <div class="kpi-value">101…152/165</div>
+      <div class="kpi-label">Destinaciones relevantes</div>
+    </div>
+    <div class="kpi" role="listitem">
+      <div class="kpi-value">W</div>
+      <div class="kpi-label">Filtros semánticos aplicables</div>
+    </div>
+  </div>
+
+  <section class="story">
+    <h2>Clasificación arancelaria</h2>
+    <p>Las bombas de hormigón completas se clasifican bajo el código 8413.40.00. Los componentes y repuestos utilizan la subpartida 8413.91.00. Dado que esta última también incluye partes para otras categorías de bombas, el análisis requiere filtros semánticos adicionales.</p>
+  </section>
+
+  <section class="story">
+    <h2>Filtrado de microdatos</h2>
+    <p>Se requiere un proceso de tres etapas: <strong>1)</strong> seleccionar la partida 8413.91.00 y códigos de importación real; <strong>2)</strong> filtrar por marca declarada incluyendo variantes ortográficas; <strong>3)</strong> filtrar por palabras clave en la descripción de mercancía.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Etapa</th><th>Criterio</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Arancelaria</td><td>8413.91.00 más códigos 101, 103, 120, 165</td></tr>
+          <tr><td>Marcas</td><td>Putzmeister, Sany, Zoomlion, XCMG y variantes frecuentes</td></tr>
+          <tr><td>Descripción</td><td>camisa de bombeo, pistón de goma, placa de desgaste, tubo de transporte</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="story">
+    <h2>Fuentes oficiales y triangulación</h2>
+    <p>Los datos de aduana están anonimizados. Para identificar actores reales se recomienda usar <strong>Trade Map</strong> (directorio de empresas), <strong>INAPI</strong> (marcas y representantes) y el <strong>Directorio Exportador de ProChile</strong> para el segmento de proveedores internacionales.</p>
+  </section>
+
+  <section class="story">
+    <h2>Nota técnica</h2>
+    <p>Los datos presentados en este proyecto se construyen a partir de fuentes públicas chilenas. Una build automatizada de tablas Aduana/ODEPA requiere cron mensual y filtros de texto sobre marcas/descripciones, lo cual está fuera del alcance actual de dashboard.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div>© <span id="year"></span> CápsulaData · Storytelling con tus datos</div>
+  <div><a href="../index.html">Empresa</a> · <a href="../servicios.html">Servicios</a> · <a href="../lalinea.html">Dashboard</a></div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+new Chart(document.getElementById? document.getElementById('chartDest') : {}, {type:'bar'});
+</script>
+</body>
+</html>

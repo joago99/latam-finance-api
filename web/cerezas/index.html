@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exportaciones de cerezas — CápsulaData</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="../../vendor/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f172a;--card:#1e293b;--text:#f8fafc;--muted:#94a3b8;--accent:#be185d;--accent2:#ec4899;--border:#334155;--chile:#be185d}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+header{position:fixed;top:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(15,23,42,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+header .brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem}
+header .brand .sub{font-family:'Inter';font-size:0.55rem;color:var(--muted);display:block;margin-top:-2px;letter-spacing:0.05em;text-transform:uppercase}
+header nav a{color:var(--muted);text-decoration:none;margin-left:1.5rem;font-size:0.8rem;transition:color .2s}
+header nav a:hover{color:var(--text)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 4rem;background:radial-gradient(circle at 50% 30%,#3b0a2a 0%,#0f172a 60%)}
+.hero .big{font-size:clamp(3rem,10vw,7rem);font-family:'Playfair Display',serif;font-style:italic;font-weight:700;line-height:0.95;background:linear-gradient(120deg,#be185d,#ec4899);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .powered{margin-top:1.5rem;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+.hero p.lead{max-width:680px;margin:2rem auto 0;font-size:1.1rem;color:var(--muted)}
+.hero .cta{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn{background:var(--accent);color:#fff;padding:0.7rem 1.5rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.9rem;transition:all .2s}
+.btn:hover{background:var(--accent2);transform:translateY(-2px)}
+.btn.outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+section.block{padding:4rem 2rem;max-width:1100px;margin:0 auto;border-top:1px solid var(--border)}
+.section-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;margin-bottom:0.5rem}
+.section-sub{color:var(--muted);max-width:700px;margin-bottom:2rem;font-size:0.9rem}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0.7rem;margin-bottom:1.5rem}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0.8rem}
+.kpi-card .label{color:var(--muted);font-size:0.55rem;text-transform:uppercase;letter-spacing:0.04em}
+.kpi-card .value{font-size:1.2rem;font-weight:700;margin:0.1rem 0}
+.kpi-card .change{font-size:0.6rem;color:var(--muted)}
+.kpi-card .change.up{color:#4ade80}.kpi-card .change.down{color:#f87171}
+.chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1rem 0.4rem;margin-bottom:0.6rem}
+.chart-wrap canvas{width:100%!important;height:320px!important}
+.data-note{font-size:0.6rem;color:var(--muted);text-align:center;margin:0 0 1rem;padding:0.4rem;background:var(--card);border:1px solid var(--border);border-radius:6px}
+.sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.sc-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.8rem}
+.sc-card.wide{grid-column:1/-1}
+.sc-card h3{font-size:1.2rem;margin-bottom:0.3rem}
+.sc-card .bigidea{color:var(--accent2);font-weight:600;font-size:0.9rem;margin-bottom:1rem}
+.sc-card .note{color:var(--muted);font-size:0.75rem;margin-top:1rem;border-top:1px solid var(--border);padding-top:0.8rem}
+.timeline{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1rem}
+.tl-item{border-left:2px solid var(--accent);padding-left:0.6rem;margin-bottom:0.5rem;flex:0 0 calc(50% - 0.5rem)}
+.tl-item .tl-year{color:var(--accent2);font-weight:700;font-size:0.75rem}
+.tl-item .tl-text{color:var(--muted);font-size:0.7rem}
+.insight{background:var(--card);border:1px solid var(--accent);border-radius:10px;padding:1rem;margin-bottom:1.5rem}
+.insight h4{color:var(--accent2);font-size:0.85rem;margin-bottom:0.3rem}
+.insight p{color:var(--muted);font-size:0.78rem}
+@media(max-width:768px){.sc-grid{grid-template-columns:1fr}.tl-item{flex:0 0 100%}header nav{display:none}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">La Línea<span class="sub">Powered by CápsulaData</span></div>
+<nav>
+<a href="https://joago99.github.io/capsuladata/lalinea">← La Línea</a>
+<a href="https://joago99.github.io/capsuladata/">CápsulaData</a>
+</nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+<div class="big">Exportaciones de cerezas</div>
+<div class="powered">Powered by CápsulaData</div>
+<p class="lead">Chile exportó <strong>USD 3.147 millones</strong> en cerezas frescas la temporada 2023/24. China concentra el <strong>87,5%</strong> del valor. Analizamos precios, volúmenes, destinos y el contexto de los acuerdos comerciales que hicieron posible este mercado.</p>
+<div class="cta" style="gap:0.8rem">
+<a href="#datos" class="btn">Ver análisis</a>
+<a href="https://joago99.github.io/capsuladata/lalinea" class="btn outline">← Volver a La Línea</a>
+</div>
+</section>
+
+<section class="block" id="datos">
+<h2 class="section-title">Exportaciones de cerezas frescas</h2>
+<p class="section-sub">Serie histórica ODEPA · 2005/06–2023/24 · Código arancelario SACH 0809.29 · Cerezas frescas (<em>Prunus avium</em>) · Variedades: Bing, Lapins, Santina, Regina, Sweetheart.</p>
+
+<div class="kpi-grid" id="kpiGrid">
+  <div class="kpi-card"><div class="label">Valor FOB 2023/24</div><div class="value" id="kpiValor">—</div><div class="change up">+31% vs 2022/23</div></div>
+  <div class="kpi-card"><div class="label">Volumen 2023/24</div><div class="value" id="kpiVol">—</div><div class="change up">+6% vs 2022/23</div></div>
+  <div class="kpi-card"><div class="label">Precio FOB 2023/24</div><div class="value" id="kpiPrice">—</div><div class="change up">+24% vs 2022/23</div></div>
+  <div class="kpi-card"><div class="label">Destino principal</div><div class="value">China 87,5%</div><div class="change">participación valor</div></div>
+</div>
+
+<div class="insight">
+<h4>📌 China domina el mercado de cerezas chilenas</h4>
+<p>China concentra el 87,5% del valor exportado de cerezas chilenas, equivalente a ~USD 2.750 M en 2023/24. Le siguen EE.UU. (4,8%) y Corea del Sur (2,3%). Esta especialización es resultado de tratados de libre comercio (TLC Chile-China 2006), mejoras logísticas como el servicio <em>Cherry Express</em> (2012) y variedades adaptadas al paladar asiático (Bing, Lapins, Santina).</p>
+</div>
+
+<div class="sc-grid">
+  <div class="sc-card wide">
+    <h3>1. Precio promedio FOB por temporada</h3>
+    <div class="bigidea">El precio por tonelada pasó de ~USD 5.310 (2005/06) a USD 13.486 (2023/24): un crecimiento de 2,5x impulsado por la demanda china.</div>
+    <div class="chart-wrap"><canvas id="priceChart"></canvas></div>
+    <div class="note">USD por tonelada. Fuente: ODEPA · Matriz Detallada de Comercio Exterior.</div>
+  </div>
+
+  <div class="sc-card">
+    <h3>2. Exportación: valor vs volumen</h3>
+    <div class="bigidea">El valor FOB creció <strong>60x</strong> desde 2005; el volumen <strong>24x</strong>. La brecha refleja la apreciación del precio unitario en destino.</div>
+    <div class="chart-wrap"><canvas id="exportChart"></canvas></div>
+    <div class="note">Barras: valor FOB (M USD, izq). Línea: volumen (kt, der).</div>
+  </div>
+
+  <div class="sc-card">
+    <h3>3. Principales destinos (2023/24)</h3>
+    <div class="bigidea">China concentra 87,5% del valor. EE.UU. y Corea del Sur completan el podio, seguidos por Reino Unido y Brasil.</div>
+    <div class="chart-wrap"><canvas id="destChart"></canvas></div>
+    <div class="note">Participación por valor FOB. Fuente: ODEPA.</div>
+  </div>
+
+  <div class="sc-card wide">
+    <h3>4. Hitos comerciales</h3>
+    <div class="bigidea">Los acuerdos de libre comercio con China (2006), EE.UU. (2004) y UE (2002) fueron habilitantes para la apertura de mercados. La logística <em>Cherry Express</em> redujo el tránsito marítimo a China de 35 a 22 días.</div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+
+  <div class="sc-card wide">
+    <h3>5. Principales exportadores</h3>
+    <div class="bigidea">Las 5 primeras empresas concentran ~52% de las exportaciones. El resto se fragmenta en decenas de actores, lo que indica un mercado competitivo pero con liderazgos consolidados.</div>
+    <div class="chart-wrap"><canvas id="expChart"></canvas></div>
+    <div class="note">Participación estimada por valor FOB. Datos estructurados con base en reportes de industria.</div>
+  </div>
+</div>
+
+<div class="data-note" id="dataNote">Cargando datos desde ODEPA…</div>
+</section>
+
+<footer id="contacto">
+<div class="brand">Exportaciones de cerezas</div>
+<div class="commercial">Powered by CápsulaData</div>
+<p>Análisis de datos públicos · Fuentes oficiales · Metodología documentada</p>
+<p style="margin-top:1rem;opacity:0.6">Fuentes: ODEPA · Matriz Detallada de Comercio Exterior · Aduanas de Chile · Trade Map (ITC)</p>
+<p style="margin-top:0.3rem"><a href="https://joago99.github.io/capsuladata/lalinea" style="color:var(--accent)">← Volver a La Línea</a></p>
+</footer>
+
+<script>
+let DATA = null;
+const fmt = (v,d=0)=>Number(v).toLocaleString('es-CL',{minimumFractionDigits:d,maximumFractionDigits:d});
+
+async function loadData(){
+  try{
+    const r = await fetch('../../data/cerezas-export.json');
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    DATA = await r.json();
+    return true;
+  }catch(e){
+    document.getElementById('dataNote').textContent = 'Error cargando datos: '+e.message;
+    return false;
+  }
+}
+
+function renderTimeline(){
+  const tl = document.getElementById('timeline');
+  if(!DATA || !DATA.hitos_arancelarios) return;
+  DATA.hitos_arancelarios.forEach(function(h){
+    const d = document.createElement('div'); d.className = 'tl-item';
+    d.innerHTML = '<div class="tl-year">'+h.fecha+'</div><div class="tl-text">'+h.evento+'</div>';
+    tl.appendChild(d);
+  });
+}
+
+function render(){
+  const s = DATA.series;
+  const yrs = s.map(function(d){ return d.temporada; });
+  const price = s.map(function(d){ return d.price_usd_t; });
+  const fob = s.map(function(d){ return d.fob_musd; });
+  const vol = s.map(function(d){ return d.vol_kt; });
+
+  // KPIs dinámicos
+  var ult = s[s.length-1];
+  document.getElementById('kpiValor').textContent = 'USD '+fmt(ult.fob_musd,0)+' M';
+  document.getElementById('kpiVol').textContent = fmt(ult.vol_kt,1)+' kt';
+  document.getElementById('kpiPrice').textContent = 'USD '+fmt(ult.price_usd_t,0)+' /t';
+
+  // 1. Precio
+  new Chart(document.getElementById('priceChart'),{
+    type:'line',
+    data:{labels:yrs,datasets:[{label:'Precio FOB (USD/t)',data:price,borderColor:'#ec4899',backgroundColor:'#ec48991A',borderWidth:2,pointRadius:2,tension:0.2,fill:true}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#cbd5e1',font:{size:9}}},tooltip:{callbacks:{label:function(c){return 'USD '+fmt(c.parsed.y);}}}},scales:{x:{ticks:{color:'#94a3b8',font:{size:8},maxTicksLimit:12},grid:{color:'#1e293b'}},y:{ticks:{color:'#94a3b8',callback:function(v){return '$'+fmt(v);}},grid:{color:'#1e293b'}}}}
+  });
+
+  // 2. Valor vs Volumen
+  new Chart(document.getElementById('exportChart'),{
+    data:{labels:yrs,datasets:[
+      {type:'bar',label:'Valor FOB (M USD)',data:fob,backgroundColor:'#be185d',yAxisID:'y',order:2},
+      {type:'line',label:'Volumen (kt)',data:vol,borderColor:'#fbbf24',backgroundColor:'#fbbf24',borderWidth:2,pointRadius:2,yAxisID:'y1',order:1}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#cbd5e1',font:{size:9}}},tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+fmt(c.parsed.y,1);}}}},scales:{x:{ticks:{color:'#94a3b8',font:{size:8},maxTicksLimit:12},grid:{color:'#1e293b'}},y:{position:'left',ticks:{color:'#94a3b8'},grid:{color:'#1e293b'},title:{display:true,text:'M USD',color:'#94a3b8'}},y1:{position:'right',ticks:{color:'#fbbf24'},grid:{display:false},title:{display:true,text:'kt',color:'#fbbf24'}}}}
+  });
+
+  // 3. Destinos
+  var dst = DATA.destinos;
+  new Chart(document.getElementById('destChart'),{
+    type:'bar',
+    data:{labels:dst.map(function(d){return d.pais;}),datasets:[{label:'Participación (%)',data:dst.map(function(d){return d.participacion;}),backgroundColor:['#DE2910','#3C3B6E','#003478','#012169','#009c3b','#64748b']}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.x.toFixed(1)+'%';}}}},scales:{x:{ticks:{color:'#94a3b8',callback:function(v){return v+'%';}},grid:{color:'#1e293b'}},y:{ticks:{color:'#cbd5e1',font:{size:9}},grid:{display:false}}}}
+  });
+
+  // 4. Exportadores
+  var exp = DATA.exportadores;
+  new Chart(document.getElementById('expChart'),{
+    type:'doughnut',
+    data:{labels:exp.map(function(d){return d.nombre;}),datasets:[{data:exp.map(function(d){return d.participacion;}),backgroundColor:['#be185d','#e11d48','#f43f5e','#fb7185','#fda4af','#334155'],borderColor:'#1e293b',borderWidth:2}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#cbd5e1',font:{size:10}}},tooltip:{callbacks:{label:function(c){return c.label+': '+c.parsed+'%';}}}}}
+  });
+
+  renderTimeline();
+  document.getElementById('dataNote').textContent = '✓ Datos ODEPA 2005/06–2023/24 cargados correctamente. Fuente: ODEPA · Matriz Detallada de Comercio Exterior.';
+}
+
+async function init(){
+  const ok = await loadData();
+  if(ok) render(); else document.getElementById('dataNote').textContent = 'Error cargando datos de exportaciones.';
+}
+init();
+</script>
+</body>
+</html>

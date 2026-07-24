@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "fuente": "ODEPA · Matriz Detallada de Comercio Exterior",
+    "codigo_arancelario": "0809.29 (Cerezas frescas)",
+    "actualizacion": "2024-12",
+    "proyecto": "Exportaciones de cerezas chilenas — CápsulaData",
+    "nota": "Datos simulados con base en estadísticas oficiales ODEPA 2005/06–2023/24. Precios FOB por tonelada, valor FOB en millones USD, volumen en kilotoneladas."
+  },
+  "series": [
+    {"temporada": "2005/06", "price_usd_t": 5310, "fob_musd": 52, "vol_kt": 9.8},
+    {"temporada": "2006/07", "price_usd_t": 5470, "fob_musd": 63, "vol_kt": 11.5},
+    {"temporada": "2007/08", "price_usd_t": 5620, "fob_musd": 78, "vol_kt": 13.9},
+    {"temporada": "2008/09", "price_usd_t": 5480, "fob_musd": 82, "vol_kt": 15.0},
+    {"temporada": "2009/10", "price_usd_t": 5740, "fob_musd": 105, "vol_kt": 18.3},
+    {"temporada": "2010/11", "price_usd_t": 6210, "fob_musd": 145, "vol_kt": 23.4},
+    {"temporada": "2011/12", "price_usd_t": 6950, "fob_musd": 192, "vol_kt": 27.6},
+    {"temporada": "2012/13", "price_usd_t": 7230, "fob_musd": 235, "vol_kt": 32.5},
+    {"temporada": "2013/14", "price_usd_t": 7680, "fob_musd": 311, "vol_kt": 40.5},
+    {"temporada": "2014/15", "price_usd_t": 8210, "fob_musd": 398, "vol_kt": 48.5},
+    {"temporada": "2015/16", "price_usd_t": 8520, "fob_musd": 512, "vol_kt": 60.1},
+    {"temporada": "2016/17", "price_usd_t": 8910, "fob_musd": 655, "vol_kt": 73.5},
+    {"temporada": "2017/18", "price_usd_t": 9430, "fob_musd": 812, "vol_kt": 86.1},
+    {"temporada": "2018/19", "price_usd_t": 9870, "fob_musd": 1045, "vol_kt": 105.9},
+    {"temporada": "2019/20", "price_usd_t": 10420, "fob_musd": 1280, "vol_kt": 122.8},
+    {"temporada": "2020/21", "price_usd_t": 10850, "fob_musd": 1520, "vol_kt": 140.1},
+    {"temporada": "2021/22", "price_usd_t": 11520, "fob_musd": 1890, "vol_kt": 164.1},
+    {"temporada": "2022/23", "price_usd_t": 10870, "fob_musd": 2400, "vol_kt": 220.8},
+    {"temporada": "2023/24", "price_usd_t": 13486, "fob_musd": 3147, "vol_kt": 233.4}
+  ],
+  "destinos": [
+    {"pais": "China", "participacion": 87.5},
+    {"pais": "EE.UU.", "participacion": 4.8},
+    {"pais": "Corea del Sur", "participacion": 2.3},
+    {"pais": "Reino Unido", "participacion": 1.6},
+    {"pais": "Brasil", "participacion": 1.2},
+    {"pais": "Otros", "participacion": 2.6}
+  ],
+  "exportadores": [
+    {"nombre": "Exportadora 1 (Top 5)", "participacion": 15},
+    {"nombre": "Exportadora 2 (Top 5)", "participacion": 12},
+    {"nombre": "Exportadora 3 (Top 5)", "participacion": 10},
+    {"nombre": "Exportadora 4 (Top 5)", "participacion": 8},
+    {"nombre": "Exportadora 5 (Top 5)", "participacion": 7},
+    {"nombre": "Otros exportadores", "participacion": 48}
+  ],
+  "hitos_arancelarios": [
+    {"fecha": "2002", "evento": "Acuerdo Asociación Chile-UE: cerezas frescas desgravación 4 años (Lista B)"},
+    {"fecha": "2004", "evento": "TLC Chile-EE.UU.: arancel base 6.9¢/kg + ad valorem, desgravación 12 años"},
+    {"fecha": "2006", "evento": "TLC Chile-China entra en vigor"},
+    {"fecha": "2010", "evento": "Desgravación total cerezas procesadas a EE.UU. completada"},
+    {"fecha": "2012", "evento": "Inicio servicio Cherry Express: marítimo acelerado a China (22 días)"},
+    {"fecha": "2018", "evento": "Cherry Express alcanza frecuencias semanales en temporada alta"},
+    {"fecha": "2021", "evento": "Protocolo fitosanitario Chile-China actualizado, apertura nuevos puertos de entrada"},
+    {"fecha": "2024", "evento": "Exportaciones superan USD 3.000 M por primera vez"}
+  ],
+  "variedades": ["Bing", "Lapins", "Santina", "Regina", "Sweetheart"]
+}

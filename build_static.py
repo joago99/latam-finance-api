@@ -26,7 +26,9 @@ def rel(src, path_from_root=False):
 
 def main():
     os.makedirs(os.path.join(DIST, "data"), exist_ok=True)
-    os.makedirs(os.path.join(DIST, "vendor"), exist_ok=True)
+    os.makedirs(os.path.join(DIST, 'vendor'), exist_ok=True)
+    os.makedirs(os.path.join(DIST, 'cerezas'), exist_ok=True)
+    os.makedirs(os.path.join(DIST, 'bombas-hormigon'), exist_ok=True)
 
     macro = json.load(open(os.path.join(ROOT, "data", "chile", "bcentral", "chile_macro_monthly.json"), encoding="utf-8"))
     clean = [r for r in macro["data"] if r.get("fecha","") <= "2026-12"]
@@ -64,15 +66,39 @@ def main():
     svc = svc.replace('href="https://joago99.github.io/la-linea-web/empresa.html"', 'href="./index.html"')
     svc = svc.replace('href="https://joago99.github.io/la-linea-web/capsula-servicios.html"', 'href="./servicios.html"')
     open(os.path.join(DIST, "servicios.html"), "w", encoding="utf-8").write(svc)
-
+    # logo de CápsulaData
     logo = os.path.join(ROOT, "web", "capsula-servicios", "logo.png")
     if os.path.exists(logo):
         shutil.copy(logo, os.path.join(DIST, "logo.png"))
+
+    # --- Datos de proyectos ---
+    for fname in ["cerezas-export.json"]:
+        src = os.path.join(ROOT, "data", fname)
+        if os.path.exists(src):
+            shutil.copy(src, os.path.join(DIST, "data", fname))
 
     print(f"Build estático en {DIST}")
     print(f"  - index.html (CápsulaData empresa)")
     print(f"  - lalinea.html (La Línea dashboard)")
     print(f"  - servicios.html (Servicios)")
+
+    # 4) cerezas -> lalinea/cerezas/index.html
+    cz = open(os.path.join(ROOT, "web", "cerezas", "index.html"), encoding="utf-8").read()
+    cz_dir = os.path.join(DIST, "lalinea", "cerezas")
+    os.makedirs(cz_dir, exist_ok=True)
+    cz = cz.replace('../../vendor/chart.umd.min.js', '../../../vendor/chart.umd.min.js')
+    cz = cz.replace('../../data/cerezas-export.json', '../../../data/cerezas-export.json')
+    open(os.path.join(cz_dir, "index.html"), "w", encoding="utf-8").write(cz)
+
+    # 5) bombas-hormigon -> lalinea/bombas-hormigon/index.html
+    bh = open(os.path.join(ROOT, "web", "bombas-hormigon", "index.html"), encoding="utf-8").read()
+    bh_dir = os.path.join(DIST, "lalinea", "bombas-hormigon")
+    os.makedirs(bh_dir, exist_ok=True)
+    bh = bh.replace('../../vendor/chart.umd.min.js', '../../../vendor/chart.umd.min.js')
+    open(os.path.join(bh_dir, "index.html"), "w", encoding="utf-8").write(bh)
+
+    print(f"  - cerezas/index.html")
+    print(f"  - bombas-hormigon/index.html")
     print(f"  - logo.png")
     print(f"  - data/chile-macro.json ({len(clean)} filas)")
     print(f"  - data/world-gdp.json ({len(world)} países)")
