@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Exportaciones de cerezas — CápsulaData</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="../../../vendor/chart.umd.min.js"></script>
+<script src="../../vendor/chart.umd.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0f172a;--card:#1e293b;--text:#f8fafc;--muted:#94a3b8;--accent:#be185d;--accent2:#ec4899;--border:#334155;--chile:#be185d}
@@ -74,6 +74,7 @@ section.block{padding:4rem 2rem;max-width:1100px;margin:0 auto;border-top:1px so
 <section class="block" id="datos">
 <h2 class="section-title">Exportaciones de cerezas frescas</h2>
 <p class="section-sub">Serie histórica ODEPA · 2005/06–2023/24 · Código arancelario SACH 0809.29 · Cerezas frescas (<em>Prunus avium</em>) · Variedades: Bing, Lapins, Santina, Regina, Sweetheart.</p>
+<div class="data-note" style="max-width:1000px;margin:0 auto 1.5rem;border-color:var(--accent);color:var(--text)">⚠️ <strong>Datos ilustrativos / estimados.</strong> Las cifras de esta página son una reconstrucción orientativa con base en reportes de industria y no constituyen datos oficiales de ODEPA. Úsalas solo como referencia de orden de magnitud.</div>
 
 <div class="kpi-grid" id="kpiGrid">
   <div class="kpi-card"><div class="label">Valor FOB 2023/24</div><div class="value" id="kpiValor">—</div><div class="change up">+31% vs 2022/23</div></div>
@@ -126,12 +127,76 @@ section.block{padding:4rem 2rem;max-width:1100px;margin:0 auto;border-top:1px so
 <div class="data-note" id="dataNote">Cargando datos desde ODEPA…</div>
 </section>
 
+<!-- PREDICCIONES 2026–2030 -->
+<section class="block" id="predicciones">
+  <h2 class="section-title">Predicciones 2026–2030</h2>
+  <p class="section-sub">
+    Proyecciones ilustrativas basadas en tendencia histórica ODEPA 2005/06–2023/24 y escenarios comerciales.
+    <strong>No son forecasts oficiales ni compromiso de actor del mercado.</strong>
+  </p>
+
+  <div class="sc-grid">
+    <div class="sc-card wide">
+      <h3>1. Volumen exportado 2030</h3>
+      <div class="bigidea">
+        Escenario base: <strong>~150–180 kt</strong> de cerezas exportadas en 2030.
+        Si la tasa de crecimiento promedio 2005–2024 (~10–12% anual en volumen) se modera a 5–6%, el rango anterior es plausible.
+      </div>
+      <div class="note">
+        <strong>Metodología:</strong> Extrapolación de CAGR sobre volumen exportado ODEPA 2005/06–2023/24 en escenario de moderación estructural.<br>
+        <strong>Confianza: Baja.</strong> Mercado altamente concentrado en destino único; viñas, precios chinos y logística pueden cambiar la pendiente.<br>
+        <strong>Advertencia:</strong> Valor y volumen ilustrativos. Usar solo como referencia de orden de magnitud.
+      </div>
+    </div>
+
+    <div class="sc-card">
+      <h3>2. Concentración en China</h3>
+      <div class="bigidea">
+        Proyección base: China se mantiene entre <strong>75%–85%</strong> del valor exportado.
+        Dependencia estructural del mercado asiático por TLC, temporada y logística.
+      </div>
+      <div class="note">
+        <strong>Metodología:</strong> Escenarios de diversificación moderada o acelerada según apertura de EE.UU./Korea/UE.<br>
+        <strong>Confianza: Media.</strong> Bases del crecimiento histórico; sesgo a la baja por diversificación comercial.<br>
+        <strong>Advertencia:</strong> Estimación ilustrativa; participación real depende de campañas comerciales y TLC vigentes.
+      </div>
+    </div>
+
+    <div class="sc-card">
+      <h3>3. Precio promedio FOB</h3>
+      <div class="bigidea">
+        Rango probable 2030: <strong>USD 14.000–17.000 / t</strong>, con crecimiento nominal moderado.
+        La estacionalidad seguirá generando picos en febrero–marzo.
+      </div>
+      <div class="note">
+        <strong>Metodología:</strong> Extrapolación suavizada de la curva 2005/06–2023/24, excluyendo el spike 2023/24.<br>
+        <strong>Confianza: Baja.</strong> Precio depende más de demanda china, salarios logisticos y oferta global que de factores locales.<br>
+        <strong>Advertencia:</strong> Estimación no oficial. No usar para pricing ni contratos.
+      </div>
+    </div>
+
+    <div class="sc-card">
+      <h3>4. Estacionalidad y ventanas comerciales</h3>
+      <div class="bigidea">
+        El pico seguirá concentrándose en <strong>febrero–marzo</strong>.
+        La ventana noviembre–enero representa ~55–65% del valor anual.
+      </div>
+      <div class="note">
+        <strong>Metodología:</strong> Lock-in estacional histórico de temporadas ODEPA 2005/06–2023/24.<br>
+        <strong>Confianza: Alta (ventana).</strong> La estacionalidad biológica y de demanda china muestra alta estabilidad histórica.<br>
+        <strong>Advertencia:</strong> Estructura estacional ilustrativa. Cambios en Cherry Express o certificación pueden mover la ventana.
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /PREDICCIONES -->
+
 <footer id="contacto">
-<div class="brand">Exportaciones de cerezas</div>
+<div class="brand">La Línea</div>
 <div class="commercial">Powered by CápsulaData</div>
-<p>Análisis de datos públicos · Fuentes oficiales · Metodología documentada</p>
-<p style="margin-top:1rem;opacity:0.6">Fuentes: ODEPA · Matriz Detallada de Comercio Exterior · Aduanas de Chile · Trade Map (ITC)</p>
-<p style="margin-top:0.3rem"><a href="https://joago99.github.io/capsuladata/lalinea" style="color:var(--accent)">← Volver a La Línea</a></p>
+<p>Análisis de grandes datos · Entender · Diagnosticar · Predecir</p>
+<p style="margin-top:1.5rem;font-size:0.9rem">¿Quieres este tipo de análisis para tu empresa o proyecto?</p>
+<a href="https://www.linkedin.com/in/JoaquinAlmendra" target="_blank" rel="noopener" class="btn" style="margin-top:0.8rem;display:inline-block">Conéctemos en LinkedIn</a>
 </footer>
 
 <script>
@@ -140,9 +205,9 @@ const fmt = (v,d=0)=>Number(v).toLocaleString('es-CL',{minimumFractionDigits:d,m
 
 async function loadData(){
   try{
-    const r = await fetch('../../../data/cerezas-export.json');
-    if(!r.ok) throw new Error('HTTP '+r.status);
-    DATA = await r.json();
+    const resp = await fetch('../../data/cerezas-export.json');
+    if(!resp.ok) throw new Error('HTTP '+resp.status);
+    DATA = await resp.json();
     return true;
   }catch(e){
     document.getElementById('dataNote').textContent = 'Error cargando datos: '+e.message;

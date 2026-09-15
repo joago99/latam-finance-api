@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La Línea — CápsulaData</title>
+<title>Chile 1958–2026 · La Línea — CápsulaData</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="./vendor/chart.umd.min.js"></script>
+<script src="../../vendor/chart.umd.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0f172a;--card:#1e293b;--text:#f8fafc;--muted:#94a3b8;--accent:#60a5fa;--accent2:#38bdf8;--border:#334155;--chile:#f87171}
@@ -91,10 +91,10 @@ footer .commercial{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15
 <section class="hero">
 <div class="big">Chile 1958–2026</div>
 <div class="powered">Proyecto demo · CápsulaData</div>
-<p class="lead">Dashboard macroeconómico histórico de Chile: PIB, inflación, tipo de cambio, tasas, empleo, cobre, petróleo y población. 13 indicadores, 68 años de historia, con datos del Banco Central e INE.</p>
+<p class="lead">Dashboard macroeconómico histórico de Chile (PIB, inflación, tipo de cambio, empleo, cobre, petróleo, población) y su comparación con el mundo: PIB per cápita vs 23 economías. Datos del Banco Central, INE y Banco Mundial.</p>
 <div class="cta" style="gap:0.8rem">
-<a href="#chile" class="btn">Ver dashboard</a>
-<a href="https://joago99.github.io/capsuladata/lalinea" class="btn outline">← Volver a La Línea</a>
+<a href="#chile" class="btn">Ver dashboard Chile</a>
+<a href="#mundo" class="btn outline">Chile vs el Mundo</a>
 </div>
 </section>
 
@@ -120,13 +120,102 @@ footer .commercial{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15
 <div class="prez-label" id="prezLabel"></div>
 </section>
 
+<!-- CHILE VS MUNDO -->
+<section class="block" id="mundo">
+<h2 class="section-title">Chile vs el Mundo</h2>
+<p class="section-sub">PIB per cápita (USD corrientes) comparado con 23 economías. Siempre con Chile como referencia. Datos: Banco Mundial (NY.GDP.PCAP.CD), 1960–2023.</p>
+<div class="sc-grid" id="scGrid">
+<div class="sc-card"><h3>1. La brecha que no se cierra</h3><div class="bigidea">Chile creció sostenidamente, pero EE.UU. y Noruega se alejan: en 2023 Chile tiene 1/5 del PIB per cápita de Noruega.</div><canvas id="sc1"></canvas><div class="note">Línea roja = Chile. Escala lineal en USD.</div></div>
+<div class="sc-card"><h3>2. ¿Dónde cae Chile hoy?</h3><div class="bigidea">Chile lidera a sus pares sudamericanos, pero está a mitad de tabla global.</div><canvas id="sc2"></canvas><div class="note">Ranking 2023, barras horizontales. Chile en rojo destacado.</div></div>
+<div class="sc-card"><h3>3. ¿Quién corrió más desde 1990?</h3><div class="bigidea">China multiplicó su PIB per cápita por 12x; Chile por 4x. La distancia relativa con Asia se amplió.</div><canvas id="sc3"></canvas><div class="note">Índice base 1990 = 100.</div></div>
+<div class="sc-card"><h3>4. Convergencia: Chile vs mediana mundial</h3><div class="bigidea">Chile superó la mediana de los países comparados a partir de 2005.</div><canvas id="sc4"></canvas><div class="note">Chile (rojo) vs mediana de los 23 países.</div></div>
+<div class="sc-card"><h3>5. ¿Cuántos somos?</h3><div class="bigidea">Chile tiene 19,7 millones de habitantes: el 0,24% del mundo. India y China concentran el 36% de la población global.</div><canvas id="sc5"></canvas><div class="note">Ranking de población 2023. Chile en rojo; otros países latinoamericanos en azul. Fuente: Banco Mundial.</div></div>
+</div>
+</section>
+
+<!-- PREDICCIONES 2026–2030 -->
+<section class="block" id="predicciones">
+  <h2 class="section-title">Predicciones 2026–2030</h2>
+  <p class="section-sub">
+    Proyecciones basadas en extrapolaciones de tendencia y CAGR sobre datos BCCh/INE/Banco Mundial 1990–2025.
+    Son estimaciones orientativas, <strong>no constituyen pronósticos oficiales</strong>.
+  </p>
+
+  <div class="sc-grid">
+    <div class="sc-card wide">
+      <h3>1. PIB per cápita 2030</h3>
+      <div class="bigidea">
+        Proyección base: <strong>USD 20.500–21.800</strong> por habitante en 2030.
+        Si el crecimiento promedio avanza al 1,8–2,2% anual, Chile podría cruzar la barrera psicológica de USD 20k.
+      </div>
+      <div class="note">
+        <strong>Metodología:</strong> CAGR implícito del PIB per cápita 2000–2025 (~2,0%) proyectado a 5 años.<br>
+        <strong>Confianza: Alta.</strong> Base de datos larga y variable estructuralmente estable.<br>
+        <strong>Advertencia:</strong> Estructura productiva, sequías extremas o crisis globales pueden mover el rango ±USD 1.500–2.000.
+      </div>
+    </div>
+
+    <div class="sc-card">
+      <h3>2. Inflación IPC 2026–2030</h3>
+      <div class="bigidea">
+        Escenario base: <strong>2,8%–3,5% anual</strong>, convergiendo gradualmente a la meta del 3%.
+      </div>
+      <div class="note">
+        <strong>Metodología:</strong> Tasas neutrales y trayectoria de convergencia BCCh post-ciclo 2022–2024.<br>
+        <strong>Confianza: Media.</strong> Depende de credibilidad institucional, precios agrícolas y costo energético.<br>
+        <strong>Advertencia:</strong> Choques climáticos o financieros pueden alejar temporalmente la inflación de la meta.
+      </div>
+    </div>
+
+    <div class="sc-card">
+      <h3>3. Tipo de cambio USD/CLP</h3>
+      <div class="bigidea">
+        Rango probable 2026–2030: <strong>$880–$960 por dólar</strong>.
+        Sesgo bajista si precio del cobre se mantiene sobre USD 3,8/lb.
+      </div>
+      <div class="note">
+        <strong>Metodología:</strong> Revisión de bandas implícitas históricas y relación cobre–dólar desde 2000.<br>
+        <strong>Confianza: Media.</strong> Alta sensibilidad a términos de trade, liquidez global y política monetaria de la Fed.<br>
+        <strong>Advertencia:</strong> Crisis cambiarias o episodios de aversión global pueden disparar brechas transitorias.
+      </div>
+    </div>
+
+    <div class="sc-card">
+      <h3>4. Cobre: precio y exportaciones</h3>
+      <div class="bigidea">
+        Precio base: <strong>USD 3,8–4,4/lb</strong>. Rango extremo plausible: USD 3,2–5,0/lb.
+        Chile mantiene ~26–28% de la producción mundial de cobre fino.
+      </div>
+      <div class="note">
+        <strong>Metodología:</strong> CAGR ajustado por shocks de oferta/demanda 2012–2025 y escenarios de descarbonización global.<br>
+        <strong>Confianza: Media.</strong> Precio spot depende más de demanda china y geopolítica que de política doméstica.<br>
+        <strong>Advertencia:</strong> No es precio objetivo ni recomendación. Solo orden de magnitud para análisis estructural.
+      </div>
+    </div>
+
+    <div class="sc-card">
+      <h3>5. Población 2030</h3>
+      <div class="bigidea">
+        Censo y proyecciones INE: <strong>~19,9–20,2 millones</strong> de habitantes en 2030.
+        Crecimiento anual acumulado: ~0,5%.
+      </div>
+      <div class="note">
+        <strong>Metodología:</strong> Proyección de población INE 2002–2035 con tasa de crecimiento estable.<br>
+        <strong>Confianza: Alta.</strong> Fuerte base censal y baja volatilidad demográfica en el corto plazo.<br>
+        <strong>Advertencia:</strong> Flujos migratorios post-pandemia pueden modificar el rango en ±100–150k personas.
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /PREDICCIONES -->
+
 <!-- CONTACTO -->
 <footer id="contacto">
-<div class="brand">Chile 1958–2026</div>
-<div class="commercial">Proyecto demo · CápsulaData</div>
-<p>Análisis de datos públicos · Fuentes oficiales · Metodología documentada</p>
-<p style="margin-top:1rem;opacity:0.6">Fuentes: Banco Central de Chile (BCCh) · Instituto Nacional de Estadísticas (INE)</p>
-<p style="margin-top:0.3rem"><a href="https://joago99.github.io/capsuladata/lalinea" style="color:var(--accent)">← Volver a La Línea</a></p>
+<div class="brand">La Línea</div>
+<div class="commercial">Powered by CápsulaData</div>
+<p>Análisis de grandes datos · Entender · Diagnosticar · Predecir</p>
+<p style="margin-top:1.5rem;font-size:0.9rem">¿Quieres este tipo de análisis para tu empresa o proyecto?</p>
+<a href="https://www.linkedin.com/in/JoaquinAlmendra" target="_blank" rel="noopener" class="btn" style="margin-top:0.8rem;display:inline-block">Conéctemos en LinkedIn</a>
 </footer>
 
 <script>
@@ -243,7 +332,7 @@ let macroAll = [], activeInd = 'UF', selPrez = new Set(), dateFrom = 1958, dateT
 
 async function loadMacroData() {
   try {
-    const resp = await fetch('../../../data/chile-macro.json');
+    const resp = await fetch('../../data/chile-macro.json');
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const json = await resp.json();
     const baseKeys = ['TPM','UF','USD','EUR','UTM','IMACEC','IPC','DESEMPLEO','PIB','IPSA','COBRE','WTI','PIBPC','POB','POBH','POBM'];
@@ -440,5 +529,49 @@ function buildAll(){buildKPIs();buildChart();buildPrezBar();}
   await loadMacroData();
   buildIndChips();
   buildAll();
+})();
+
+// ==================== DATA: MUNDO ====================
+let world = {};
+let worldPop = {};
+const CHILE='#f87171';
+const OTHERS=['#60a5fa','#4ade80','#a78bfa','#fb923c','#22d3ee','#fbbf24','#f472b6','#86efac','#c4b5fd','#5eead4','#fca5a5','#94a3b8'];
+const PALETTE={}; let pi=0;
+function colorFor(name){if(name==='Chile')return CHILE;if(!PALETTE[name])PALETTE[name]=OTHERS[pi++%OTHERS.length];return PALETTE[name];}
+function yearsRange(){const all=new Set();Object.values(world).forEach(function(d){Object.keys(d).forEach(function(y){all.add(parseInt(y));});});return Array.from(all).sort(function(a,b){return a-b;});}
+function seriesFor(name){const d=world[name]||{};const yrs=yearsRange();return yrs.map(function(y){return d[String(y)]!=null?d[String(y)]:null;});}
+
+let charts = {};
+function renderMundo() {
+  const yrs = yearsRange();
+  const chileColor = '#f87171';
+  const sel = ['Chile','Argentina','Perú','México','Brasil','EE.UU.','Noruega','China','India'];
+  function safeChart(id, cfg) { try { var el=document.getElementById(id); if(!el) return; return new Chart(el, cfg); } catch(e) { console.warn('Chart '+id+' failed:', e.message); return null; } }
+  charts.c1 = safeChart('sc1', { type: 'line', data: { labels: yrs, datasets: sel.map(function(n){ return { label: n, data: seriesFor(n), borderColor: n==='Chile'?chileColor:colorFor(n), backgroundColor: n==='Chile'?chileColor:colorFor(n), borderWidth: n==='Chile'?3:1.5, pointRadius: 0, tension: 0.15, spanGaps: true }; }) }, options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': $' + Number(ctx.parsed.y).toLocaleString('en-US', { maximumFractionDigits: 0 }); } } } }, scales: { x: { ticks: { maxTicksLimit: 12, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#64748b', font: { size: 9 }, callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; } }, grid: { color: '#1e293b' } } } } });
+  const arr = Object.entries(world).map(function(e){ return [e[0], e[1]['2023']]; }).filter(function(x){ return x[1]!=null; }).sort(function(a,b){ return a[1]-b[1]; });
+  charts.c2 = safeChart('sc2', { type: 'bar', data: { labels: arr.map(function(x){ return x[0]; }), datasets: [ { label: 'PIB per cápita 2023 (USD)', data: arr.map(function(x){ return x[1]; }), backgroundColor: arr.map(function(x){ return x[0]==='Chile'?chileColor:'#60a5fa'; }), borderColor: arr.map(function(x){ return x[0]==='Chile'?chileColor:'#3b82f6'; }), borderWidth: arr.map(function(x){ return x[0]==='Chile'?2:0; }) } ] }, options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx){ return '$' + Number(ctx.parsed.x).toLocaleString('en-US', { maximumFractionDigits: 0 }); } } } }, scales: { x: { ticks: { callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; }, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#cbd5e1', font: { size: 9 } }, grid: { display: false } } } } });
+  const focus = ['Chile','China','India','Corea del Sur','Perú','Argentina','EE.UU.','Noruega'];
+  charts.c3 = safeChart('sc3', { type: 'line', data: { labels: yrs, datasets: focus.map(function(n){ const d=world[n]||{}; const b=d['1990']; const data=yrs.map(function(y){ const v=d[String(y)]; if(b==null||v==null) return null; return v/b*100; }); return { label: n, data: data, borderColor: n==='Chile'?chileColor:colorFor(n), backgroundColor: n==='Chile'?chileColor:colorFor(n), borderWidth: n==='Chile'?3:1.5, pointRadius: 0, tension: 0.2, spanGaps: true }; }) }, options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': ' + Number(ctx.parsed.y).toLocaleString('en-US', { maximumFractionDigits: 0 }) + 'x'; } } } }, scales: { x: { ticks: { maxTicksLimit: 12, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#64748b', font: { size: 9 }, callback: function(v){ return v + 'x'; } }, grid: { color: '#1e293b' } } } } });
+  const median = yrs.map(function(y){ const vals = Object.values(world).map(function(d){ return d[String(y)]; }).filter(function(v){ return v!=null; }).sort(function(a,b){ return a-b; }); if(!vals.length) return null; const m=Math.floor(vals.length/2); return vals.length%2 ? vals[m] : (vals[m-1]+vals[m])/2; });
+  charts.c4 = safeChart('sc4', { type: 'line', data: { labels: yrs, datasets: [ { label: 'Chile', data: seriesFor('Chile'), borderColor: chileColor, backgroundColor: chileColor, borderWidth: 3, pointRadius: 0, tension: 0.15, spanGaps: true }, { label: 'Mediana 23 países', data: median, borderColor: '#94a3b8', backgroundColor: '#94a3b8', borderWidth: 1.5, borderDash: [5,4], pointRadius: 0, tension: 0.15, spanGaps: true } ] }, options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': $' + Number(ctx.parsed.y).toLocaleString('en-US', { maximumFractionDigits: 0 }); } } } }, scales: { x: { ticks: { maxTicksLimit: 12, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#64748b', font: { size: 9 }, callback: function(v){ return '$' + (v/1000).toFixed(0) + 'k'; } }, grid: { color: '#1e293b' } } } } });
+  var popArr = [];
+  if(worldPop && Object.keys(worldPop).length){
+    Object.keys(worldPop).forEach(function(c){
+      if(c!=='WLD' && c!=='LCN' && worldPop[c] && worldPop[c]['2023']){
+        popArr.push({nombre:c, poblacion:worldPop[c]['2023']});
+      }
+    });
+    popArr.sort(function(a,b){return a.poblacion-b.poblacion;});
+  }
+  var latamSet = new Set(['Chile','Argentina','Brasil','Perú','México']);
+  charts.c5 = safeChart('sc5', { type: 'bar', data: { labels: popArr.map(function(x){return x.nombre;}), datasets: [ { label: 'Población 2023', data: popArr.map(function(x){return x.poblacion;}), backgroundColor: popArr.map(function(x){return x.nombre==='Chile'?chileColor:(latamSet.has(x.nombre)?'#60a5fa':'#334155');}), borderColor: popArr.map(function(x){return x.nombre==='Chile'?chileColor:'transparent';}), borderWidth: popArr.map(function(x){return x.nombre==='Chile'?2:0;}) } ] }, options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx){ return Number(ctx.parsed.x).toLocaleString('es-CL') + ' habitantes'; } } } }, scales: { x: { ticks: { callback: function(v){ return (v/1e6).toFixed(0) + 'M'; }, color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#cbd5e1', font: { size: 8 } }, grid: { display: false } } } } });
+}
+
+(async function(){
+  try {
+    const r = await fetch('../../data/world-gdp.json'); const j = await r.json(); world = j.data;
+    const rp = await fetch('../../data/world-pop.json'); const jp = await rp.json(); worldPop = jp.data;
+    renderMundo();
+  } catch(e){ console.warn('Mundo error:', e.message); }
 })();
 </script>

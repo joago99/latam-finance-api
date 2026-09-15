@@ -6,7 +6,7 @@
 <title>Mercado de bombas de hormigón — CápsulaData</title>
 <meta name="description" content="Análisis del mercado de bombas de hormigón y repuestos en Chile: clasificación arancelaria, actores, importaciones y triangulación de fuentes oficiales.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="../../../vendor/chart.umd.min.js"></script>
+<script src="../../vendor/chart.umd.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0f172a;--card:#1e293b;--text:#f8fafc;--muted:#94a3b8;--accent:#ea580c;--accent2:#f97316;--border:#334155}
@@ -132,12 +132,77 @@ th{background:var(--card);color:var(--text);font-weight:600}
 <div class="data-note" id="dataNote">Cargando datos…</div>
 </section>
 
+<!-- PREDICCIONES 2026–2030 -->
+<section class="block" id="predicciones">
+  <h2 class="section-title">Predicciones 2026–2030</h2>
+  <p class="section-sub">
+    Proyecciones ilustrativas construidas por triangulación de fuentes públicas (Aduana, INAPI, Trade Map, ODEPA, CChC, mercado de repuestos).
+    <strong>No representan cifras oficiales ni compromiso de mercado.</strong>
+  </p>
+
+  <div class="sc-grid">
+    <div class="sc-card wide">
+      <h3>1. Demanda de bombas de hormigón 2030</h3>
+      <div class="bigidea">
+        Demanda de equipos nuevos: <strong>+55%–80% respecto de 2024</strong> en 2030,
+        impulsada por construcción residencial y reposición del parque instalado.
+      </div>
+      <div class="note">
+        <strong>Metodología:</strong> Triangulación CChC (licencias/obra) + importaciones históricas 8413.40.00 + reposición técnica<br>
+        <strong>Confianza: Baja.</strong> No hay serie pública oficial de "unidades de bombas vendidas"; se infiere por importaciones y licitaciones.<br>
+        <strong>Advertencia:</strong> Estimación ilustrativa. Ciclo de construcción chilena puede desviar el rango en ±20%.
+      </div>
+    </div>
+
+    <div class="sc-card">
+      <h3>2. Demanda de repuestos 2026–2030</h3>
+      <div class="bigidea">
+        Mercado de repuestos 2030: crecimiento del <strong>40%–65%</strong>,
+        con demanda recurrente fuerte en camisas, pistones y placas de desgaste.
+      </div>
+      <div class="note">
+        <strong>Metodología:</strong> CAGR implícito sobre importaciones repuestos 8413.91.00 + vida técnica estimada de equipos.<br>
+        <strong>Confianza: Media.</strong> Relación entre parque instalado y reemplazo de desgaste es estructuralmente más estable que la demanda de equipos.<br>
+        <strong>Advertencia:</strong> Estimación ilustrativa. Ciclos locales y globales pueden afectar importaciones.
+      </div>
+    </div>
+
+    <div class="sc-card">
+      <h3>3. Arancel y estructura impositiva</h3>
+      <div class="bigidea">
+        Partida 8413.40.00: arancel base <strong>0%–6%</strong> según origen y TLC aplicables.
+        Repuestos 8413.91.00: similar lógica de desgravación.
+      </div>
+      <div class="note">
+        <strong>Metodología:</strong> Revisión de normativa Aduana + acuerdos bilaterales (China, UE, Corea).<br>
+        <strong>Confianza: Alta.</strong> Información pública y vigente; fluctuación improbable sin reforma legal.<br>
+        <strong>Advertencia:</strong> Régimen cambiario o nuevas negociaciones comerciales pueden modificar cupos/aranceles.
+      </div>
+    </div>
+
+    <div class="sc-card">
+      <h3>4. Actores y competencia 2030</h3>
+      <div class="bigidea">
+        Probable consolidación de <strong>Sany y Zoomlion</strong> en equipos nuevos;
+        <strong>Putzmeister</strong> mantiene participación en repuestos y alta gama;
+        actores locales aumentan en servicio postventa.
+      </div>
+      <div class="note">
+        <strong>Metodología:</strong> Triangulación Trade Map + INAPI + tendencias de importación por marca declarada.<br>
+        <strong>Confianza: Media.</strong> Participación de marcas chinas crece desde 2010; tendencia estructural, pero sin serie oficial.<br>
+        <strong>Advertencia:</strong> Estimación ilustrativa sobre cuotas de mercado. No reemplaza estudios sectoriales oficiales.
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /PREDICCIONES -->
+
 <footer id="contacto">
-<div class="brand">Bombas de hormigón</div>
-<div class="commercial">Proyecto demo · CápsulaData</div>
-<p>Análisis de datos públicos · Fuentes oficiales · Metodología documentada</p>
-<p style="margin-top:1rem;opacity:0.6">Fuentes: Aduanas de Chile · ODEPA · INAPI · Trade Map (ITC) · ProChile</p>
-<p style="margin-top:0.3rem"><a href="https://joago99.github.io/capsuladata/lalinea" style="color:var(--accent)">← Volver a La Línea</a></p>
+<div class="brand">La Línea</div>
+<div class="commercial">Powered by CápsulaData</div>
+<p>Análisis de grandes datos · Entender · Diagnosticar · Predecir</p>
+<p style="margin-top:1.5rem;font-size:0.9rem">¿Quieres este tipo de análisis para tu empresa o proyecto?</p>
+<a href="https://www.linkedin.com/in/JoaquinAlmendra" target="_blank" rel="noopener" class="btn" style="margin-top:0.8rem;display:inline-block">Conéctemos en LinkedIn</a>
 </footer>
 
 <script>

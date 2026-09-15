@@ -58,16 +58,16 @@ def main():
     ll = ll.replace('href="#contacto"', 'href="../index.html#contacto"')
     open(os.path.join(DIST, "lalinea.html"), "w", encoding="utf-8").write(ll)
 
-    # 3) servicios -> servicios.html
-    svc = open(os.path.join(ROOT, "web", "capsula-servicios", "index.html"), encoding="utf-8").read()
-    svc = rel(svc, path_from_root=True)
-    svc = svc.replace('href="lalinea.html"', 'href="./lalinea.html"')
-    svc = svc.replace('href="index.html"', 'href="./index.html"')
-    svc = svc.replace('href="https://joago99.github.io/la-linea-web/empresa.html"', 'href="./index.html"')
-    svc = svc.replace('href="https://joago99.github.io/la-linea-web/capsula-servicios.html"', 'href="./servicios.html"')
-    open(os.path.join(DIST, "servicios.html"), "w", encoding="utf-8").write(svc)
-    # logo de CápsulaData
-    logo = os.path.join(ROOT, "web", "capsula-servicios", "logo.png")
+    # 3) servicios -> servicios.html  [RETIRADO 2026-07-27: secciones guardadas en web/servicios-bloques-respaldo.html]
+    # svc = open(os.path.join(ROOT, "web", "capsula-servicios", "index.html"), encoding="utf-8").read()
+    # svc = rel(svc, path_from_root=True)
+    # svc = svc.replace('href="lalinea.html"', 'href="./lalinea.html"')
+    # svc = svc.replace('href="index.html"', 'href="./index.html"')
+    # svc = svc.replace('href="https://joago99.github.io/la-linea-web/empresa.html"', 'href="./index.html"')
+    # svc = svc.replace('href="https://joago99.github.io/la-linea-web/capsula-servicios.html"', 'href="./servicios.html"')
+    # open(os.path.join(DIST, "servicios.html"), "w", encoding="utf-8").write(svc)
+    # logo: copiar el logo definitivo del usuario (web/logo.png) a dist
+    logo = os.path.join(ROOT, "web", "logo.png")
     if os.path.exists(logo):
         shutil.copy(logo, os.path.join(DIST, "logo.png"))
 
@@ -86,23 +86,25 @@ def main():
     ch = open(os.path.join(ROOT, "web", "chile", "index.html"), encoding="utf-8").read()
     ch_dir = os.path.join(DIST, "lalinea", "chile")
     os.makedirs(ch_dir, exist_ok=True)
-    ch = ch.replace('../../vendor/chart.umd.min.js', '../../../vendor/chart.umd.min.js')
-    ch = ch.replace('./data/chile-macro.json', '../../../data/chile-macro.json')
+    ch = ch.replace('../../vendor/chart.umd.min.js', '../../vendor/chart.umd.min.js')
+    ch = ch.replace('../../data/chile-macro.json', '../../data/chile-macro.json')
+    ch = ch.replace('../../data/world-gdp.json', '../../data/world-gdp.json')
+    ch = ch.replace('../../data/world-pop.json', '../../data/world-pop.json')
     open(os.path.join(ch_dir, "index.html"), "w", encoding="utf-8").write(ch)
 
     # 5) cerezas -> lalinea/cerezas/index.html
     cz = open(os.path.join(ROOT, "web", "cerezas", "index.html"), encoding="utf-8").read()
     cz_dir = os.path.join(DIST, "lalinea", "cerezas")
     os.makedirs(cz_dir, exist_ok=True)
-    cz = cz.replace('../../vendor/chart.umd.min.js', '../../../vendor/chart.umd.min.js')
-    cz = cz.replace('../../data/cerezas-export.json', '../../../data/cerezas-export.json')
+    cz = cz.replace('../../vendor/chart.umd.min.js', '../../vendor/chart.umd.min.js')
+    cz = cz.replace('../../data/cerezas-export.json', '../../data/cerezas-export.json')
     open(os.path.join(cz_dir, "index.html"), "w", encoding="utf-8").write(cz)
 
     # 6) bombas-hormigon -> lalinea/bombas-hormigon/index.html
     bh = open(os.path.join(ROOT, "web", "bombas-hormigon", "index.html"), encoding="utf-8").read()
     bh_dir = os.path.join(DIST, "lalinea", "bombas-hormigon")
     os.makedirs(bh_dir, exist_ok=True)
-    bh = bh.replace('../../vendor/chart.umd.min.js', '../../../vendor/chart.umd.min.js')
+    bh = bh.replace('../../vendor/chart.umd.min.js', '../../vendor/chart.umd.min.js')
     open(os.path.join(bh_dir, "index.html"), "w", encoding="utf-8").write(bh)
 
     print(f"  - lalinea/chile/index.html")

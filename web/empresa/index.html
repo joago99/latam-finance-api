@@ -4,66 +4,88 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CápsulaData — Datos macro de Latinoamérica, claros y accesibles</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Playfair+Display:ital,wght@0,700;1,600;1,700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#f8fafc;--card:#ffffff;--text:#0f172a;--muted:#64748b;--accent:#3b82f6;--accent2:#60a5fa;--border:#e2e8f0}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-header{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(255,255,255,0.92);backdrop-filter:blur(8px);z-index:10}
-header .brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:var(--text)}
-header .brand .sub{font-family:'Inter';font-size:0.55rem;color:var(--muted);display:block;margin-top:-2px;letter-spacing:0.05em;text-transform:uppercase}
+:root{
+  --bg:#1a1206;
+  --bg2:#241608;
+  --card:#2b1c0c;
+  --text:#f4e9d8;
+  --muted:#c9a87a;
+  --accent:#ea7317;
+  --accent2:#eab308;
+  --olive:#6b7a3a;
+  --border:#3f2a14;
+  --line:#5a3c1c;
+  --chile:#f87171;
+}
+body{font-family:'Share Tech Mono',monospace;background:var(--bg);color:var(--text);line-height:1.5}
+/* textura halftone sutil tipo FNV */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(rgba(234,115,23,0.04) 1px, transparent 1px);
+  background-size:6px 6px;opacity:0.6}
+header{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem;border-bottom:2px solid var(--accent);position:sticky;top:0;background:var(--bg2);z-index:10}
+header .brand{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:1.6rem;letter-spacing:0.04em;color:var(--text);text-shadow:1px 1px 0 #000;text-transform:uppercase}
+header .brand .sub{font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:var(--accent2);display:block;margin-top:-2px;letter-spacing:0.05em;text-transform:uppercase}
+.la-linea{font-family:'Playfair Display',serif;font-style:italic;letter-spacing:-0.02em}
+.la-linea.head{font-size:1.05rem}
+.la-linea.prod{font-size:1.6rem;color:var(--accent2)}
 header nav a{color:var(--muted);text-decoration:none;margin-left:1.5rem;font-size:0.85rem;transition:color .2s}
 header nav a:hover{color:var(--accent)}
-.hero{padding:5rem 2rem 3rem;text-align:center;background:linear-gradient(135deg,#eff6ff 0%,#f8fafc 50%,#f0fdf4 100%);border-bottom:1px solid var(--border)}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,6vw,4rem);font-weight:700;line-height:1.05;color:var(--text)}
-.hero h1 span{background:linear-gradient(135deg,#3b82f6,#059669);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero{padding:5rem 2rem 3rem;text-align:center;background:radial-gradient(circle at 50% 30%,#3a230d 0%,#1a1206 60%);border-bottom:2px solid var(--accent);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.06) 3px,rgba(0,0,0,0.06) 4px);z-index:0}
+.hero>*{position:relative;z-index:1}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:400;line-height:0.95;color:var(--text);text-shadow:2px 2px 0 #000;letter-spacing:0.02em;text-transform:uppercase}
+.hero h1 span{background:linear-gradient(135deg,#ea7317,#eab308);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p{max-width:680px;margin:1.5rem auto 0;color:var(--muted);font-size:1.05rem}
 .hero .stats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem}
 .hero .stat{text-align:center}
-.hero .stat .num{font-size:2rem;font-weight:700;color:var(--text)}
+.hero .stat .num{font-family:'Share Tech Mono',monospace;font-size:2rem;font-weight:400;color:var(--accent2);letter-spacing:-0.02em}
 .hero .stat .lbl{font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em}
 .hero .cta{margin-top:2.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn{background:var(--accent);color:#fff;padding:0.7rem 1.5rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.9rem;transition:all .2s}
-.btn:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 4px 12px rgba(59,130,246,0.25)}
-.btn.outline{background:transparent;border:1.5px solid var(--border);color:var(--text)}
-.btn.outline:hover{border-color:var(--accent);color:var(--accent);box-shadow:none}
-section.block{padding:3.5rem 2rem;max-width:1000px;margin:0 auto;border-top:1px solid var(--border)}
-.section-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;margin-bottom:0.5rem;color:var(--text)}
+.btn{background:var(--accent);color:#1a1206;border:2px solid #000;padding:0.7rem 1.5rem;border-radius:0;font-weight:700;text-decoration:none;font-size:0.9rem;letter-spacing:0.03em;text-transform:uppercase;transition:all .2s;box-shadow:3px 3px 0 #000;font-family:'Share Tech Mono',monospace}
+.btn:hover{background:var(--accent2);transform:translate(-1px,-1px);box-shadow:4px 4px 0 #000}
+.btn.outline{background:transparent;border:2px solid var(--accent);color:var(--text);box-shadow:none}
+.btn.outline:hover{border-color:var(--accent2);color:var(--accent2);transform:none}
+section.block{padding:3.5rem 2rem;max-width:1000px;margin:0 auto;border-top:1px solid var(--border);position:relative;z-index:1}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;font-weight:400;margin-bottom:0.5rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.04em}
 .section-sub{color:var(--muted);max-width:680px;margin-bottom:2rem;font-size:0.9rem}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.6rem;transition:border-color .2s}
+.card{background:var(--card);border:2px solid var(--line);border-radius:0;padding:1.6rem;transition:border-color .2s;box-shadow:3px 3px 0 #000}
 .card:hover{border-color:var(--accent)}
-.card h3{font-size:1.1rem;margin-bottom:0.4rem}
+.card h3{font-family:'Share Tech Mono',monospace;font-size:1rem;margin-bottom:0.4rem;color:var(--accent2);letter-spacing:-0.02em}
 .card p{color:var(--muted);font-size:0.82rem}
-.product{background:var(--card);border:1px solid var(--accent);border-radius:12px;padding:2rem;margin-top:1.5rem;display:flex;gap:2rem;align-items:center;flex-wrap:wrap}
+.product{background:var(--card);border:2px solid var(--accent);border-radius:0;padding:2rem;margin-top:1.5rem;display:flex;gap:2rem;align-items:center;flex-wrap:wrap;box-shadow:3px 3px 0 #000}
 .product .info{flex:1;min-width:260px}
-.product h3{font-size:1.4rem;margin-bottom:0.4rem;color:var(--text)}
+.product h3{font-family:'Share Tech Mono',monospace;font-size:1.2rem;margin-bottom:0.4rem;color:var(--text);letter-spacing:-0.02em}
 .product p{color:var(--muted);font-size:0.85rem}
 .product a{margin-top:1rem;display:inline-block}
 .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:1.5rem}
-.feature{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem;text-align:center}
-.feature .num{font-size:1.6rem;font-weight:700;color:var(--accent2)}
+.feature{background:var(--card);border:2px solid var(--line);border-radius:0;padding:1rem;text-align:center;box-shadow:3px 3px 0 #000}
+.feature .num{font-family:'Share Tech Mono',monospace;font-size:1.6rem;font-weight:400;color:var(--accent2);letter-spacing:-0.03em}
 .feature .lbl{font-size:0.7rem;color:var(--muted);margin-top:0.15rem;text-transform:uppercase;letter-spacing:0.03em}
 .use-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:1.5rem}
-.use{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.3rem}
-.use h4{font-size:0.9rem;margin-bottom:0.3rem}
+.use{background:var(--card);border:2px solid var(--line);border-radius:0;padding:1.3rem;box-shadow:3px 3px 0 #000}
+.use h4{font-family:'Share Tech Mono',monospace;font-size:0.85rem;margin-bottom:0.3rem;color:var(--accent2);letter-spacing:-0.02em}
 .use p{color:var(--muted);font-size:0.78rem}
-footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;color:var(--muted);font-size:0.8rem}
-footer a{color:var(--accent);text-decoration:none}
+footer{border-top:2px solid var(--accent);padding:2.5rem 2rem;text-align:center;color:var(--muted);font-size:0.8rem;background:var(--bg2);position:relative;z-index:1}
+footer a{color:var(--accent2);text-decoration:none}
+footer .brand{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--text);text-shadow:1px 1px 0 #000}
 @media(max-width:768px){header nav{display:none}.product{flex-direction:column}}
 </style>
 </head>
 <body>
 <header>
-<div class="brand" style="display:flex;align-items:center;gap:0.5rem"><img src="logo.png" alt="CápsulaData" style="height:38px;width:auto"><div>CápsulaData<span class="sub">Storytelling con tus datos</span></div></div>
+<div class="brand" style="display:flex;align-items:center;gap:0.5rem"><img src="logo.png" alt="CápsulaData" style="height:38px;width:auto"><div>CápsulaData<span class="sub">Datos oficiales ordenados y listos para tus decisiones</span></div></div>
 <nav>
-<a href="lalinea.html" class="btn" style="margin-left:1rem;padding:0.5rem 1.1rem">La Línea →</a>
+<a href="lalinea.html" class="btn" style="margin-left:1rem;padding:0.5rem 1.1rem"><span class="la-linea head">La Línea</span> →</a>
 </nav>
 </header>
 
 <section class="hero">
-<h1>Datos macro de Latinoamérica,<br>claros y accesibles</h1>
-<p>Integramos fuentes oficiales — bancos centrales, institutos de estadística, organismos multilaterales — en una capa de datos limpia, documentada y lista para decisiones. Sin ruido, sin Excel perdido, sin incertidumbre sobre la fuente.</p>
+<h1>Datos macro, claros,<br>accesibles para decidir</h1>
+<p>De fuentes dispersas a una capa confiable, inmediata. Integramos bancos centrales, institutos de estadística y organismos multilaterales en datos limpios, trazables y listos para análisis. Sin ruido, sin Excel perdido, sin incertidumbre sobre la fuente.</p>
 <div class="stats">
 <div class="stat"><div class="num">13</div><div class="lbl">Indicadores macro</div></div>
 <div class="stat"><div class="num">24</div><div class="lbl">Países comparados</div></div>
@@ -93,7 +115,7 @@ footer a{color:var(--accent);text-decoration:none}
 </section>
 
 <section class="block" id="producto">
-<h2 class="section-title">La Línea</h2>
+<h2 class="section-title"><span class="la-linea prod">La Línea</span></h2>
 <p class="section-sub">Nuestro laboratorio público. Una línea de tiempo interactiva de la economía chilena que muestra hacia dónde vamos — y de dónde venimos.</p>
 <div class="product">
 <div class="info">
@@ -123,8 +145,11 @@ footer a{color:var(--accent);text-decoration:none}
 </section>
 
 <footer>
-<p>CápsulaData · Datos macro que se entienden</p>
-<p style="margin-top:0.5rem;opacity:0.6">Fuentes: Banco Central de Chile (BCCh) · Instituto Nacional de Estadísticas (INE) · Banco Mundial</p>
+<div class="brand">La Línea</div>
+<div class="commercial">Powered by CápsulaData</div>
+<p>Análisis de grandes datos · Entender · Diagnosticar · Predecir</p>
+<p style="margin-top:1.5rem;font-size:0.9rem">¿Quieres este tipo de análisis para tu empresa o proyecto?</p>
+<a href="https://www.linkedin.com/in/JoaquinAlmendra" target="_blank" rel="noopener" class="btn" style="margin-top:0.8rem;display:inline-block">Conéctemos en LinkedIn</a>
 </footer>
 </body>
 </html>
